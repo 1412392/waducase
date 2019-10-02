@@ -1,0 +1,20 @@
+[
+  {
+    "outputFileName": "Assets/fancydesigner/js/FancyProductDesigner-all.min.js",
+    "inputFiles": [
+      "Assets/fancydesigner/js/FancyProductDesigner-all.js"
+    ]
+  },
+  {
+    "outputFileName": "Assets/fancydesigner/js/fabric-1.6.7.min.js",
+    "inputFiles": [
+      "Assets/fancydesigner/js/fabric-1.6.7.js"
+    ]
+  },
+  {
+    "outputFileName": "Assets/Admin/build/js/custom.min.js",
+    "inputFiles": [
+      "Assets/Admin/build/js/custom.js"
+    ]
+  }
+]

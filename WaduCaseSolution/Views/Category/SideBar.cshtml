@@ -1,0 +1,30 @@
+﻿@using WaduCaseBusiness.Model;
+@using WaduCase.Common;
+
+@{
+    List<CollectionBO> lstCollection = ViewBag.ListCollection;
+    List<BrandBO> lstBrand = ViewBag.ListBrand;
+    int CurrentID = ViewBag.CurrentID;
+    bool isCollectionLoad = ViewBag.IsCollectionLoad;
+}
+
+<div id="shop-sidebar" class="sidebar-inner col-inner">
+    <aside id="woocommerce_product_categories-13" class="widget woocommerce widget_product_categories">
+        <span class="widget-title shop-sidebar">DANH MỤC SẢN PHẨM</span>
+        <div class="is-divider small"></div>
+        <ul class="product-categories">
+            @foreach (var item in lstCollection)
+            {
+                <li class="cat-item cat-item-@item.id @(item.id==CurrentID && isCollectionLoad?"current-cat":"")">
+                    <a style="color:#e74343;font-family:monospace" href="@ProductHelper.GenCollectionURL(item.name,item.id)">@item.name.ToUpper().Trim()</a>
+                </li>
+            }
+            @foreach (var item in lstBrand)
+            {
+                <li class="cat-item cat-item-@item.id @(item.id==CurrentID && !isCollectionLoad?"current-cat":"")">
+                    <a style="font-family:monospace" href="@ProductHelper.GenBrandURL(item.name,item.id)">ỐP @item.name.ToUpper().Trim()</a>
+                </li>
+            }
+        </ul>
+    </aside>
+</div>

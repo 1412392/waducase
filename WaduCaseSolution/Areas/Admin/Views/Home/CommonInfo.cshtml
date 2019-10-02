@@ -1,0 +1,186 @@
+﻿@using WaduCaseBusiness.Model
+@model CommonBO
+
+@{
+    ViewBag.Title = "Quản lý thông tin chung | Waducase Admin";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+@section jsFooter{
+    <script>
+        $(document).ready(function () {
+            $('#notifymessage').removeClass('hide');
+            $('#notifymessage').delay(2000).slideUp(500);
+
+
+        });
+
+
+    </script>
+
+}
+
+<div class="right_col" role="main">
+    <div class="">
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        @if (TempData["AlertMessage"] != null)
+                        {
+                            <div id="notifymessage" class="alert @TempData["AlertType"]" style="font-size:23px;">
+                                @TempData["AlertMessage"]
+                            </div>
+                        }
+
+                        <h2>Cập nhật thông tin chung</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                            </li>
+                            <li>
+                                <a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        @using (Html.BeginForm("UpdateCommonInfo", "Home", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+
+                                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                                <div class="item form-group">
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBoxFor(model => model.id, new { @class = "form-control col-md-7 col-xs-12", @type = "hidden" })
+
+                                    </div>
+                                </div>
+
+                                <div class="x_title">
+                                    <p style="text-align:center;color:red">THÔNG TIN CHUNG</p>
+                                </div>
+                                <div class="item form-group">
+                                    @Html.LabelFor(model => model.phone, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBoxFor(model => model.phone, new { @class = "form-control col-md-7 col-xs-12", @type = "tel", @required = "" })
+                                        @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    @Html.LabelFor(model => model.hotline, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBoxFor(model => model.hotline, new { @class = "form-control col-md-7 col-xs-12", @required = "" })
+                                        @Html.ValidationMessageFor(model => model.hotline, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    @Html.LabelFor(model => model.email, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBoxFor(model => model.email, new { @class = "form-control col-md-7 col-xs-12", @type = "email", @required = "" })
+                                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+
+                                <div class="item form-group">
+                                    @Html.LabelFor(model => model.facebookchat, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBoxFor(model => model.facebookchat, new { @class = "form-control col-md-7 col-xs-12", @type = "text", @required = "" })
+                                        @Html.ValidationMessageFor(model => model.facebookchat, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    @Html.LabelFor(model => model.facebookpage, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBoxFor(model => model.facebookpage, new { @class = "form-control col-md-7 col-xs-12", @type = "text", @required = "" })
+                                        @Html.ValidationMessageFor(model => model.facebookpage, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    @Html.LabelFor(model => model.zalochat, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBoxFor(model => model.zalochat, new { @class = "form-control col-md-7 col-xs-12" })
+                                        @Html.ValidationMessageFor(model => model.zalochat, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    @Html.LabelFor(model => model.officeaddress, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextAreaFor(model => model.officeaddress, new { @class = "form-control col-md-7 col-xs-12" })
+                                        @Html.ValidationMessageFor(model => model.officeaddress, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    @Html.LabelFor(model => model.factoryaddress, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextAreaFor(model => model.factoryaddress, new { @class = "form-control col-md-7 col-xs-12" })
+                                        @Html.ValidationMessageFor(model => model.factoryaddress, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    @Html.LabelFor(model => model.mapurl, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBoxFor(model => model.mapurl, new { @class = "form-control col-md-7 col-xs-12" })
+                                        @Html.ValidationMessageFor(model => model.mapurl, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="x_title">
+                                    <p style="text-align:center;color:red">THÔNG TIN TÀI KHOẢN NGÂN HÀNG</p>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Chủ tài khoản</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" class="form-control col-md-7 col-xs-12" name="accountname" id="accountname" value="@(Model.bankinfo.First().accountname)" />
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Số tài khoản</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" class="form-control col-md-7 col-xs-12" name="accountnumber" id="accountnumber" value="@(Model.bankinfo.First().accountnumber)" />
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Tên ngân hàng - chi nhánh</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" class="form-control col-md-7 col-xs-12" name="bankname" id="bankname" value="@(Model.bankinfo.First().bankname)" />
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <div class="col-md-offset-5 col-md-10">
+                                        <input type="submit" value="Cập Nhật" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

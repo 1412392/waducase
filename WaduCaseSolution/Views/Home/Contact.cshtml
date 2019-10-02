@@ -1,0 +1,92 @@
+﻿@using WaduCaseBusiness.Model
+@model CommonBO
+
+@{
+    ViewBag.Title = "Liên Hệ | Wada Case";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main id="main" class="">
+    <div id="content" role="main" class="content-area">
+        <div class="banner has-hover is-full-height" id="banner-1328481648">
+            <div class="banner-inner fill">
+                <div class="banner-bg fill">
+                    <div class="bg fill bg-fill bg-loaded"></div>
+                    <div class="overlay"></div>
+                </div>
+                <div class="banner-layers container">
+                    <div class="fill banner-link"></div>
+                    <div id="text-box-156351296" class="text-box banner-layer x50 md-x50 lg-x50 y50 md-y50 lg-y50 res-text">
+                        <div class="text dark">
+                            <div class="text-inner text-center">
+                                <h1 class="uppercase"><strong>LIÊN HỆ VỚI WADU CASE</strong></h1>
+                                <h3><span style="font-size: 90%;">WADU Case – In ốp lưng điện thoại chất lượng cao<br></span></h3>
+                                <div class="row" id="row-1498173043">
+                                    <div class="col small-12 large-12">
+                                        <div class="col-inner">
+                                            <p>
+                                                <span style="font-size: 140%;">Văn phòng đại diện: <span class="LrzXr">@Model.officeaddress</span></span>
+                                            </p>
+                                            <p>
+                                                <span style="font-size: 140%;">Xưởng in:&nbsp;@Model.factoryaddress</span>
+                                            </p><p>
+                                                <span style="font-size: 140%;">Số điện thoại: @Model.phone</span>
+                                            </p><p>
+                                                <span style="font-size: 140%;">Email: @Model.email</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <style scope="scope">
+                            #text-box-156351296 {
+                                width: 65%;
+                            }
+
+                                #text-box-156351296 .text {
+                                    font-size: 100%;
+                                }
+
+
+                            @@media (min-width:550px) {
+
+                                #text-box-156351296 {
+                                    width: 77%;
+                                }
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+            <style scope="scope">
+                #banner-1328481648 {
+                    padding-top: 100%;
+                }
+
+                    #banner-1328481648 .bg.bg-loaded {
+                        background-image: url(/Assets/img/contact.jpg);
+                    }
+
+                    #banner-1328481648 .overlay {
+                        background-color: rgba(23, 28, 38, 0.85);
+                    }
+            </style>
+        </div>
+        <div class="row row-full-width align-middle align-center" id="row-1642414903">
+            <div class="col small-12 large-12">
+                <div class="col-inner text-center">
+                    <p>
+                        @Html.Raw(Model.mapurl)
+                        
+                        <h3>THEO DÕI WADU CASE TRÊN MẠNG XÃ HỘI</h3>
+                        <div class="social-icons follow-icons ">
+                            <a href="@Model.facebookpage" target="_blank" data-label="Facebook" rel="noopener noreferrer nofollow" class="icon button circle is-outline facebook tooltip tooltipstered"><i class="icon-facebook"></i></a>
+                           
+                        </div>
+                </div>
+            </div>
+            <style scope="scope"></style>
+        </div>
+    </div>
+</main>

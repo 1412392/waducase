@@ -1,0 +1,72 @@
+﻿@using WaduCaseBusiness.Model;
+@using WaduCase.Common;
+
+@model List<ProductBO>
+
+@{
+    ViewBag.Title = "Kết quả tìm kiếm cho từ khóa " + ViewBag.Keyword + " | WaduCase";
+    int OrderBy = ViewBag.OrderBy;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="shop-page-title category-page-title page-title featured-title dark ">
+    <div class="page-title-bg fill">
+        <div class="title-bg fill bg-fill" data-parallax-fade="true" data-parallax="-2" data-parallax-background
+             data-parallax-container=".page-title"></div>
+        <div class="title-overlay fill"></div>
+    </div>
+    <div class="page-title-inner flex-row  medium-flex-wrap container">
+        <div class="flex-col flex-grow medium-text-center">
+            <div class="is-medium">
+                <nav class="woocommerce-breadcrumb breadcrumbs">
+                    <a href="#">Trang chủ</a> <span class="divider">&#47;</span> Tất cả sản phẩm
+                </nav>
+            </div>
+            <div class="category-filtering category-filter-row show-for-medium">
+                <a href="#" data-open="#shop-sidebar"
+                   data-visible-after="true" data-pos="left" class="filter-button uppercase plain">
+                    <i class="icon-menu"></i>
+                    <strong>Lọc</strong>
+                </a>
+                <div class="inline-block"></div>
+            </div>
+        </div>
+        <div class="flex-col medium-text-center  form-flat">
+            <form class="woocommerce-ordering" method="get">
+                <select name="orderby" class="orderby">
+                    <option value="relevance" @(OrderBy == 0 ? "selected" : "")>Sắp xếp</option>
+                    <option value="price"  @(OrderBy == 1 ? "selected" : "")>Thứ tự theo giá: thấp đến cao</option>
+                    <option value="price-desc"  @(OrderBy == 2 ? "selected" : "")>Thứ tự theo giá: cao xuống thấp</option>
+                </select>
+                <input type="hidden" name="s" value="@ViewBag.Keyword">
+                <input type="hidden" name="post_type" value="product">
+            </form>
+        </div>
+    </div>
+</div>
+<main id="main" class="">
+    <div class="row category-page-row">
+        <div class="col large-3 hide-for-medium ">
+            @Html.Action("Sidebar", "Category", new { currentID = 0, isCollectionLoad = false })
+        </div>
+        <div class="col large-9">
+            <div class="shop-container">
+                <div class="term-description">
+                    <h1 class="uppercase"><span style="font-size: 85%;">KẾT QUẢ TÌM KIẾM CHO "@ViewBag.Keyword"</span></h1>
+                    <div class="gap-element clearfix" style="display:block; height:auto; padding-top:30px"></div>
+
+                </div>
+                <div class="woocommerce-notices-wrapper"></div>
+
+                @Html.Partial("ListProduct", Model)
+
+
+                <hr />
+                <div class="gap-element clearfix" style="display:block; height:auto; padding-top:30px"></div>
+
+
+            </div>
+        </div>
+    </div>
+</main>
+

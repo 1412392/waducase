@@ -1,0 +1,190 @@
+﻿@using WaduCaseBusiness.Model
+@model PhoneModelBO
+
+@{
+    ViewBag.Title = "Cập Nhật PhoneModel | Admin WaduCase";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section jsFooter{
+    <script>
+        $('#generate-temlate').on('click', function (e) {
+
+            e.preventDefault();
+            var name = $('#name').val();
+
+            if (name) {
+                let namelower = name.toLowerCase().replace("/", " ").replace("+", " plus ").replace("(", " ").replace(")", " ").trim();
+
+                $('#seoname').val("Điện thoại " + name);
+                $('#description').val("ốp lưng điện thoại " + namelower + ", op lung " + namelower);
+                $('#keyword').val("ốp lưng điện thoại " + namelower + ", op lung " + namelower);
+                $('#metakeyword').val("ốp lưng điện thoại " + namelower + ", op lung " + namelower);
+
+                $('#metadescription').val("ốp lưng điện thoại " + namelower + ", op lung " + namelower);
+
+            }
+        });
+    </script>
+
+
+}
+
+<div class="right_col" role="main">
+    <div class="">
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Cập nhật PhoneModel</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                            </li>
+                            <li>
+                                <a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        @*form here*@
+
+                        @using (Html.BeginForm("UpdatePhoneModel", "Category", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+
+                                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                                <div class="item form-group">
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBoxFor(model => model.id, new { @class = "form-control col-md-7 col-xs-12", @type = "hidden" })
+
+                                    </div>
+                                </div>
+
+
+                                <div class="item form-group">
+                                    @Html.LabelFor(model => model.name, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBoxFor(model => model.name, new { @class = "form-control col-md-7 col-xs-12", @id = "name", @required = "" })
+                                        @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div style="text-align:center">
+                                    <a href="#" class="btn btn-danger" id="generate-temlate">Generate Template</a>
+                                </div>
+                                <div class="item form-group">
+                                    @Html.LabelFor(model => model.seoname, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBoxFor(model => model.seoname, new { @class = "form-control col-md-7 col-xs-12", @id = "seoname", @required = "" })
+                                        @Html.ValidationMessageFor(model => model.seoname, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    @Html.LabelFor(model => model.description, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextAreaFor(model => model.description, new { @class = "form-control col-md-7 col-xs-12", @id = "description" })
+                                        @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    @Html.LabelFor(model => model.keyword, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBoxFor(model => model.keyword, new { @class = "form-control col-md-7 col-xs-12", @type = "text", @required = "", @id = "keyword" })
+                                        @Html.ValidationMessageFor(model => model.keyword, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    @Html.LabelFor(model => model.metakeyword, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBoxFor(model => model.metakeyword, new { @class = "form-control col-md-7 col-xs-12", @id = "metakeyword" })
+                                        @Html.ValidationMessageFor(model => model.metakeyword, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    @Html.LabelFor(model => model.metadescription, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextAreaFor(model => model.metadescription, new { @class = "form-control col-md-7 col-xs-12", @id = "metadescription" })
+                                        @Html.ValidationMessageFor(model => model.metadescription, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                @*Dùng dropdowlist*@
+                                <div class="item form-group">
+                                    @Html.LabelFor(model => model.brandid, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.DropDownListFor(model => model.brandid, null, new { @class = "form-control col-md-7 col-xs-12" })
+                                        @Html.ValidationMessageFor(model => model.brandid, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    @Html.LabelFor(model => model.group, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.DropDownListFor(model => model.group,
+                                       new List<SelectListItem>
+            {
+             new SelectListItem {Text = "Samsung Galaxy S", Value = "Samsung Galaxy S"},
+              new SelectListItem {Text = "Samsung Galaxy A", Value = "Samsung Galaxy A"},
+              new SelectListItem {Text = "Samsung Galaxy J", Value = "Samsung Galaxy J"},
+              new SelectListItem {Text = "Samsung Note", Value = "Samsung Note"},
+              new SelectListItem {Text = "Điện thoại Samsung khác", Value = "Điện thoại Samsung khác"},
+               new SelectListItem {Text = "Dòng điện thoại Oppo A", Value = "Dòng điện thoại Oppo A"},
+                new SelectListItem {Text = "Dòng điện thoại Oppo F", Value = "Dòng điện thoại Oppo F"},
+                new SelectListItem {Text = "Dòng điện thoại Oppo R", Value = "Dòng điện thoại Oppo R"},
+                new SelectListItem {Text = "Điện thoại Oppo khác", Value = "Điện thoại Oppo khác"},
+                new SelectListItem {Text = "Xiaomi Mi", Value = "Xiaomi Mi"},
+                new SelectListItem {Text = "Xiaomi Redmi", Value = "Xiaomi Redmi"},
+                 new SelectListItem {Text = "Điện thoại Xiaomi khác", Value = "Điện thoại Xiaomi khác"},
+
+            }, "--- Select ---",
+new { @class = "form-control col-md-7 col-xs-12" })
+                                        @Html.ValidationMessageFor(model => model.group, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                @*<div class="item form-group">
+                                        @Html.LabelFor(model => model.group, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            @Html.TextBoxFor(model => model.group, new { @class = "form-control col-md-7 col-xs-12", @required = "" })
+                                            @Html.ValidationMessageFor(model => model.group, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>*@
+
+
+                                <div class="item form-group">
+                                    <div class="col-md-offset-5 col-md-10">
+                                        <input type="submit" value="Cập Nhật" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        <div>
+                            @Html.ActionLink("Back to List", "PhoneModel")
+                        </div>
+                        @*end form*@
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

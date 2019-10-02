@@ -1,0 +1,576 @@
+﻿@using WaduCaseBusiness.Model
+@model ProductBO
+
+@{
+    ViewBag.Title = "Cập Nhật Product | Admin WaduCase";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int ProductType = Convert.ToInt32(ViewBag.ProductType);
+}
+@section jsFooter{
+    <script>
+        $(document).ready(function () {
+            function HideAll() {
+                $('#namearea').hide();
+                $('#generatearea').hide();
+                $('#seonamearea').hide();
+                $('#descriptionarea').hide();
+                $('#htmldescriptionarea').hide();
+                $('#keywordarea').hide();
+                $('#metakeywordarea').hide();
+                $('#metadescriptionarea').hide();
+                $('#avatararea').hide();
+                $('#slidearea').hide();
+                $('#oldpricearea').hide();
+                $('#newpricearea').hide();
+                $('#displayorderarea').hide();
+
+                $('#materialarea').hide();
+                $('#collectionarea').hide();
+                $('#phonemodelarea').hide();
+                $('#designimagearea').hide();
+
+                $('#buttonsubmitarea').hide();
+            }
+
+            @if (Model.id == 0)
+            {
+                 <text> HideAll();</text>
+
+
+            }
+
+            //ẩn hếtl
+
+            function showCommon() {
+                $('#namearea').show();
+                $('#generatearea').show();
+                $('#seonamearea').show();
+                $('#descriptionarea').show();
+                $('#htmldescriptionarea').show();
+                $('#keywordarea').show();
+                $('#metakeywordarea').show();
+                $('#metadescriptionarea').show();
+                $('#avatararea').show();
+                $('#slidearea').show();
+                $('#oldpricearea').show();
+                $('#newpricearea').show();
+                $('#displayorderarea').show();
+                $('#buttonsubmitarea').show();
+
+            }
+
+
+
+
+            //
+
+            $(".select2_typeproduct").on('change', function (e) {
+                var selected_option = $(this).find(":selected");
+                var selected_value = selected_option.val();
+                if (parseInt(selected_value) === 1) {//bst
+                    showCommon();
+                    $('#collectionarea').show();
+
+                    $('#materialarea').hide();
+                    $('#phonemodelarea').hide();
+                    $('#designimagearea').hide();
+                } else if (parseInt(selected_value) === 2) {//phonemodel
+                    showCommon();
+                    $('#materialarea').show();
+                    $('#phonemodelarea').show();
+                    $('#designimagearea').show();
+
+                    $('#collectionarea').hide();
+                }
+                else {//khong chon
+                    HideAll();
+                }
+            });
+
+            //function selectFileWithCKFinder(elementId) {
+            //    CKFinder.popup({
+            //        chooseFiles: true,
+            //        selectMultiple: true,
+            //        width: 1000,
+            //        height: 500,
+            //        onInit: function (finder) {
+            //            finder.on('files:choose', function (evt) {
+            //                var file = evt.data.files
+            //                var output = document.getElementById(elementId);
+            //                output.value = file.getUrl();
+            //            });
+            //            //finder.on('files:choose', function (evt) {
+            //            //    console.log(evt);
+            //            //    var files = evt.data.files;
+            //            //    var chosenFiles = '';
+            //            //    files.forEach(function (file, i) {
+            //            //        chosenFiles += (i + 1) + '. ' + file.get('name') + '\n';
+            //            //    });
+
+            //            //    alert(chosenFiles);
+            //            //});
+            //            //finder.on('file:choose:resizedImage', function (evt) {
+            //            //    var output = document.getElementById(elementId);
+            //            //    output.value = evt.data.resizedUrl;
+            //            //});
+            //        }
+            //    });
+            //}
+            $('#button-avatarselect').on('click', function (e) {
+                e.preventDefault();
+
+
+                var finder = new CKFinder();
+                finder.selectActionFunction = function (fileUrl, file, files) {
+                    //$('#tbAvatar').val(url);
+                    $('.viewavatar').empty();
+                    var finalListImage = [];
+                    for (var i = 0; i < files.length; i++) {
+                        //console.log(files[i].url);
+                        if (!finalListImage.includes(files[i].url)) {
+                            finalListImage.push(files[i].url);
+                            let element = "<img width='100' height='100' src='" + files[i].url + "'/>"
+                            $('.viewavatar').append(element);
+                        }
+
+                    }
+                    $('#tbAvatar').val(finalListImage.join(";"));
+                };
+                finder.popup();
+                //selectFileWithCKFinder('tbAvatar');
+
+            });
+
+            $('#button-slideselect').on('click', function (e) {
+                e.preventDefault();
+
+
+                var finder = new CKFinder();
+                finder.selectActionFunction = function (fileUrl, file, files) {
+                    //$('#tbAvatar').val(url);
+                    $('.viewslide').empty();
+                    var finalListImage = [];
+                    for (var i = 0; i < files.length; i++) {
+                        //console.log(files[i].url);
+                        if (!finalListImage.includes(files[i].url)) {
+                            finalListImage.push(files[i].url);
+                            let element = "<img width='100' height='100' src='" + files[i].url + "'/>"
+                            $('.viewslide').append(element);
+                        }
+
+                    }
+                    $('#tbSlide').val(finalListImage.join(";"));
+                };
+                finder.popup();
+                //selectFileWithCKFinder('tbAvatar');
+
+            });
+
+            $('#button-designimageselect').on('click', function (e) {
+                e.preventDefault();
+
+
+                var finder = new CKFinder();
+                finder.selectActionFunction = function (fileUrl, file, files) {
+                    //$('#tbAvatar').val(url);
+                    $('.viewdesignimage').empty();
+                    var finalListImage = [];
+                    for (var i = 0; i < files.length; i++) {
+                        //console.log(files[i].url);
+                        if (!finalListImage.includes(files[i].url)) {
+                            finalListImage.push(files[i].url);
+                            let element = "<img width='100' height='100' src='" + files[i].url + "'/>"
+                            $('.viewdesignimage').append(element);
+                        }
+
+                    }
+                    $('#tbDesignImage').val(finalListImage.join(";"));
+                };
+                finder.popup();
+                //selectFileWithCKFinder('tbAvatar');
+
+            });
+
+            var editor = CKEDITOR.replace('htmldescription', {
+                customConfig: "/Assets/Admin/plugins/ckeditor/config.js",
+
+            });
+        });
+
+
+    </script>
+    <script>
+        function xoa_dau(str) {
+            str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+            str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+            str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+            str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+            str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+            str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+            str = str.replace(/đ/g, "d");
+            str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+            str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+            str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+            str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+            str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+            str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+            str = str.replace(/Đ/g, "D");
+            return str;
+        }
+        $('#generate-temlate').on('click', function (e) {
+
+            e.preventDefault();
+            var name = $('#name').val();
+
+            if (name) {
+                let namelower = name.toLowerCase().replace("/", " ").replace("+", " plus ").replace("(", " ").replace(")", " ").trim();
+                let namekhongdau = xoa_dau(namelower);
+                $('#seoname').val(name + " tự thiết kế");
+                $('#description').val("ốp lưng " + namelower + " tự thiết kế đẹp, ốp lưng thiết kế đẹp thiết kế theo yêu cầu, ốp lưng bền tự in, quà tặng ốp lưng cho bạn gái, tặng ốp lưng sinh nhật, ốp lưng waducase bền không tróc");
+                //$('#tgs_keyword').val(namelower + ", " + namekhongdau);
+                $('#tags_keyword').addTag(namelower);
+                $('#tags_keyword').addTag(namekhongdau);
+                $('#metakeyword').val("ốp lưng " + namelower + " tự thiết kế đẹp, ốp lưng thiết kế đẹp thiết kế theo yêu cầu, ốp lưng bền tự in, quà tặng ốp lưng cho bạn gái, tặng ốp lưng sinh nhật, ốp lưng waducase bền không tróc");
+
+                $('#metadescription').val("ốp lưng " + namelower + " tự thiết kế đẹp, ốp lưng thiết kế đẹp thiết kế theo yêu cầu, ốp lưng bền tự in, quà tặng ốp lưng cho bạn gái, tặng ốp lưng sinh nhật, ốp lưng waducase bền không tróc");
+
+            }
+        });
+    </script>
+
+
+}
+
+<div class="right_col" role="main">
+    <div class="">
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        @if (Model.id > 0)
+                        {
+                            <h2>Cập nhật Sản Phẩm @Model.name - @Model.id</h2>
+
+                        }
+                        else
+                        {
+                            <h2>Thêm Sản Phẩm Mới</h2>
+                        }
+
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                            </li>
+                            <li>
+                                <a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        @*form here*@
+
+                        @using (Html.BeginForm("UpdateProduct", "Product", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+
+                                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                                @if (Model.id == 0)
+                                {
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12"><span style="color:red">Chọn loại sản phẩm muốn tạo(*)?(bắt buộc)</span></label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select class="select2_typeproduct form-control" name="producttype" tabindex="-1">
+                                                <option value="0">----Chọn----</option>
+                                                <option value="1">Bộ Sưu Tập</option>
+                                                <option value="2">Hãng</option>
+
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                }
+                                else
+                                {
+                                    <input type="hidden" name="producttype" value="@ProductType" />
+                                }
+
+
+                                <div class="item form-group">
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBoxFor(model => model.id, new { @class = "form-control col-md-7 col-xs-12", @type = "hidden" })
+
+                                    </div>
+                                </div>
+
+
+                                <div class="item form-group" id="namearea">
+                                    @Html.LabelFor(model => model.name, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBoxFor(model => model.name, new { @class = "form-control col-md-7 col-xs-12", @id = "name", @required = "" })
+                                        @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                @if (Model.id == 0)//th them san pham mới có chức năng này
+                                {
+                                    <div style="text-align:center" id="generatearea">
+                                        <a href="#" class="btn btn-danger" id="generate-temlate">Generate Template</a>
+                                    </div>
+                                }
+
+                                <div class="item form-group" id="seonamearea">
+                                    @Html.LabelFor(model => model.seoname, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBoxFor(model => model.seoname, new { @class = "form-control col-md-7 col-xs-12", @id = "seoname", @required = "" })
+                                        @Html.ValidationMessageFor(model => model.seoname, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="item form-group" id="descriptionarea">
+                                    @Html.LabelFor(model => model.description, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextAreaFor(model => model.description, new { @class = "form-control col-md-7 col-xs-12" })
+                                        @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="item form-group" id="htmldescriptionarea">
+                                    @Html.LabelFor(model => model.htmldescription, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextAreaFor(model => model.htmldescription, new { @class = "form-control col-md-7 col-xs-12", @id = "htmldescription" })
+                                        @Html.ValidationMessageFor(model => model.htmldescription, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                @*<div class="item form-group" id="keywordarea">
+                                        @Html.LabelFor(model => model.keyword, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            @Html.TextBoxFor(model => model.keyword, new { @class = "form-control col-md-7 col-xs-12", @type = "text", @required = "", @id = "keyword" })
+                                            @Html.ValidationMessageFor(model => model.keyword, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>*@
+
+                                <div class="item form-group" id="keywordarea">
+                                    @Html.LabelFor(model => model.keyword, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    @{ string lstKeyword = Model.keyword != null && Model.keyword.Any() ? String.Join(",", Model.keyword) : "";}
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBoxFor(model => model.keyword, new { @class = "tags form-control col-md-7 col-xs-12", @type = "text", Value = lstKeyword, @required = "", @id = "tags_keyword" })
+                                        @Html.ValidationMessageFor(model => model.keyword, "", new { @class = "text-danger" })
+
+                                        @*<div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div>*@
+                                    </div>
+                                </div>
+
+
+
+                                <div class="item form-group" id="metakeywordarea">
+                                    @Html.LabelFor(model => model.metakeyword, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextAreaFor(model => model.metakeyword, new { @class = "form-control col-md-7 col-xs-12", @id = "metakeyword" })
+                                        @Html.ValidationMessageFor(model => model.metakeyword, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="item form-group" id="metadescriptionarea">
+                                    @Html.LabelFor(model => model.metadescription, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextAreaFor(model => model.metadescription, new { @class = "form-control col-md-7 col-xs-12", @id = "metadescription" })
+                                        @Html.ValidationMessageFor(model => model.metadescription, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                @*thư viện CKFinder*@
+                                <div class="item form-group" id="avatararea">
+                                    @Html.LabelFor(model => model.avatar, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @*@Html.EditorFor(model => model.avatar, new { @class = "form-control col-md-7 col-xs-12", @readonly = "readonly", @required = "", @id = "tbAvatar" })*@
+                                        <input type="text" class="form-control col-md-7 col-xs-12" readonly="readonly" name="tbavatar" id="tbAvatar" value="@(Model.avatar!=null &&Model.avatar.Any()?String.Join(";",Model.avatar.Select(x=>x.url)):String.Empty)" />
+                                        <a id="button-avatarselect" href="#">Chọn Ảnh</a>
+                                        @*@Html.ValidationMessageFor(model => model.avatar, "", new { @class = "text-danger" })*@
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12 viewavatar" style="text-align:center">
+                                        @if (Model.avatar != null)
+                                        {
+                                            foreach (var item in Model.avatar)
+                                            {
+                                                if (item != null)
+                                                {
+                                                    <img width="100" height="100" src="@item.url" />
+                                                }
+
+                                            }
+                                        }
+
+
+                                    </div>
+                                </div>
+                                <div class="item form-group" id="slidearea">
+                                    @Html.LabelFor(model => model.slide, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @*@Html.EditorFor(model => model.slide, new { @class = "form-control col-md-7 col-xs-12", @readonly = "readonly", @required = "", @id = "tbSlide" })*@
+                                        <input type="text" class="form-control col-md-7 col-xs-12" readonly="readonly" name="tbslide" id="tbSlide" value="@(Model.slide!=null && Model.slide.Any()?String.Join(";",Model.slide.Select(x=>x.url)):String.Empty)" />
+                                        <a id="button-slideselect" href="#">Chọn Ảnh</a>
+                                        @*@Html.ValidationMessageFor(model => model.slide, "", new { @class = "text-danger" })*@
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12 viewslide" style="text-align:center">
+                                        @if (Model.slide != null)
+                                        {
+                                            foreach (var item in Model.slide)
+                                            {
+                                                if (item != null)
+                                                {
+                                                    <img width="100" height="100" src="@item.url" />
+                                                }
+
+                                            }
+                                        }
+
+
+                                    </div>
+                                </div>
+
+                                @if (Model.collectionid == 0)
+                                {
+                                    string disignImage = Model.designimage != null && Model.designimage.Any() ? Model.designimage.First().fullimage + ";" + Model.designimage.First().specialpoint + ";" + Model.designimage.First().background : "";
+
+                                    <div class="item form-group" id="designimagearea">
+                                        @Html.LabelFor(model => model.designimage, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            @*@Html.EditorFor(model => model.designimage, new { @class = "form-control col-md-7 col-xs-12", @readonly = "readonly", @id = "tbDesignImage" })*@
+                                            <input type="text" class="form-control col-md-7 col-xs-12" readonly="readonly" name="tbdesignimage" id="tbDesignImage" value="@(disignImage)" />
+                                            <a id="button-designimageselect" href="#">Chọn Ảnh</a>
+                                            @*@Html.ValidationMessageFor(model => model.designimage, "", new { @class = "text-danger" })*@
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-12 viewdesignimage" style="text-align:center">
+                                            @if (Model.designimage != null && Model.designimage.Any())
+                                            {
+                                                <img width="100" height="100" src="@Model.designimage.First().fullimage" />
+                                                <img width="100" height="100" src="@Model.designimage.First().specialpoint" />
+                                                <img width="100" height="100" src="@Model.designimage.First().background" />
+
+                                            }
+
+
+                                        </div>
+                                    </div>
+                                }
+
+
+                                <div class="item form-group" id="oldpricearea">
+                                    @Html.LabelFor(model => model.oldprice, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBoxFor(model => model.oldprice, new { @class = "form-control col-md-7 col-xs-12", @type = "number", @step = "any", @id = "oldprice" })
+                                        @Html.ValidationMessageFor(model => model.oldprice, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="item form-group" id="newpricearea">
+                                    @Html.LabelFor(model => model.newprice, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBoxFor(model => model.newprice, new { @class = "form-control col-md-7 col-xs-12", @type = "number", @step = "any", @id = "newprice" })
+                                        @Html.ValidationMessageFor(model => model.newprice, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="item form-group" id="displayorderarea">
+                                    @Html.LabelFor(model => model.displayorder, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBoxFor(model => model.displayorder, new { @class = "form-control col-md-7 col-xs-12", @type = "number", @step = "1", @id = "displayorder" })
+                                        @Html.ValidationMessageFor(model => model.displayorder, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                                @*Dùng dropdowlist*@
+                                @if (Model.id > 0 && Model.collectionid > 0)//th updatesp collection
+                                {
+                                    <div class="item form-group" id="collectionarea">
+                                        @Html.LabelFor(model => model.collectionid, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            @Html.DropDownListFor(model => model.collectionid, null, new { @class = "form-control col-md-7 col-xs-12" })
+                                            @Html.ValidationMessageFor(model => model.collectionid, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                }
+                                else//th tao moi san pham
+                                {
+                                    <div class="item form-group" id="collectionarea">
+                                        @Html.LabelFor(model => model.collectionid, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            @Html.DropDownListFor(model => model.collectionid, null, new { @class = "form-control col-md-7 col-xs-12" })
+                                            @Html.ValidationMessageFor(model => model.collectionid, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                }
+
+                                @if (Model.collectionid == 0)
+                                {
+                                    @*<div class="item form-group" id="materialarea">
+                                                                        @Html.LabelFor(model => model.material, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                            @Html.DropDownListFor(model => model.material,
+                                                                           new List<SelectListItem>
+                                                {
+                                                 new SelectListItem {Value = "1", Text = "Viền silicoin đen. Mặt lưng nhựa cứng"},
+                                                  new SelectListItem {Value = "2", Text = "Viền silicoin trong. Mặt lưng nhựa cứng"},
+                                                  new SelectListItem {Value = "3", Text = "Ốp dẻo trong"},
+
+                                                }, "--- Select ---",
+                                        new { @class = "form-control col-md-7 col-xs-12" })
+                                                                            @Html.ValidationMessageFor(model => model.material, "", new { @class = "text-danger" })
+                                                                        </div>
+                                                                    </div>*@
+                                    <div class="item form-group" id="materialarea">
+                                        @Html.LabelFor(model => model.material, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            @{ string materialValue = Model.material != null && Model.material.Any() ? String.Join(",", Model.material.Select(x => x.name)) : "";}
+
+                                            @*@Html.TextBoxFor(model => model.material, new { @class = "tags form-control col-md-7 col-xs-12", @type = "text", Value = materialValue, @id = "tags_material" })*@
+                                            <input type="text" class="tags form-control col-md-7 col-xs-12" readonly="readonly" name="tbmaterial" id="tags_material" value="@materialValue" />
+
+                                            @Html.ValidationMessageFor(model => model.material, "", new { @class = "text-danger" })
+
+                                            <div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group" id="phonemodelarea">
+                                        @Html.LabelFor(model => model.phonemodelid, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            @Html.DropDownListFor(model => model.phonemodelid, null, new { @class = "form-control col-md-7 col-xs-12" })
+                                            @Html.ValidationMessageFor(model => model.phonemodelid, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                }
+
+                                <div class="item form-group" id="buttonsubmitarea">
+                                    <div class="col-md-offset-5 col-md-10">
+                                        <input type="submit" value="Cập Nhật" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        <div>
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+                        @*end form*@
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

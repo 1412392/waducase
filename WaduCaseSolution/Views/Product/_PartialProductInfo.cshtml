@@ -1,0 +1,174 @@
+﻿@using WaduCaseBusiness.Model;
+@using WaduCase.Common;
+@using WaduCase.Models;
+
+@model ProductBO
+@{
+    int currentMaterialID = Convert.ToInt32(ViewData["CurrentMaterialID"]);
+    string CartItemKey = Convert.ToString(ViewData["CartItemKey"]);
+    CommonBO CommonInfo = (CommonBO)ViewData["CommonInfo"];
+}
+@if (Model.collectionid == 0)
+{
+    <div class="product-info summary col-fit col entry-summary product-summary form-flat">
+        <div class="price-wrapper">
+            <p class="price product-page-price price-on-sale">
+                <del>
+                    <span class="woocommerce-Price-amount amount">
+                        @Model.oldprice.ToString("N0")
+                        <span class="woocommerce-Price-currencySymbol">&#8363;</span>
+                    </span>
+                </del>
+                <ins>
+                    <span class="woocommerce-Price-amount amount">
+                        @Model.newprice.ToString("N0")
+                        <span class="woocommerce-Price-currencySymbol">&#8363;</span>
+                    </span>
+                </ins>
+            </p>
+        </div>
+        <form class="variations_form cart" action="/gio-hang" method="post" enctype='multipart/form-data' data-product_id="1033">
+            <table class="variations" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td class="label">
+                            <label for="pa_chon-chat-lieu-op-lung">CHỌN CHẤT LIỆU ỐP</label>
+                        </td>
+                        <td class="value">
+                            <select id="pa_chon-chat-lieu-op-lung" class="" name="attribute_pa_chon_chat_lieu_op_lung" data-attribute_name="attribute_pa_chon-chat-lieu-op-lung" data-show_option_none="yes">
+
+                                <option @(currentMaterialID == 0 ? "selected" : "") value="0">----------Chọn chất liệu----------</option>
+                                @foreach (var item in Model.material)
+                                {
+                                    <option @(currentMaterialID == item.id ? "selected" : "") value="@item.id">@item.name</option>
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="single_variation_wrap">
+                <div class="woocommerce-variation single_variation"></div>
+                <div class="woocommerce-variation-add-to-cart variations_button">
+                    <a href="#" id="fpd-start-customizing-button" class="fpd-blue-btn fpd-inline" title="" onclick="return false">TỰ THIẾT KẾ</a>
+                    @*<input type="hidden" value="@Model.id" name="add-to-cart" />*@
+
+                    <input type="hidden" value="" name="fpd_product" />
+                    <input type="hidden" value="@Model.avatar.First().url" name="fpd_product_thumbnail" />
+                    <input type="hidden" value="" name="fpd_remove_cart_item" />
+
+                    <input type="hidden" value="@CartItemKey" name="fpd_cartitemkey" />
+                    @*<div class="quantity buttons_added">
+                            <input type="button" value="-" class="minus button is-form"> <label class="screen-reader-text" for="quantity_5d365d73dc14f">Số lượng</label>
+                            <input type="number"
+                                   id="quantity_5d365d73dc14f"
+                                   class="input-text qty text"
+                                   step="1"
+                                   min="1"
+                                   max="9999"
+                                   name="quantity"
+                                   value="1"
+                                   title="SL"
+                                   size="4"
+                                   pattern="[0-9]*"
+                                   inputmode="numeric"
+                                   aria-labelledby="" />
+                            <input type="button" value="+" class="plus button is-form">
+                        </div>*@
+                    <div class="gap-element clearfix" style="display:block; height:auto; padding-top:5px"></div>
+                    <button type="submit" class="single_add_to_cart_button button alt">Thêm vào giỏ hàng</button>
+                    <input type="hidden" name="product_id" value="@Model.id" />
+                    <input type="hidden" name="variation_id" class="variation_id" value="0" />
+                </div>
+            </div>
+
+        </form>
+        <div class="product-short-description">
+            <div class="gap-element clearfix" style="display:block; height:auto; padding-top:30px"></div>
+            <div class="row" id="row-287546940">
+                <div class="col medium-6 small-6 large-6">
+                    <div class="col-inner"> <a href="#videothietke" target="_self" class="button success is-outline is-small lowercase expand" style="border-radius:99px;"> <span>Xem Hướng Dẫn Thiết Kế</span> </a></div>
+                </div>
+                <div class="col medium-6 small-6 large-6">
+                    <div class="col-inner"> <a href="#canhotro" target="_self" class="button success is-outline is-small lowercase expand" style="border-radius:99px;"> <span>Cần Hỗ Trợ Thiết Kế?</span> </a></div>
+                </div>
+            </div>
+            <p>
+                <div id="videothietke"
+                     class="lightbox-by-id lightbox-content mfp-hide lightbox-white "
+                     style="max-width:800px ;padding:20px"><iframe width="1280" height="753" src="https://www.youtube.com/embed/mf97OmbceNk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+            </p>
+            <p>
+                <div id="canhotro"
+                     class="lightbox-by-id lightbox-content mfp-hide lightbox-white "
+                     style="max-width:600px ;padding:20px" />
+            </p>
+            <p style="text-align: center;">WADU rất vui khi được hỗ trợ anh, chị. WADU có thể hỗ trợ anh, chị qua (nhấn vào nút chat bên dưới):</p><div class="row row-collapse row-full-width align-equal align-center" id="row-1381628621">
+                <div class="col medium-6 small-6 large-6">
+                    <div class="col-inner text-center">
+                        <p>
+                            <a href="#" class="external" rel="nofollow" target="_blank">
+                                <span style="font-size: 100%;">
+                                    <img class="wp-image-28289 alignright" src="~/Assets/img/chat-facebook-for-custom.png" alt="" width="200" />
+                                </span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col medium-6 small-6 large-6">
+                    <div class="col-inner text-left">
+                        <p>
+                            <a href="#" class="external" rel="nofollow" target="_blank">
+                                <img class="wp-image-28290 alignleft" src="~/Assets/img/chat-ZALO.png" alt="" width="200" />
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <style scope="scope"></style>
+            </div>
+        </div>
+        <div class="gap-element clearfix" style="display:block; height:auto; padding-top:5px"></div>
+        <p><strong>Lưu ý chất lượng hình để in: </strong>Hình ảnh có chất lượng càng cao sẽ in càng tốt. WADU sẽ gọi cho anh chị nếu hình ảnh không đủ chất lượng để in. Anh chị hãy yên tâm ạ.</p><p><strong>Bảo hành:</strong> 01 tháng bảo hành 01 ĐỔI 01 không điều kiện, độ bền màu sắc 03 năm.</p><p><strong>Thời gian giao hàng:</strong> 01 ngày in và 01 - 03 ngày vận chuyển.</p><p><strong>Hình thức thanh toán:</strong> Giao hàng thu tiền tại nhà</p>
+    </div>
+}
+
+else
+{
+    <div class="product-info summary col-fit col entry-summary product-summary form-flat">
+        <div class="price-wrapper">
+            <p class="price product-page-price "> @Model.newprice.ToString("N0")₫ – @Model.oldprice.ToString("N0")₫</p>
+        </div>
+
+        <div class="product-short-description">
+            <p style="text-align: center;">
+                <strong>
+                    <span style="font-size: 120%;">- CÁCH THỨC ĐẶT HÀNG -</span><br>
+                </strong>
+            </p>
+            <p style="text-align: center;">
+                <strong>
+                    Chat với HATO để tìm điện thoại của bạn, xem trước thiết kế với tên bạn và Đặt Hàng<br>
+                </strong>
+            </p>
+            <p style="text-align: center;">
+                <span style="font-size: 95%;">
+                    <em>(Hỗ trợ in cho +800 dòng điện thoại: iPhone/ Samsung/ Oppo/ Vivo/ Xiaomi/Huawei/ Zenfone/ Vsmart/ Nokia/ Lenovo/ HTC/...)</em>
+                </span>
+            </p>
+            <p style="text-align: center;">
+                <a href="@CommonInfo.facebookchat" class="external" rel="nofollow" target="_blank">
+                    <img class="aligncenter wp-image-22980" src="@Url.Content("~/Assets/img/chat-facebook-for-custom.png")" alt="" width="234" height="52">
+                </a>
+            </p>
+            <p style="text-align: center;">
+                <a href="@CommonInfo.zalochat" class="external" rel="nofollow" target="_blank">
+                    <img class="aligncenter wp-image-22980" src="@Url.Content("~/Assets/img/chat-ZALO.png")" alt="" width="234" height="52">
+                </a>
+            </p>
+            <div class="gap-element" style="display:block; height:auto; padding-top:30px"></div>
+            <p><strong>800+ dòng điện thoại: </strong>Chat với WADU để tìm điện thoại của bạn và xem thiết kế với tên bạn. Thay đổi màu chữ bạn thích.</p><p><strong>Bảo hành:</strong> 01 tháng bảo hành 01 ĐỔI 01 không điều kiện, độ bền màu sắc 03 năm.</p><p><strong>Thời gian giao hàng:</strong> 01 ngày in và 01 - 03 ngày vận chuyển.</p><p><strong>Hình thức thanh toán:</strong> Giao hàng thu tiền tại nhà</p>
+        </div>
+    </div>
+}
+
+

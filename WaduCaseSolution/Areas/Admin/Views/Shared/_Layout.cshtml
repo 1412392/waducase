@@ -1,0 +1,237 @@
+﻿@using WaduCase.Common
+@{
+    UserLogin user = null;
+    try
+    {
+        user = (UserLogin)Session[CommonConstants.USER_SESSION];
+    }
+    catch
+    {
+        user = new UserLogin();
+    }
+    if (user == null)
+    {
+        user = new UserLogin();
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>@ViewBag.Title</title>
+
+    <link rel="icon" href="/images/icon.png">
+
+    <!-- Bootstrap -->
+    <link href="/Assets/Admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/Assets/Admin/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="/Assets/Admin/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="/Assets/Admin/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="/Assets/Admin/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+    <!-- Datatables -->
+    <link href="/Assets/Admin/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="/Assets/Admin/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="/Assets/Admin/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="/Assets/Admin/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="/Assets/Admin/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Custom Theme Style -->
+    <link href="/Assets/Admin/build/css/custom.min.css" rel="stylesheet">
+</head>
+
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="/" class="site_title"><i class="fa fa-paw"></i> <span>WaduCase</span></a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <!-- menu profile quick info -->
+                    <div class="profile clearfix">
+                        <div class="profile_pic">
+                            <img src="@user.Avatar" alt="..." class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                            <span>Welcome,</span>
+                            <h2>@user.UserName</h2>
+                        </div>
+                    </div>
+                    <!-- /menu profile quick info -->
+
+                    <br />
+
+                    <!-- sidebar menu -->
+                    @RenderPage("Sidebar.cshtml")
+
+                    <!-- /sidebar menu -->
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="/login">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <!-- /menu footer buttons -->
+                </div>
+            </div>
+
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav>
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="@user.Avatar" alt="">@user.UserName
+                                    <span class=" fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+
+                                    <li>
+                                        @Html.ActionLink("Log Out", "Index", "Logout", new { @class = "fa fa-sign-out pull-right" }, null)
+
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li role="presentation" class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class="badge bg-green">1</span>
+                                </a>
+                                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                    <li>
+                                        <a>
+                                            <span class="image"><img src="@user.Avatar" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>@user.UserName</span>
+                                                <span class="time">0 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Đăng nhập vào hệ thống....
+                                            </span>
+                                        </a>
+                                    </li>
+
+
+                                    <div class="text-center">
+                                        <a>
+                                            <strong>See All Alerts</strong>
+                                            <i class="fa fa-angle-right"></i>
+                                        </a>
+                                    </div>
+                            </li>
+                        </ul>
+                        </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            @RenderBody()
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    Hệ thống được thiết kế bởi Nguyễn Thanh Phi<br>
+                    Copyright &copy; 2017-2018
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+
+
+    <!-- jQuery -->
+    <script src="/Assets/Admin/vendors/jquery/dist/jquery.min.js"></script>
+
+
+    @*<script src="~/Assets/Admin/jquery-3.1.1.min.js"></script>*@
+    <!-- Bootstrap -->
+
+    <script src="/Assets/Admin/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- FastClick -->
+    <script src="/Assets/Admin/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="/Assets/Admin/vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="/Assets/Admin/vendors/Chart.js/dist/Chart.min.js"></script>
+    <script src="/Assets/Admin/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- jQuery Sparklines -->
+    <script src="/Assets/Admin/vendors/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+    <!-- Flot -->
+    <script src="/Assets/Admin/vendors/Flot/jquery.flot.js"></script>
+    <script src="/Assets/Admin/vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="/Assets/Admin/vendors/Flot/jquery.flot.time.js"></script>
+    <script src="/Assets/Admin/vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="/Assets/Admin/vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="/Assets/Admin/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="/Assets/Admin/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="/Assets/Admin/vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="/Assets/Admin/vendors/DateJS/build/date.js"></script>
+   
+    <!-- iCheck -->
+    <script src="/Assets/Admin/vendors/iCheck/icheck.min.js"></script>
+    <!-- Datatables -->
+    <script src="/Assets/Admin/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/Assets/Admin/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="/Assets/Admin/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/Assets/Admin/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="/Assets/Admin/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="/Assets/Admin/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="/Assets/Admin/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="/Assets/Admin/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="/Assets/Admin/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="/Assets/Admin/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/Assets/Admin/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="/Assets/Admin/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="/Assets/Admin/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="/Assets/Admin/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="/Assets/Admin/vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="/Assets/Admin/vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
+
+    <script src="/Assets/Admin/plugins/ckeditor/ckeditor.js"></script>
+
+    <script src="/Assets/Admin/plugins/ckfinder/ckfinder.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="/Assets/Admin/build/js/custom.min.js"></script>
+    <script src="/Assets/Admin/plugins/bootbox.min.js"></script>
+    <!-- jQuery Tags Input -->
+
+
+    @RenderSection("jsFooter", required: false)
+</body>
+</html>

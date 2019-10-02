@@ -1,0 +1,41 @@
+﻿@using WaduCaseBusiness.Model
+@model CommonBO
+
+@{
+    ViewBag.Title = "Chính sách thanh toán | Wadu Case";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main id="main" class="">
+    <div id="content" class="content-area page-wrapper" role="main">
+        <div class="row row-main">
+            <div class="large-12 col">
+                <div class="col-inner">
+                    <h1 style="text-align: center;">CHÍNH SÁCH THANH TOÁN</h1>
+                    <p>&nbsp;</p>
+                    <p>Khách hàng có thể lựa chọn các hình thức thanh toán sau khi mua sắm trực tuyến tại Wadu Case.</p>
+                    <h2><span style="font-size: 75%;"><strong>1.Thanh toán trực tiếp COD</strong></span></h2>
+                    <p>
+                        COD (dịch vụ giao hàng nhận tiền):&nbsp; Nhân viên vận chuyển thu tiền mặt khi giao hàng cho
+                        khách.
+                    </p>
+                    <h2>
+                        <span style="font-size: 75%;">2.Chuyển khoản trực tiếp vào số tài khoản của chúng tôi:</span>
+                    </h2>
+                    @foreach (var item in Model.bankinfo)
+                    {
+                        <ul>
+                            <li>Tên tài khoản: @item.accountname</li>
+                            <li>&nbsp;Số tài khoản: @item.accountnumber</li>
+                            <li>&nbsp;Ngân hàng: @item.bankname</li>
+                            <li>&nbsp;Nội dung chuyển khoản: Tên anh/chị + Số điện thoại</li>
+                        </ul>
+
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

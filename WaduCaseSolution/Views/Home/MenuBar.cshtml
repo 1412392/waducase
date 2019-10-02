@@ -1,0 +1,127 @@
+﻿@using WaduCaseBusiness.Model;
+@using WaduCase.Common;
+@using WaduCase.Models;
+
+@model List<CollectionBO>
+@{
+    List<CartSession> ListCartItem = ViewBag.ListCartItem;
+}
+
+<div id="wide-nav" class="header-bottom wide-nav hide-for-sticky flex-has-center hide-for-medium">
+    <div class="flex-row container">
+        <div class="flex-col hide-for-medium flex-left">
+            <ul class="nav header-nav header-bottom-nav nav-left  nav-spacing-xlarge nav-uppercase"></ul>
+        </div>
+        <div class="flex-col hide-for-medium flex-center">
+            <ul class="nav header-nav header-bottom-nav nav-center  nav-spacing-xlarge nav-uppercase">
+                <li id="menu-item-6136" class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-6136">
+                    <a class="nav-top-link"><a href="#nhowaduthietke"> NHỜ WADU THIẾT KẾ </a></a>
+                </li>
+                <li id="menu-item-1996"
+                    class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home active  menu-item-6135">
+                    <a id="menu-item-tutaythietke" href="" class="nav-top-link">TỰ TAY THIẾT KẾ</a>
+                </li>
+                <li id="menu-item-23830"
+                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children  menu-item-23830 has-dropdown">
+                    <a href="#" class="nav-top-link">BỘ SƯU TẬP<i class="icon-angle-down"></i></a>
+                    <ul class='nav-dropdown nav-dropdown-default'>
+                        @foreach (var item in Model)
+                        {
+                            <li id="menu-item-@item.id"
+                                class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-@item.id">
+                                <a href="@ProductHelper.GenCollectionURL(item.name,item.id)">
+                                    @item.name
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+                </li>
+                <li id="menu-item-24570"
+                    class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-24570">
+                    <a href="#"
+                       class="nav-top-link">DÀNH CHO DOANH NGHIỆP</a>
+                </li>
+                <li id="menu-item-23830"
+                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children  menu-item-23830 has-dropdown">
+                    <a href="#" class="nav-top-link">Chính sách<i class="icon-angle-down"></i></a>
+                    <ul class='nav-dropdown nav-dropdown-default'>
+                        <li id="menu-item-27899"
+                            class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-27899"><a href="/chinh-sach-giao-hang">Chính Sách Giao Hàng</a></li>
+                        <li id="menu-item-27900"
+                            class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-27900"><a href="/chinh-sach-doi-tra">Chính Sách Đổi Trả</a></li>
+                        <li id="menu-item-27901"
+                            class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-27901"><a href="/chinh-sach-thanh-toan">Chính Sách Thanh Toán</a></li>
+                    </ul>
+                </li>
+                <li id="menu-item-24570"
+                    class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-24570">
+                    <a href="/lien-he"
+                       class="nav-top-link">Liên Hệ</a>
+                </li>
+                <!-- <li id="menu-item-28674"
+                class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-28674"><a
+                  href="#" class="nav-top-link">BLOG</a></li> -->
+            </ul>
+        </div>
+        <div class="flex-col hide-for-medium flex-right flex-grow">
+            <ul class="nav header-nav header-bottom-nav nav-right  nav-spacing-xlarge nav-uppercase">
+                @*<li class="account-item has-icon">
+                    <div class="header-button">
+                        <a href="#" class="nav-top-link nav-top-not-logged-in icon button circle is-outline is-small">
+                            <i class="icon-user"></i>
+                        </a>
+                    </div>
+                </li>*@
+                <li class="header-divider"></li>
+
+                <li class="cart-item has-icon has-dropdown">
+                    <div class="header-button">
+                        <a href="/gio-hang" title="Giỏ hàng" class="header-cart-link icon button circle is-outline is-small">
+                            <span class="header-cart-title">
+                                <span class="cart-price">
+                                    <span class="woocommerce-Price-amount amount">@ListCartItem.Sum(x => x.FinalPrice).ToString("N0")<span class="woocommerce-Price-currencySymbol">₫</span></span>
+                                </span>
+                            </span>
+                            <i class="icon-shopping-basket" data-icon-label="@ListCartItem.Count">
+                            </i>
+                        </a>
+                    </div><ul class="nav-dropdown nav-dropdown-default" style="">
+                        <li class="html widget_shopping_cart">
+                            <div class="widget_shopping_cart_content">
+
+                                @if (ListCartItem.Count > 0)
+                                {
+                                    foreach (var item in ListCartItem)
+                                    {
+                                        <ul class="woocommerce-mini-cart cart_list product_list_widget ">
+                                            <li class="woocommerce-mini-cart-item mini_cart_item">
+                                                <a href="javascript:void(0);" class="removeitem  remove remove_from_cart_button" aria-label="Xóa sản phẩm này" data-product_id="@item.ItemKey" data-itemkey="@item.ItemKey" data-product_sku="">×</a>
+                                                <a href="@ProductHelper.GenProductURL(item.Name,item.ProductID)/?attribute_pa_chon_chat_lieu_op_lung=@item.MaterialID&cart_item_key=@item.ItemKey">
+                                                    <img width="300" height="300" src="@Url.Content(item.Thumbnail)" sizes="(max-width: 300px) 100vw, 300px">@(item.Name + " - " + item.MaterialName)
+                                                </a>
+                                                <span class="quantity">@item.Quantity × <span class="woocommerce-Price-amount amount">@item.Price.ToString("N0")<span class="woocommerce-Price-currencySymbol">₫</span></span></span>
+                                            </li>
+                                        </ul>
+                                    }
+
+
+                                    <p class="woocommerce-mini-cart__total total"><strong>Tổng::</strong> <span class="woocommerce-Price-amount amount">@ListCartItem.Sum(x => x.FinalPrice).ToString("N0")<span class="woocommerce-Price-currencySymbol">₫</span></span></p>
+
+
+                                    <p class="woocommerce-mini-cart__buttons buttons"><a href="/gio-hang" class="button wc-forward">Xem giỏ hàng</a><a href="/thanh-toan" class="button checkout wc-forward">Thanh toán</a></p>
+                                }
+                                else
+                                {
+                                    <p class="woocommerce-mini-cart__empty-message">Chưa có sản phẩm trong giỏ hàng.</p>
+                                }
+
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+

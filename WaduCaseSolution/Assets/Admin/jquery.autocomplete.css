@@ -1,0 +1,138 @@
+.ac_results
+{
+    padding: 2px;
+    background-color: white;
+    overflow: hidden !important;
+    width: 330px !important;
+    height: 300px !important;
+    z-index: 99999;
+    -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    -webkit-transition: opacity .218s;
+    -moz-transition: opacity .218s;
+    -ms-transition: opacity .218s;
+    -o-transition: opacity .218s;
+    transition: opacity .218s;
+    background: white;
+    border: 1px solid #CCC;
+    border: 1px solid rgba(0, 0, 0, .2);
+    cursor: default;
+    font-size: 13px;
+    position: absolute;
+    padding: 0 0 6px;
+    font-size: 12px;
+}
+
+.ac_results ul
+{
+    margin-top: 2px !important;
+    width: 100%;
+    height: 300px !important;
+    max-height: 300px !important;
+    list-style-position: outside;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ac_results li
+{
+    margin: 0px;
+    cursor: default;
+    display: block; /*  	if width will be 100% horizontal scrollbar will apear  	when scroll mode will be used 	*/ /*width: 100%;*/ /*  	it is very important, if line-height not setted or setted  	in relative units scroll will be broken in firefox 	*/
+    overflow: hidden;
+    color: #333;
+    list-style: none;
+    margin: 0;
+    padding: 7px 7em 6px 30px;
+    white-space: nowrap;
+}
+
+.ac_loading
+{
+    background: white url('indicator.gif') right center no-repeat;
+}
+
+.ac_odd
+{
+    /*background-color:#eee;*/
+}
+
+.ac_over
+{
+    background-color: #EEE;
+    border-color: #EEE;
+    border-style: dotted;
+    border-width: 1px 0;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    cursor: pointer !important;
+}
+
+
+
+
+.ac_resultLI
+{
+    background-color: white;
+    overflow-x: hidden;
+    overflow-y: auto;
+    top: 25px;
+    right: 0px;
+    width: 200px;
+    z-index: 99999;
+    -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    -webkit-transition: opacity .218s;
+    -moz-transition: opacity .218s;
+    -ms-transition: opacity .218s;
+    -o-transition: opacity .218s;
+    transition: opacity .218s;
+    background: white;
+    border: 1px solid #CCC;
+    border: 1px solid rgba(0, 0, 0, .2);
+    cursor: default;
+    font-size: 13px;
+    position: absolute;
+    padding: 0 0 6px;
+    float: right;
+    height: auto !important;
+    max-height: 250px !important;
+    display: none;
+}
+
+.ReportAcUl
+{
+    margin-top: 2px !important;
+    width: 100%;
+    list-style-position: outside;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ReportAcli, .ReportAcli .a-li
+{
+    margin: 0px;
+    cursor: default;
+    display: block;
+    overflow: hidden;
+    color: #333!important;
+    list-style: none;
+    margin: 0;
+    padding: 7px 7em 6px 30px !important;
+    white-space: nowrap;
+    border-bottom: 1px solod #EDEDEE !important;
+}
+
+.ReportAcli:hover, .ReportAcli .a-li:hover
+{
+    text-decoration:none!important;
+    background-color: #EEE!important;
+    cursor: pointer !important;
+    color: #36C!important;
+    font-weight: bold!important;
+    
+}

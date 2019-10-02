@@ -1,0 +1,87 @@
+﻿@using WaduCaseBusiness.Model;
+@using WaduCase.Common;
+@model List<ProductBO>
+
+@if (Model.Count > 0)
+{
+    <div class="products row row-small large-columns-3 medium-columns-3 small-columns-2">
+        @foreach (var product in Model)
+        {
+            double percentSaleOff = Math.Ceiling(100 - (product.newprice / product.oldprice) * 100);
+
+            <div class="product-small col has-hover post-3627 product type-product status-publish has-post-thumbnail product_cat-in-op-lung-couple first instock sale shipping-taxable purchasable product-type-simple">
+                <div class="col-inner">
+                    <div class="badge-container absolute left top z-1">
+                        <div class="callout badge badge-frame">
+                            <div class="badge-inner secondary on-sale"><span class="onsale">-@percentSaleOff%</span></div>
+                        </div>
+                    </div>
+                    <div class="product-small box ">
+                        <div class="box-image">
+                            <div class="image-fade_in_back">
+                                <a href="@ProductHelper.GenProductURL(product.name, product.id)">
+                                    @{ var lstAvatar = product.avatar;}
+                                    @if (lstAvatar != null && lstAvatar.Count > 0)
+                                    {
+                                        if (lstAvatar.Count == 1)
+                                        {
+                                            <img width="300"
+                                                 height="300" src="@lstAvatar.First().url"
+                                                 class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
+                                                 alt="@product.seoname" />
+                                        }
+                                        else
+                                        {
+                                            <img width="300"
+                                                 height="300" src="@lstAvatar.First().url"
+                                                 class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
+                                                 alt="@product.seoname" />
+                                            <img width="300" height="300"
+                                                 src="@lstAvatar.Skip(1).First().url"
+                                                 class="show-on-hover absolute fill hide-for-small back-image" alt="@product.seoname" />
+                                        }
+                                    }
+
+                                </a>
+                            </div>
+                            <div class="image-tools is-small top right show-on-hover"></div>
+                            <div class="image-tools is-small hide-for-small bottom left show-on-hover"></div>
+                            <div class="image-tools grid-tools text-center hide-for-small bottom hover-slide-in show-on-hover">
+                            </div>
+                        </div>
+                        <div class="box-text box-text-products">
+                            <div class="title-wrapper">
+                                <p class="name product-title">
+                                    <a href="@ProductHelper.GenProductURL(product.name, product.id)">
+                                        @product.name
+                                        | @(product.collectionid > 0 ? "Tất cả dòng điện thoại" : "Tự thiết kế")
+                                    </a>
+                                </p>
+                            </div>
+                            <div class="price-wrapper">
+                                <span class="price">
+                                    <del>
+                                        <span class="woocommerce-Price-amount amount">
+                                            @product.oldprice.ToString("N0")<span class="woocommerce-Price-currencySymbol">&#8363;</span>
+                                        </span>
+                                    </del> <ins>
+                                        <span class="woocommerce-Price-amount amount">
+                                            @product.newprice.ToString("N0")<span class="woocommerce-Price-currencySymbol">&#8363;</span>
+                                        </span>
+                                    </ins>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        }
+    </div>
+}
+else
+{
+    <div class="col large-9"><div class="shop-container"><p class="woocommerce-info">Không tìm thấy sản phẩm nào khớp với lựa chọn của bạn.</p></div></div>
+}

@@ -1,0 +1,179 @@
+﻿@using WaduCaseBusiness.Model
+@model OrderBO
+@using WaduCase.Common
+@{
+    ViewBag.Title = "Đặt hàng thành công | WaduCase";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    CommonBO CommonInfo = ViewBag.CommonInfo;
+
+}
+
+<main id="main" class="">
+    <div id="content" class="content-area page-wrapper" role="main">
+        <div class="row row-main">
+            <div class="large-12 col">
+                <div class="col-inner">
+                    <h1 style="text-align: center;">&nbsp;CHÚC MỪNG ANH CHỊ ĐÃ ĐẶT HÀNG THÀNH CÔNG!</h1>
+                    <h4 style="text-align: center;">
+                        &nbsp;<strong>
+                            Xin cảm ơn anh chị đã tin tưởng và đặt hàng tại WADU
+                            Case.&nbsp;
+                        </strong>
+                    </h4>
+                    <p>
+                        WADU sẽ gọi xác nhận đơn hàng trong vòng 24h kể từ lúc đặt hàng, để đơn hàng được xử lý nhanh hơn
+                        anh chị có thể chủ động liên hệ với WADU để xác nhận&nbsp; (8h – 22h cả T7, CN) :
+                    </p>
+                    <ul class="has-block tooltipstered">
+                        <li>
+                            <strong>Hotline:</strong>&nbsp;<span style="color: #0000ff;">@CommonInfo.phone</span>
+                        </li>
+                        <li>
+                            <strong>Live chat Facebook</strong>: <span style="color: #3366ff;">
+                                <a id="u_0_1k"
+                                   style="color: #3366ff;" href="@CommonInfo.facebookchat" target="_blank" rel="noopener"
+                                   data-lynx-mode="asynclazy"
+                                   data-lynx-uri="">
+                                    <span class="_2iem">
+                                        <span style="color: #0000ff;">m.me/WaduStore</span>
+                                    </span>
+                                </a>
+                            </span>
+                        </li>
+                        <li>
+                            <strong>Chat zalo: </strong><a target="_blank" href="@CommonInfo.zalochat">
+                                <span style="color: #0000ff;">@CommonInfo.zalochat</span>
+                            </a>
+                        </li>
+                        <li>
+                            <strong>Email: </strong><span style="color: #0000ff;">
+                                @CommonInfo.email<br>
+                            </span>
+                        </li>
+                    </ul>
+                    <p>
+                        Anh chị vui lòng xem kỹ lại thông tin đặt hàng: <strong>Họ tên</strong>, <strong>SĐT</strong>,
+                        <strong>Địa chỉ</strong> và <strong>Sản phẩm&nbsp;</strong>bên dưới.
+                    </p>
+                    <p>
+                        Nếu anh chị có bất kỳ câu hỏi hoặc thay đổi nào về thông tin đơn hàng, xin vui lòng liên hệ ngay
+                        với WADU để được hỗ trợ.
+                    </p>
+                    <p>
+                        Đội ngũ WADU Team luôn sẵn sàng hỗ trợ anh chị bất kì lúc nào. Một lần nữa WADU Case xin cảm ơn
+                        quý anh chị.
+                    </p>
+                    <div class="row align-center" id="row-1735661505">
+                        <div class="col small-12 large-12">
+                            <div class="col-inner text-center">
+                                <a href="/" target="_self"
+                                   class="button secondary lowercase" style="border-radius:99px;">
+                                    <span>
+                                        Trở lại trang
+                                        chủ
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <style scope="scope"></style>
+                    </div>
+                    <style>
+                        .yith-ctpw-front h2.customer_details,
+                        .yith-ctpw-front h2.order_details_title,
+                        .yith-ctpw-front .billig_address_title h2,
+                        .yith-ctpw-front .shipping_address_title h2 {
+                            color: #000000;
+                            font-size: 20px;
+                            font-weight: bold;
+                        }
+                    </style>
+                    <h2 class="woocommerce-order-details__title order_details_title"> Chi tiết đơn hàng</h2>
+                    <table class="woocommerce-table woocommerce-table--order-details shop_table order_details">
+                        <thead>
+                            <tr>
+                                <th class="woocommerce-table__product-name product-name product-name">Sản phẩm</th>
+                                <th class="woocommerce-table__product-table product-total product-total">
+                                    Tiền thanh toán
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.listitem)
+                            {
+                                <tr class="order_item">
+                                    <td class="product-name">
+                                        <a href="@ProductHelper.GenProductURL(item.Name,item.ProductID)">
+                                            @(item.Name + " | " + item.MaterialName)
+                                        </a> <strong class="product-quantity">× @item.Quantity</strong>
+                                    </td>
+                                    <td class="woocommerce-table__product-total product-total">
+                                        <span class="woocommerce-Price-amount amount">
+                                            @item.FinalPrice.ToString("N0")<span class="woocommerce-Price-currencySymbol">₫</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+
+                            <tr class="woocommerce-table__product-purchase-note product-purchase-note">
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr class="woocommerce-table__product-purchase-note product-purchase-note">
+                                <td colspan="2"></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            @*<tr>
+                                    <th scope="row">Tổng:</th>
+                                    <td>
+                                        <span class="woocommerce-Price-amount amount">
+                                            @Model.totalmoney<span class="woocommerce-Price-currencySymbol">₫</span>
+                                        </span>
+                                    </td>
+                                </tr>*@
+                            <tr>
+                                <th scope="row">Phí giao hàng:</th>
+                                <td>
+                                    <span class="woocommerce-Price-amount amount">
+                                        @Model.shipfee.ToString("N0")<span class="woocommerce-Price-currencySymbol">₫</span>
+                                    </span>&nbsp;<small class="shipped_via">qua Phí</small>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Phương thức thanh toán:</th>
+                                <td>@(Model.paymenttype == 1 ? "Trả tiền mặt khi nhận hàng (COD)" : "Chuyển khoản ngân hàng (giảm 5% giá trị đơn hàng)")</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Số tiền cần phải thanh toán:</th>
+                                <td>
+                                    <span class="woocommerce-Price-amount amount">
+                                        @Model.totalmoney.ToString("N0")<span class="woocommerce-Price-currencySymbol">₫</span>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <h2 class="customer_details"> Thông tin khách hàng</h2>
+                    <ul class="woocommerce-customer-details customer_details">
+                        <li>
+                            <p class="woocommerce-customer-details--phone">
+                                Số điện thoại: <span> <i>@Model.phone</i></span>
+                                <div style="clear:both;"></div>
+                        </li>
+                        <li>
+                            <p class="woocommerce-customer-details--phone">
+                                Họ tên: <span> <i>@Model.fullname</i></span>
+                                <div style="clear:both;"></div>
+                        </li>
+                    </ul>
+                    <header class="billig_address_title">
+                        <h3 class="woocommerce-column__title">Thông tin thanh toán</h3>
+                    </header>
+                    <address class="woocommerce-column--billing-address">
+                        @(Model.fulladdress + ", " + Model.ward + ", " + Model.district + ", " + Model.province)
+                    </address>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

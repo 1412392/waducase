@@ -1,0 +1,89 @@
+﻿@using WaduCaseBusiness.Model;
+@using WaduCase.Common;
+
+@model List<CollectionBO>
+
+<div id="main-menu" class="mobile-sidebar no-scrollbar mfp-hide">
+    <div class="sidebar-menu no-scrollbar ">
+        <ul class="nav nav-sidebar  nav-vertical nav-uppercase">
+            <li class="header-search-form search-form html relative has-icon">
+                <div class="header-search-form-wrapper">
+                    <div class="searchform-wrapper ux-search-box relative form-flat is-normal">
+                        <form role="search" method="get" class="searchform" action="#">
+                            <div class="flex-row relative">
+                                <div class="flex-col flex-grow">
+                                    <input type="search" class="search-field mb-0" name="s" value=""
+                                           placeholder="Tìm kiếm dòng điện thoại ?" /> <input type="hidden" name="post_type"
+                                                                                              value="product" />
+                                </div>
+                                <div class="flex-col">
+                                    <button type="submit"
+                                            class="ux-search-submit submit-button secondary button icon mb-0">
+                                        <i class="icon-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="live-search-results text-left z-top"></div>
+                        </form>
+                    </div>
+                </div>
+            </li>
+            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6136">
+                <a class="nav-top-link">
+                    <a href="javascript:void(Tawk_API.toggle())">NHỜ WADU THIẾT KẾ</a>
+                </a>
+            </li>
+            <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-6135">
+                <a href="" id="menu-item-tutaythietke" class="nav-top-link">TỰ TAY THIẾT KẾ</a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-23830">
+                <a href="#" class="nav-top-link">BỘ SƯU TẬP</a>
+                <ul class=children>
+                    @foreach (var item in Model)
+                    {
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-@item.id">
+                            <a href="@ProductHelper.GenCollectionURL(item.name,item.id)">
+                                @item.name
+                            </a>
+                        </li>
+                    }
+
+                </ul>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24570">
+                <a href=""
+                   class="nav-top-link">DÀNH CHO DOANH NGHIỆP</a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-23830">
+                <a href="#" class="nav-top-link">CHÍNH SÁCH</a>
+                <ul class=children>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-27900">
+                        <a href="/chinh-sach-giao-hang">
+                            Chính Sách Giao Hàng
+                        </a>
+                    </li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-27900">
+                        <a href="/chinh-sach-doi-tra">
+                            Chính Sách Đổi Trả
+                        </a>
+                    </li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-27900">
+                        <a href="/chinh-sach-thanh-toan">
+                            Chính Sách Thanh Toán
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24570">
+                <a href="/lien-he"
+                   class="nav-top-link">LIÊN HỆ</a>
+            </li>
+
+            @*<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24570">
+                <a href=""
+                   class="nav-top-link">ĐĂNG NHẬP</a>
+            </li>*@
+        </ul>
+    </div>
+</div>

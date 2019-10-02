@@ -1,0 +1,48 @@
+﻿@using WaduCaseBusiness.Model;
+@using WaduCase.Common;
+
+@model List<CollectionBO>
+
+
+<section class="section" id="section_1446136045">
+    <div class="bg section-bg fill bg-fill bg-loaded bg-loaded"></div>
+    <div class="section-content relative">
+        <h2 style="text-align: center;"><strong>BỘ SƯU TẬP ỐP LƯNG NỔI BẬT</strong></h2>
+        <div class="gap-element clearfix" style="display:block; height:auto; padding-top:30px"></div>
+        <div id="cats-2127443637" class="row large-columns-2 medium-columns- small-columns- row-normal row-masonry"
+             data-packery-options='{"itemSelector": ".col", "gutter": 0, "presentageWidth" : true}'>
+            @foreach (var item in Model)
+            {
+                <div class="product-category col">
+                    <div class="col-inner">
+                        <a href="@ProductHelper.GenCollectionURL(item.name,item.id)">
+                            <div class="box box-category has-hover box-push ">
+                                <div class="box-image">
+                                    <div class="">
+                                        <img src="@Url.Content(item.logo)" alt="@item.name"
+                                             width="300" height="300" />
+                                    </div>
+                                </div>
+                                <div class="box-text text-center">
+                                    <div class="box-text-inner">
+                                        <h5 class="uppercase header-title"> @item.name</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+        <div class="gap-element clearfix" style="display:block; height:auto; padding-top:30px" ></div>
+    </div>
+    <style scope="scope">
+
+        #section_1446136045 {
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+    </style>
+</section>

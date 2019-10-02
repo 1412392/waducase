@@ -1,0 +1,20 @@
+﻿@using WaduCaseBusiness.Model;
+@model CommonBO
+
+
+<div class="devvn_button_call_action">
+    <div class="devvn_call_action_item">
+        <a href="@Model.zalochat" target="_blank" title="Chat zalo"
+           class="devvn_call_action_zalo external" rel="nofollow"><strong>Chat Zalo</strong></a>
+    </div>
+    <div class="devvn_call_action_item">
+        <a href="@Model.facebookchat" target="_blank" title="Chat zalo"
+           class="devvn_call_action_face external" rel="nofollow"><strong>Chat Facebook</strong></a>
+    </div>
+    <div class="devvn_call_action_item">
+        <a href="tel:@Model.phone.Replace(" ","")" target="_blank" title="Chat zalo">
+            Gọi
+            <strong>@Model.phone</strong>
+        </a>
+    </div>
+</div>

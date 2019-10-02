@@ -1,0 +1,240 @@
+﻿@using WaduCaseBusiness.Model
+@model List<OrderBO>
+
+
+@{
+    ViewBag.Title = "Quản lý Đơn Hàng | Admin WaduCase";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<OrderWithStatus> ListOrderStatus = ViewBag.ListStatusOrder;
+    int Status = ViewBag.Status;
+}
+<style>
+    .ajax_loading p {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 55%;
+    }
+
+    .ajax_loading {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        font-weight: 600;
+        text-align: center;
+        font-size: 34px;
+        padding-top: 337px;
+        background: rgba( 255, 255, 255, .7 ) url('../../../../Assets/Admin/images/Pacman-1s-200px.gif') 50% 50% no-repeat;
+    }
+
+    body.loading {
+        overflow: hidden;
+    }
+
+        body.loading .ajax_loading {
+            display: block;
+        }
+</style>
+
+@section jsFooter{
+
+
+    <script src="/Assets/Admin/ajax/Order.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#notifymessage').removeClass('hide');
+            $('#notifymessage').delay(2000).slideUp(500);
+
+            $(".liststatus").on('change', function (e) {
+
+                //var picker_id = e.target.id;
+                var selected_option = $(this).find(":selected"); // get selected option for the changed select only
+                var selected_value = selected_option.val();
+                var optgroup = selected_option.parent().attr('label');
+
+                window.location = "/admin/order?status=" + parseInt(selected_value);
+
+
+
+            });
+            $('.vieworder').off('click').on('click', function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                var id = btn.data("id");
+                $.ajax({
+                    url: '/admin/order/vieworder',
+                    type: 'GET',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    ajaxasync: true,
+                    data: { id },
+                    beforeSend: function () {
+                         $("body").addClass("loading");
+                    },
+                    success: function (response) {
+
+                        console.log(response);
+                        $('#myupdatemodal').empty();
+                        $('#myupdatemodal').append(response.content);
+
+                    },
+                    error: function (err) {
+                        alert("Có lỗi xảy ra...");
+                    },
+                    complete: function () {
+                        $("body").removeClass("loading");
+                        $('#myupdatemodal').modal('show');
+                    }
+
+                });
+
+            });
+        });
+
+    </script>
+}
+<div class="right_col" role="main">
+    <div class="">
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        @if (TempData["AlertMessage"] != null)
+                        {
+                            <div id="notifymessage" class="alert @TempData["AlertType"]" style="font-size:23px;">
+                                @TempData["AlertMessage"]
+                            </div>
+                        }
+                        <h2>Danh sách đơn hàng</h2>
+                        <br />
+
+                        <div class="form-group" style="text-align:left">
+
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <select class="select2_group form-control liststatus" id="listcategory">
+                                    <optgroup label="Trạng thái đơn hàng">
+
+                                        <option @(Status == 1 ? "selected" : "") value="1">
+                                            Chưa xử lý@(" (có " + (ListOrderStatus.Where(x => x.StatusID == 1).FirstOrDefault() != null ?
+ListOrderStatus.Where(x => x.StatusID == 1).FirstOrDefault().ProductCount : 0) + " đơn hàng)")
+                                        </option>
+                                        <option @(Status == 2 ? "selected" : "") value="2">
+                                            Đang xử lý@(" (có " + (ListOrderStatus.Where(x => x.StatusID == 2).FirstOrDefault() != null ?
+ListOrderStatus.Where(x => x.StatusID == 2).FirstOrDefault().ProductCount : 0) + " đơn hàng)")
+                                        </option>
+                                        <option @(Status == 3 ? "selected" : "") value="3">
+                                            Đã hoàn tất@(" (có " + (ListOrderStatus.Where(x => x.StatusID == 3).FirstOrDefault() != null ?
+ListOrderStatus.Where(x => x.StatusID == 3).FirstOrDefault().ProductCount : 0) + " đơn hàng)")
+                                        </option>
+                                        <option @(Status == 4 ? "selected" : "") value="4">
+                                            Đã hủy@(" (có " + (ListOrderStatus.Where(x => x.StatusID == 4).FirstOrDefault() != null ?
+ListOrderStatus.Where(x => x.StatusID == 4).FirstOrDefault().ProductCount : 0) + " đơn hàng)")
+                                        </option>
+                                        <option @(Status == 5 ? "selected" : "") value="5">
+                                            Đã xóa@(" (có " + (ListOrderStatus.Where(x => x.StatusID == 5).FirstOrDefault() != null ?
+ListOrderStatus.Where(x => x.StatusID == 5).FirstOrDefault().ProductCount : 0) + " đơn hàng)")
+                                        </option>
+
+                                    </optgroup>
+
+                                </select>
+                            </div>
+                            @*<a class="btn btn-primary" style="float:right" href="@Url.Action("UpdateProduct", "Product")">Add</a>*@
+
+                        </div>
+
+
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                            </li>
+                            <li>
+                                <a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <table id="datatable" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Sản phẩm</th>
+                                    <th>Design</th>
+                                    <th>Ngày đặt</th>
+                                    <th>Khách hàng</th>
+                                    <th>Phone</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Type</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Trạng thái</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr id="row_@item.id">
+                                        <td>@item.id</td>
+                                        <td>@String.Join(" | ", item.listitem.Select(x => x.Name))</td>
+                                        <td><img class="img-responsive" src="@Url.Content(item.listitem.First().Thumbnail)" /></td>
+
+                                        @if (@item.createdate == null)
+                                        {
+                                            <td> @item.createdate </td>
+                                        }
+                                        else
+                                        {
+                                            <td> @item.createdate.Value.AddHours(7).ToString("yyyy/MM/dd hh:mm:ss") </td>
+                                        }
+                                        <td>@item.fullname</td>
+                                        <td>@item.phone</td>
+                                        <td>@(item.fulladdress + ", " + item.ward + ", " + item.district + ", " + item.province)</td>
+                                        <td>@(item.paymenttype == 1 ? "COD" : "Chuyển khoản")</td>
+                                        <td>@item.totalmoney.ToString("N0")đ</td>
+                                        <td>@item.statusname</td>
+
+                                        <td>
+                                            <a class="vieworder btn btn-success btn-view-order" data-id="@item.id"
+                                               href="javascript:void(0);">Xem</a>
+                                            @if (item.status != 3 && item.status != 4 && item.status != 5)
+                                            {
+                                                <a href="#" class="btn btn-danger btn-delete-order" data-id="@item.id">Delete</a>
+
+                                            }
+
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myupdatemodal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+
+</div>
+<div class="ajax_loading"><p></p></div>

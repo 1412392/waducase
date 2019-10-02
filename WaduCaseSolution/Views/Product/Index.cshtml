@@ -1,0 +1,649 @@
+﻿@using WaduCaseBusiness.Model;
+@using WaduCase.Common;
+@using WaduCase.Models;
+
+@model ProductBO
+@{
+    ViewBag.MetaKeyword = Model.metakeyword + " " + string.Join(" ", Model.keyword.ToArray());
+    ViewBag.Title = Model.seoname + " " + Model.name;
+    ViewBag.MetaDescription = Model.metadescription;
+
+
+    var ProductDesignImage = Model.designimage == null ? new DesignImage() : Model.designimage.FirstOrDefault();
+    if (ProductDesignImage == null)
+    {
+        ProductDesignImage = new DesignImage();
+    }
+
+    int currentMaterialID = ViewBag.CurrentMaterialID;
+    CartSession currentCart = ViewBag.CurrentCartItem;
+
+    CommonBO CommonInfo = ViewBag.CommonInfo;
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="shop-page-title product-page-title dark  featured-title page-title ">
+    <div class="page-title-bg fill">
+        <div class="title-bg fill bg-fill" data-parallax-fade="true" data-parallax="-2" data-parallax-background data-parallax-container=".page-title">
+        </div>
+        <div class="title-overlay fill"></div>
+    </div>
+    <div class="page-title-inner flex-row container medium-flex-wrap flex-has-center">
+        <div class="flex-col"> &nbsp;</div>
+        <div class="flex-col flex-center text-center">
+            <h1 class="product-title entry-title">@Model.name &#8211; @(Model.collectionid == 0 ? "Tự Thiết Kế" : "Tất cả dòng điện thoại")</h1>
+            <div class="is-medium">
+                <nav class="woocommerce-breadcrumb breadcrumbs">
+                    <a href="/">Trang chủ</a> <span class="divider">&#47;</span>
+                    @if (Model.collectionid == 0)//product thuoc brand
+                    {
+                        <a href="@ProductHelper.GenBrandURL(ViewBag.BrandName,Model.brandid)">@ViewBag.BrandName</a>
+                    }
+                    else
+                    {
+                        <a href="@ProductHelper.GenCollectionURL(ViewBag.CollectionName,Model.collectionid)">@ViewBag.CollectionName</a>
+                    }
+                </nav>
+            </div>
+        </div>
+        <div class="flex-col flex-right nav-right text-right medium-text-center"></div>
+    </div>
+</div>
+<main id="main" class="">
+    <div class="shop-container">
+        <div class="container">
+            <div class="woocommerce-notices-wrapper">
+            </div>
+        </div>
+        <div id="product-1033" class="post-1033 product type-product status-publish has-post-thumbnail product_cat-in-op-lung-iphone first instock sale shipping-taxable purchasable product-type-variable">
+            <div class="product-container">
+                <div class="product-main">
+                    <div class="row content-row mb-0">
+                        @Html.Partial("~/Views/Product/_PartialGallery.cshtml", Model)
+
+                        @Html.Partial("~/Views/Product/_PartialProductInfo.cshtml", Model, new ViewDataDictionary()
+                        {
+                             { "CurrentMaterialID",currentMaterialID },
+                             {"CartItemKey",currentCart.ItemKey },
+                             {"CommonInfo",CommonInfo }
+                        })
+
+                    </div>
+                    <div id="product-sidebar" class="mfp-hide"><div class="sidebar-inner"></div></div>
+                </div>
+            </div>
+            <div class="product-footer">
+                <div class="container">
+                    <div class="woocommerce-tabs container tabbed-content">
+                        <ul class="product-tabs  nav small-nav-collapse tabs nav nav-uppercase nav-line nav-left">
+                            <li class="description_tab  active">
+                                <a href="#tab-description">Thông tin sản phẩm</a>
+                            </li>
+                        </ul>
+                        <div class="tab-panels">
+                            <div class="panel entry-content active" id="tab-description">
+                                <section class="section" id="section_1815597822">
+                                    <div class="bg section-bg fill bg-fill bg-loaded bg-loaded"></div>
+                                    @Html.Action("RelativeProduct", new { objProductBO = Model })
+                                    <style scope="scope">
+                                        #section_1815597822 {
+                                            padding-top: 30px;
+                                            padding-bottom: 30px;
+                                            background-color: rgba(233, 233, 233, 0.81);
+                                        }
+                                    </style>
+                                </section>
+                                <div class="gap-element clearfix" style="display:block; height:auto; padding-top:40px"></div><p style="text-align: left;"><span style="color: #000000; font-size: 100%;"><strong><span style="font-size: 120%;">Có 4 Loại Chất Liệu Ốp Lưng Để Bạn Lựa Chọn</span><br /></strong></span></p>
+                                <div class="img has-hover x md-x lg-x y md-y lg-y" id="image_230621336">
+                                    <a class="image-lightbox lightbox-gallery" href="~/Assets/img/productdetail/chat-lieu-op-lung-2.jpg" title="">
+                                        <div class="img-inner dark">
+                                            <img width="1805" height="900" src="~/Assets/img/productdetail/chat-lieu-op-lung-2.jpg" class="attachment-original size-original" alt="chất liệu ốp lưng in tại WADU Case" />
+                                        </div>
+                                    </a>
+                                    <style scope="scope">
+                                        #image_230621336 {
+                                            width: 100%;
+                                        }
+                                    </style>
+                                </div>
+                                <div class="img has-hover x md-x lg-x y md-y lg-y" id="image_1910963721">
+                                    <a class="image-lightbox lightbox-gallery" href="~/Assets/img/productdetail/op-deo-trong-va-op-kinh-trang-guong.jpg" title="">
+                                        <div class="img-inner dark">
+                                            <img width="1805" height="900" src="~/Assets/img/productdetail/op-deo-trong-va-op-kinh-trang-guong.jpg" class="attachment-original size-original" alt="op deo trong va op kinh" />
+                                        </div>
+                                    </a>
+                                    <style scope="scope">
+                                        #image_1910963721 {
+                                            width: 100%;
+                                        }
+                                    </style>
+                                </div>
+                                <div class="gap-element" style="display:block; height:auto; padding-top:20px" class="clearfix"></div>
+                                <div class="img has-hover x md-x lg-x y md-y lg-y" id="image_250431927">
+                                    <div class="img-inner dark"> <img width="1200" height="600" src="~/Assets/img/productdetail/in-hinh-len-mat-lung-2.jpg" class="attachment-original size-original" alt="hình được in lên mặt lưng của ốp" /></div>
+                                    <style scope="scope">
+                                        #image_250431927 {
+                                            width: 100%;
+                                        }
+                                    </style>
+                                </div>
+                                <div class="gap-element" style="display:block; height:auto; padding-top:10px" class="clearfix"></div>
+                                <div class="img has-hover x md-x lg-x y md-y lg-y" id="image_1803552427">
+                                    <div class="img-inner dark"> <img width="1200" height="600" src="~/Assets/img/productdetail/baovephimbam.jpg" class="attachment-original size-original" alt="" /></div>
+                                    <style scope="scope">
+                                        #image_1803552427 {
+                                            width: 100%;
+                                        }
+                                    </style>
+                                </div>
+                                <div class="gap-element" style="display:block; height:auto; padding-top:30px" class="clearfix"></div>
+
+                                @*#region quang cao*@
+                                <div class="gap-element clearfix" style="text-align:center;padding-bottom:30px">
+                                    <iframe data-aa="1244316" src="//ad.a-ads.com/1244316?size=990x90" scrolling="no" style="width:990px; height:90px; border:0px; padding:0; overflow:hidden" allowtransparency="true"></iframe>
+                                </div>
+
+                                @*#endregion*@
+
+                                @Html.Action("RealProductAtWaduCase", new { objProduct = Model })
+
+                                <p>&nbsp;</p>
+                                <div class="row row-full-width align-center" id="row-354523082">
+                                    <div class="col medium-4 small-12 large-4">
+                                        <div class="col-inner"><h3 style="text-align: center;">NỀN TẢNG THIẾT KẾ</h3><ul><li>Tự tay thiết kế ốp lưng với hình ảnh của bạn, thêm chữ (tên, câu nói bạn thích, ngày kỷ niệm,...).</li><li>Giúp bạn thiết kế và xem trước mẫu trước khi đặt hàng</li></ul></div>
+                                    </div>
+                                    <div class="col medium-4 small-12 large-4">
+                                        <div class="col-inner"><h3 style="text-align: center;">CHẤT LIỆU ỐP LƯNG</h3><ul><li>Ốp lưng WADU case với chất liệu nhập khẩu, phù hợp để in hình với độ bám mực cao.</li></ul></div>
+                                    </div>
+                                    <div class="col medium-4 small-12 large-4">
+                                        <div class="col-inner"><h3 style="text-align: center;">CÔNG NGHỆ IN</h3><ul><li>Hình in lên mặt sau ốp lưng</li><li>Công nghệ in UV hiện đại nhất cho màu sắc rực rỡ, tươi sáng</li><li>Độ bền màu sắc hơn 3 năm</li></ul></div>
+                                    </div>
+                                    <style scope="scope"></style>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div> <button class="pswp__button pswp__button--close"
+                                                          aria-label="Đóng (Esc)"></button>
+                <button class="pswp__button pswp__button--zoom"
+                        aria-label="Phóng to/ thu nhỏ"></button>
+                <div class="pswp__preloader">
+                    <div class="loading-spin"></div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+            <button class="pswp__button--arrow--left" aria-label="Ảnh trước (mũi tên trái)"></button>
+            <button class="pswp__button--arrow--right" aria-label="Ảnh tiếp (mũi tên phải)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    <script src="~/Assets/fancydesigner/js/fabric.min.js"></script>
+    <script src="~/Assets/fancydesigner/js/FancyProductDesigner-all.min.js"></script>
+    <script type='text/javascript'>
+
+        $(document).ready(function () {
+            var fancyProductDesigner;
+
+            var modalModeOpt = false;
+           var $cartForm = jQuery('[name="fpd_product"]:first').parents('form:first');
+            var fpdProductsJSON = "";
+            var initProductsJson = "";
+
+             @{
+            if (!String.IsNullOrEmpty(currentCart.ItemKey)) {
+            <text>
+            fpdProductsJSON = [[
+                 @(Html.Raw(currentCart.OrderObject_Additional))
+             ]];
+
+              initProductsJson=@(Html.Raw(currentCart.OrderObject));
+            </text>
+                 }
+                 else
+                 {
+     <text>
+                     fpdProductsJSON = [
+                                        [
+                                            {
+                                        "productTitle": "@(Model.name)",
+                            "title": "@(Model.seoname)",
+                            "thumbnail": "",
+                            "options": {
+                                            "stageWidth": 500,
+                                "stageHeight": 500,
+                                "customAdds": {
+                                                "uploads": true,
+                                    "texts": true,
+                                    "designs": true
+                                }
+                                        },
+                            "elements": [
+                                {
+                                "type": "image",
+                                    "title": "fullimage",
+                                    "source": "@(ProductDesignImage.fullimage)",
+                                    "parameters": {
+                                    "uploadZone": 0,
+                                        "left": 250,
+                                        "top": 250,
+                                        "scaleX": 0.65000000000000002220446049250313080847263336181640625,
+                                        "scaleY": 0.65000000000000002220446049250313080847263336181640625,
+                                        "degree": 0,
+                                        "price": 0,
+                                        "originX": "center",
+                                        "originY": "center",
+                                        "removable": false,
+                                        "draggable": false,
+                                        "rotatable": false,
+                                        "resizable": false,
+                                        "zChangeable": false,
+                                        "topped": false,
+                                        "autoSelect": false,
+                                        "uniScalingUnlockable": false,
+                                        "excludeFromExport": false,
+                                        "advancedEditing": false,
+                                        "locked": false,
+                                        "boundingBoxMode": "inside",
+                                        "customAdds": []
+                    }
+                },
+                                {
+                                    "type": "image",
+                                    "title": "upload",
+                                    "source": "@(ProductDesignImage.background)",
+                                    "parameters": {
+                                        "uploadZone": 0,
+                                        "left": 250,
+                                        "top": 250,
+                                        "scaleX": 0.64000000000000001332267629550187848508358001708984375,
+                                        "scaleY": 0.64000000000000001332267629550187848508358001708984375,
+                                        "degree": 0,
+                                        "price": 0,
+                                        "originX": "center",
+                                        "originY": "center",
+                                        "opacity": 1,
+                                        "removable": false,
+                                        "draggable": false,
+                                        "rotatable": false,
+                                        "resizable": false,
+                                        "zChangeable": false,
+                                        "topped": false,
+                                        "autoSelect": false,
+                                        "uniScalingUnlockable": false,
+                                        "excludeFromExport": false,
+                                        "advancedEditing": false,
+                                        "locked": false,
+                                        "boundingBoxMode": "inside",
+                                        "customAdds": []
+                                    }
+                                },
+                                {
+                                    "type": "image",
+                                    "title": "specialpoint",
+                                    "source": "@(ProductDesignImage.specialpoint)",
+                                    "parameters": {
+                                        "uploadZone": 0,
+                                        "left": 250,
+                                        "top": 250,
+                                        "scaleX": 0.65000000000000002220446049250313080847263336181640625,
+                                        "scaleY": 0.65000000000000002220446049250313080847263336181640625,
+                                        "degree": 0,
+                                        "price": 0,
+                                        "originX": "center",
+                                        "originY": "center",
+                                        "opacity": 1,
+                                        "removable": false,
+                                        "draggable": false,
+                                        "rotatable": false,
+                                        "resizable": false,
+                                        "zChangeable": false,
+                                        "topped": true,
+                                        "autoSelect": false,
+                                        "uniScalingUnlockable": false,
+                                        "excludeFromExport": false,
+                                        "advancedEditing": false,
+                                        "locked": false,
+                                        "boundingBoxMode": "inside",
+                                        "customAdds": []
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                ];
+
+                   initProductsJson = {
+                "product":
+                [
+                    {
+                        "productTitle": "@(Model.name)",
+                        "title": "@(Model.seoname)",
+                        "thumbnail": "",
+                        "options": {
+                            "stageWidth": 500,
+                            "stageHeight": 500,
+                            "customAdds": {
+                                "uploads": true,
+                                "texts": true,
+                                "designs": true
+                            }
+                        },
+                        "elements": [
+                            {
+                                "type": "image",
+                                "title": "fullimage",
+                                "source": "@(ProductDesignImage.fullimage)",
+                                "parameters": {
+                                    "uploadZone": 0,
+                                    "left": 250,
+                                    "top": 250,
+                                    "scaleX": 0.65000000000000002220446049250313080847263336181640625,
+                                    "scaleY": 0.65000000000000002220446049250313080847263336181640625,
+                                    "degree": 0,
+                                    "price": 0,
+                                    "originX": "center",
+                                    "originY": "center",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "rotatable": false,
+                                    "resizable": false,
+                                    "zChangeable": false,
+                                    "topped": false,
+                                    "autoSelect": false,
+                                    "uniScalingUnlockable": false,
+                                    "excludeFromExport": false,
+                                    "advancedEditing": false,
+                                    "locked": false,
+                                    "boundingBoxMode": "inside",
+                                    "customAdds": []
+                                }
+                            },
+                            {
+                                "type": "image",
+                                "title": "upload",
+                                "source": "@(ProductDesignImage.background)",
+                                "parameters": {
+                                    "uploadZone": 0,
+                                    "left": 250,
+                                    "top": 250,
+                                    "scaleX": 0.64000000000000001332267629550187848508358001708984375,
+                                    "scaleY": 0.64000000000000001332267629550187848508358001708984375,
+                                    "degree": 0,
+                                    "price": 0,
+                                    "originX": "center",
+                                    "originY": "center",
+                                    "opacity": 1,
+                                    "removable": false,
+                                    "draggable": false,
+                                    "rotatable": false,
+                                    "resizable": false,
+                                    "zChangeable": false,
+                                    "topped": false,
+                                    "autoSelect": false,
+                                    "uniScalingUnlockable": false,
+                                    "excludeFromExport": false,
+                                    "advancedEditing": false,
+                                    "locked": false,
+                                    "boundingBoxMode": "inside",
+                                    "customAdds": []
+                                }
+                            },
+                            {
+                                "type": "image",
+                                "title": "specialpoint",
+                                "source": "@(ProductDesignImage.specialpoint)",
+                                "parameters": {
+                                    "uploadZone": 0,
+                                    "left": 250,
+                                    "top": 250,
+                                    "scaleX": 0.65000000000000002220446049250313080847263336181640625,
+                                    "scaleY": 0.65000000000000002220446049250313080847263336181640625,
+                                    "degree": 0,
+                                    "price": 0,
+                                    "originX": "center",
+                                    "originY": "center",
+                                    "opacity": 1,
+                                    "removable": false,
+                                    "draggable": false,
+                                    "rotatable": false,
+                                    "resizable": false,
+                                    "zChangeable": false,
+                                    "topped": true,
+                                    "autoSelect": false,
+                                    "uniScalingUnlockable": false,
+                                    "excludeFromExport": false,
+                                    "advancedEditing": false,
+                                    "locked": false,
+                                    "boundingBoxMode": "inside",
+                                    "customAdds": []
+                                }
+                            }
+                        ]
+                    }
+                ]
+            };
+             </text>
+          }
+        }
+            $cartForm.find('input[name="fpd_product"]').val(JSON.stringify(initProductsJson));
+
+
+            modalModeOpt = '#fpd-start-customizing-button';
+            var customImageParams = jQuery.extend(
+							{"left":0,"y":0,"z":-1,"minScaleLimit":"0.0100","price":0,"replaceInAllViews":false,"autoCenter":true,"draggable":true,"rotatable":true,"resizable":true,"zChangeable":false,"autoSelect":true,"topped":false,"uniScalingUnlockable":false,"boundingBoxMode":"clipping","removable":true,"boundingBox":"upload"},
+							{"minW":1,"minH":1,"maxW":200000,"maxH":200000,"resizeToW":0,"resizeToH":0,"maxSize":1000,"minDPI":1,"minScaleLimit":"0.0100","advancedEditing":false,"filter":"none"}						);
+            var $fpd = $('#fancy-product-designer-1996'),
+                pluginOpts = {
+                    //productsJSON: '/Assets/fancydesigner/json/products.json',
+                    designsJSON: '/Assets/fancydesigner/json/designs.json',
+                    qrCodeProps: {
+                        price: 0,
+                        resizeToW: 0,
+                        resizeToH: 0,
+                        draggable: 1,
+                        resizable: 1,
+                        boundingBox: customImageParams.boundingBox,
+                        boundingBoxMode: customImageParams.boundingBoxMode
+                    },
+
+                    elementParameters: {
+                        originX: "center",
+                        originY: "center",
+                    },
+                    imageParameters: {
+                        padding: 0,
+                        colorPrices: {},
+                        replaceInAllViews: 0,
+                        patterns: []
+                    },
+                    textParameters: {
+                        padding: 10,
+                        fontFamily: "Arial",
+                        colorPrices: {},
+                        replaceInAllViews: 0,
+                        patterns: []
+                    },
+                    customTextParameters: { "left": 0, "y": 0, "z": -1, "fill": "#000000", "colors": "#000000", "price": 0, "replaceInAllViews": false, "autoCenter": true, "draggable": true, "rotatable": true, "resizable": true, "zChangeable": false, "autoSelect": true, "topped": false, "curvable": false, "curveSpacing": 10, "curveRadius": 80, "curveReverse": false, "boundingBoxMode": "clipping", "fontSize": 30, "minFontSize": 1, "maxFontSize": 1000, "maxLength": 0, "maxLines": 0, "textAlign": "left", "removable": true, "boundingBox": "upload" },
+                    fabricCanvasOptions: {
+                        allowTouchScrolling: 1,
+                        perPixelTargetFind: 0,
+                    },
+
+                    boundingBoxProps: {
+                        strokeWidth: 1
+                    },
+                    imageEditorSettings: {
+                        masks: []
+                    },
+                    guidedTour: null,
+                    priceFormat: {
+                        currency: "%d&#8363;",
+                    },
+                    modalMode: modalModeOpt,//hiển thị khung design dạng pop up khi bấm vào button
+                    zoomStep: 0.2,
+                    maxZoom: 3,
+                    hexNames: {},
+                    replaceInitialElements: 1,
+                    lazyLoad: 1,
+                    improvedResizeQuality: 0,
+                    responsive: 1,
+                    loadFirstProductInStage: 1,
+                    unsavedProductAlert: 1,
+                    hideDialogOnAdd: 1,
+                    snapGridSize: [50, 50],
+                    fitImagesInCanvas: 1,
+                    inCanvasTextEditing: 1,
+                    openTextInputOnSelect: 0,
+                    saveActionBrowserStorage: 0,
+                    uploadAgreementModal: 0,
+                    autoOpenInfo: 0,
+                    allowedImageTypes: ["jpeg", "png", "svg"],
+                    replaceColorsInColorGroup: 0,
+                    pixabayApiKey: "",
+                    pixabayHighResImages: 0,
+                    openModalInDesigner: 0,
+                    imageSizeTooltip: 0,
+                    applyFillWhenReplacing: 0,
+                    highlightEditableObjects: "",
+                    depositphotosApiKey: "",
+                    depositphotosPrice: 0,
+                    depositphotosLang: "en",
+                    customImageAjaxSettings: {
+                        url: "/Assets/fancydesigner/php/custom-image-handler.php",
+                        //data: {
+                        //    saveOnServer: 1,
+                        //    uploadsDir: "/home/hatocanv/hatocase.com/wp-content/uploads/fancy_products_uploads/",
+                        //    uploadsDirURL: "https://hatocase.com/wp-content/uploads/fancy_products_uploads/"
+                        //}
+                    },
+                    customImageParameters: customImageParams,
+                    boundingBoxProps: {
+                        strokeWidth: 1
+                    },
+
+                    editorMode: false,
+
+
+                };
+            var uiLayoutOptions = { "stageWidth": "500", "stageHeight": "500", "gridColumns": "2", "initialActiveModule": "", "selectedColor": "#d26e4b", "boundingBoxColor": "#ffffff", "outOfBoundaryColor": "#9e0000", "cornerIconColor": "#ffffff", "mainBarModules": ["images", "text", "designs"], "actions": { "top": [], "right": [], "bottom": [], "left": ["undo", "redo", "reset-product", "preview-lightbox"] }, "toolbarPlacement": "smart" };
+
+            pluginOpts = jQuery.extend({}, pluginOpts, uiLayoutOptions);
+
+
+
+            var fancyProductDesigner = new FancyProductDesigner($fpd, pluginOpts);
+
+
+
+            //you can listen to events
+            $fpd.on('ready', function () {
+                fancyProductDesigner.setupProducts(fpdProductsJSON);
+
+                //api methods can be used
+                fancyProductDesigner.print()
+
+            });
+
+            var fpdImage;
+            function _updateProductImage(imageSrc) {
+
+                var $firstProductImage = $productWrapper.find('.images'),
+                    //wc standard, flatsome theme
+                    firstImageSelector = '.woocommerce-product-gallery__image img, .slide:first img';
+
+                var image = new Image();
+                image.onload = function () {
+                    $firstProductImage.find(firstImageSelector)
+                        .attr('data-large_image_width', this.width)
+                        .attr('data-large_image_height', this.height);
+                };
+                image.src = imageSrc;
+
+                $firstProductImage
+                    .find(firstImageSelector)
+                    .attr('src', imageSrc).attr('srcset', imageSrc) //all images (display and zoom)
+                    .parent('a').attr('href', imageSrc)  //photoswipe image
+                    .children('img').attr('data-large_image', imageSrc); //photoswipe large image
+
+
+                $firstProductImage
+                    .find('.flex-control-thumbs li:first img').attr('src', imageSrc); //thumb gallery
+
+            }
+
+            function _setProductImage() {
+                if ($('.fpd-modal-product-designer').length > 0) {
+
+                    fancyProductDesigner.viewInstances[0].toDataURL(function (dataURL) {
+                        //console.log(dataURL);
+
+                        //_updateProductImage(dataURL);
+                        fpdImage = dataURL;
+
+                    }, 'transparent', { format: 'png' });
+
+                }
+
+            };
+            //$(".fpd-done").on('click', function (e) {
+            //    e.preventDefault();
+
+            //    fancyProductDesigner.viewInstances[0].toDataURL(function (dataURL) {
+
+            //        console.log(dataURL);
+
+            //    }, 'transparent', { format: 'png', multiplier: multiplier });
+
+
+            //});
+
+            $(document).on('click', '.fpd-done', function (evt) {
+                evt.preventDefault();
+                _setProductImage();
+
+                //laay orrder tu fancy
+                var order = fancyProductDesigner.getOrder({ customizationRequired: 1 });
+                $cartForm.find('input[name="fpd_product"]').val(JSON.stringify(order));
+                $cartForm.find('input[name="fpd_product_thumbnail"]').val(fpdImage);
+
+                $cartForm.find(':submit').click();
+
+
+            });
+
+
+
+        });
+    </script>
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
+}
+

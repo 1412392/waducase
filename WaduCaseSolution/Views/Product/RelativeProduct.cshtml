@@ -1,0 +1,94 @@
+﻿@using WaduCaseBusiness.Model;
+@using WaduCase.Common;
+
+@model List<ProductBO>
+
+<div class="section-content relative">
+    <div class="row row-collapse row-full-width align-middle align-center" id="row-1604848535">
+        <div class="col small-12 large-12">
+            <div class="col-inner text-center">
+                <h2 style="text-align: left;">
+                    <span style="font-size: 90%;">
+                        Ốp lưng nổi bật
+                        <br />
+                    </span>
+                </h2>
+                <div class="row large-columns-4 medium-columns- small-columns-2 row-xsmall row-full-width slider row-slider slider-nav-reveal slider-nav-push"
+                     data-flickity-options='{"imagesLoaded": true, "groupCells": "100%", "dragThreshold" : 5, "cellAlign": "left","wrapAround": true,"prevNextButtons": true,"percentPosition": true,"pageDots": false, "rightToLeft": false, "autoPlay" : false}'>
+
+                    @foreach (var product in Model)
+                    {
+                        double percentSaleOff = Math.Ceiling(100 - (product.newprice / product.oldprice) * 100);
+
+                        <div class="col">
+                            <div class="col-inner">
+                                <div class="badge-container absolute left top z-1">
+                                    <div class="callout badge badge-frame">
+                                        <div class="badge-inner secondary on-sale">
+                                            <span class="onsale">-@percentSaleOff%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-small box has-hover box-normal box-text-bottom">
+                                    <div class="box-image">
+                                        <div class="">
+                                            <a href="@ProductHelper.GenProductURL(product.name,product.id)">
+                                                <img width="300" height="300"
+                                                     src="@product.avatar.OrderBy(x=>x.displayorder).FirstOrDefault().url"
+                                                     class="show-on-hover absolute fill hide-for-small back-image"
+                                                     alt="@product.name" />
+                                                <img width="300" height="300"
+                                                     src="@product.avatar.OrderBy(x=>x.displayorder).Skip(1).FirstOrDefault().url"
+                                                     class="attachment-original size-original"
+                                                     alt="@product.name" />
+                                            </a>
+                                        </div>
+                                        <div class="image-tools top right show-on-hover"></div>
+                                        <div class="image-tools grid-tools text-center hide-for-small bottom hover-slide-in show-on-hover">
+                                        </div>
+                                    </div>
+                                    <div class="box-text text-center">
+                                        <div class="title-wrapper">
+                                            <p class="name product-title">
+
+                                                <a href="@ProductHelper.GenProductURL(product.name,product.id)">
+                                                    @product.name |
+                                                    @(product.collectionid > 0 ? "Tất cả dòng điện thoại" : "Tự thiết kế")
+                                                </a>
+
+
+                                            </p>
+                                        </div>
+                                        <div class="price-wrapper">
+                                            <span class="price">
+                                                <del>
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        @product.oldprice.ToString("N0")<span class="woocommerce-Price-currencySymbol">&#8363;</span>
+                                                    </span>
+                                                </del>
+                                                <ins>
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        @product.newprice.ToString("N0")<span class="woocommerce-Price-currencySymbol">&#8363;</span>
+                                                    </span>
+                                                </ins>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+
+
+                </div> <a href="@(Model.FirstOrDefault().collectionid>0?ProductHelper.GenCollectionURL(ViewBag.CollectionName, ViewBag.CollectionID):
+                    ProductHelper.GenBrandURL(ViewBag.BrandName, ViewBag.BrandID))" target="_blank"
+                          class="button secondary is-shade is-smaller lowercase" style="border-radius:99px;">
+                    <span>Xem Tất Cả</span> <i class="icon-angle-right"></i>
+                </a>
+            </div>
+        </div>
+        <style scope="scope"></style>
+    </div>
+</div>

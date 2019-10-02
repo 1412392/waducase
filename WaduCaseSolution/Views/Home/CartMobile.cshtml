@@ -1,0 +1,55 @@
+﻿@using WaduCaseBusiness.Model;
+@using WaduCase.Common;
+@using WaduCase.Models;
+
+@model List<CartSession>
+
+
+<li class="cart-item has-icon">
+    <div class="header-button">
+        <a href="/gio-hang"
+           class="header-cart-link off-canvas-toggle nav-top-link icon button circle is-outline is-small"
+           data-open="#cart-popup" data-class="off-canvas-cart" title="Giỏ hàng" data-pos="right">
+            <i class="icon-shopping-basket" data-icon-label="@Model.Count"></i>
+        </a>
+    </div>
+    <div id="cart-popup" class="mfp-hide widget_shopping_cart">
+        <div class="cart-popup-inner inner-padding">
+            <div class="cart-popup-title text-center">
+                <h4 class="uppercase">Giỏ hàng</h4>
+                <div class="is-divider"></div>
+            </div>
+            <div class="widget_shopping_cart_content">
+                @if (Model.Count > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <ul class="woocommerce-mini-cart cart_list product_list_widget ">
+                            <li class="woocommerce-mini-cart-item mini_cart_item">
+                                <a href="javascript:void(0);" class="removeitem remove remove_from_cart_button" aria-label="Xóa sản phẩm này" data-product_sku="">×</a>
+                                <a href="@ProductHelper.GenProductURL(item.Name,item.ProductID)/?attribute_pa_chon_chat_lieu_op_lung=@item.MaterialID&cart_item_key=@item.ItemKey">
+                                    <img width="300" height="300" src="@Url.Content(item.Thumbnail)">@(item.Name + " - " + item.MaterialName)
+                                </a>
+                                <span class="quantity">@item.Quantity × <span class="woocommerce-Price-amount amount">@item.Price.ToString("N0")<span class="woocommerce-Price-currencySymbol">₫</span></span></span>
+                            </li>
+                        </ul>
+                    }
+
+
+                    <p class="woocommerce-mini-cart__total total"><strong>Tổng::</strong> <span class="woocommerce-Price-amount amount">@Model.Sum(x => x.FinalPrice).ToString("N0")<span class="woocommerce-Price-currencySymbol">₫</span></span></p>
+
+
+                    <p class="woocommerce-mini-cart__buttons buttons"><a href="/gio-hang" class="button wc-forward">Xem giỏ hàng</a><a href="/thanh-toan" class="button checkout wc-forward">Thanh toán</a></p>
+
+                }
+                else
+                {
+                    <p class="woocommerce-mini-cart__empty-message">Chưa có sản phẩm trong giỏ hàng.</p>
+
+                }
+
+            </div>
+            <div class="cart-sidebar-content relative"></div>
+        </div>
+    </div>
+</li>

@@ -1,0 +1,9 @@
+﻿@using WaduCaseBusiness.Model
+
+
+@model IEnumerable<ImageBO>
+@foreach (var option in Model)
+{
+    @Html.TextBoxFor(m => option.url)
+}
+

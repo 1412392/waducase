@@ -1,0 +1,53 @@
+﻿@using WaduCaseBusiness.Model;
+@using WaduCase.Common;
+
+@model List<RealCaseBO>
+
+@if (Model.Count > 0)
+{
+    <section class="section" id="section_374500718">
+        <div class="bg section-bg fill bg-fill bg-loaded bg-loaded"></div>
+        <div class="section-content relative">
+            <div class="gap-element clearfix" style="display:block; height:auto; padding-top:30px"></div>
+            <div class="row align-middle align-center" id="row-82547523">
+                <div class="col small-12 large-12">
+                    <div class="col-inner text-center">
+                        <h3 style="text-align: center;"><span style="font-size: 110%;">ẢNH THỰC TẾ ỐP LƯNG IN TẠI WADU CASE</span></h3>
+                        <p style="text-align: center;"><span style="font-size: 100%;"><em>(Nhấn vào hình để phóng to)</em></span></p>
+                    </div>
+                </div>
+                <style scope="scope"></style>
+            </div>
+            <div id="gallery-86626446" class="row large-columns-4 medium-columns- small-columns-2 row-xsmall row-full-width row-masonry" data-packery-options='{"itemSelector": ".col", "gutter": 0, "presentageWidth" : true}'>
+
+                @foreach (var item in Model)
+                {
+                    <div class="gallery-col col">
+                        <div class="col-inner">
+                            <a class="image-lightbox lightbox-gallery" href="@item.url" title="">
+                                <div class="box has-hover gallery-box box-default">
+                                    <div class="box-image">
+                                        <img width="900" height="900" src="@Url.Content(item.url)" class="attachment-large size-large" alt="@item.title" ids="24914,24943,28925,24919,25156,24916,24917,24929" style="default" type="masonry" width="full-width" col_spacing="xsmall" image_size="large" />
+                                    </div><div class="box-text text-left"><p></p></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <div class="gap-element clearfix" style="display:block; height:auto; padding-top:30px"></div>
+            <div class="gap-element clearfix" style="display:block; height:auto; padding-top:50px"></div>
+
+
+        </div>
+        <style scope="scope">
+            #section_374500718 {
+                padding-top: 30px;
+                padding-bottom: 30px;
+                background-color: rgba(212, 212, 212, 0.35);
+            }
+        </style>
+    </section>
+
+}

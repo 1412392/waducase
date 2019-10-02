@@ -1,0 +1,185 @@
+﻿@using WaduCaseBusiness.Model
+@model List<ProductBO>
+
+
+@{
+    ViewBag.Title = "Quản lý Sản Phẩm | Admin WaduCase";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<CollectionWithProduct> ListCollectionProduct = ViewBag.ListCollectionProduct;
+    List<BrandWithProduct> ListBrandProduct = ViewBag.ListBrandProduct;
+    int CollectionID = ViewBag.CollectionID;
+    int BrandID = ViewBag.BrandID;
+}
+
+
+@section jsFooter{
+
+
+    <script src="/Assets/Admin/ajax/Product.js"></script>
+    <script>
+        $('#notifymessage').removeClass('hide');
+        $('#notifymessage').delay(2000).slideUp(500);
+
+    </script>
+    <script>
+        $(".listcategory").on('change', function (e) {
+
+            //var picker_id = e.target.id;
+            var selected_option = $(this).find(":selected"); // get selected option for the changed select only
+            var selected_value = selected_option.val();
+            var optgroup = selected_option.parent().attr('label');
+
+            if (optgroup.toLowerCase() === "bộ sưu tập") {
+                window.location = "/admin/product?collectionID=" + parseInt(selected_value);
+
+            }
+            else {
+                window.location = "/admin/product?brandID=" + parseInt(selected_value);
+            }
+
+        });
+    </script>
+}
+<div class="right_col" role="main">
+    <div class="">
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        @if (TempData["AlertMessage"] != null)
+                        {
+                            <div id="notifymessage" class="alert @TempData["AlertType"]" style="font-size:23px;">
+                                @TempData["AlertMessage"]
+                            </div>
+                        }
+                        <h2>Danh sách sản phẩm</h2>
+                        <br />
+
+                        <div class="form-group" style="text-align:left">
+
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <select class="select2_group form-control listcategory" id="listcategory">
+                                    <optgroup label="Bộ sưu tập">
+                                        @foreach (var item in ListCollectionProduct)
+                                        {
+                                            string value = "có " + item.products.Count() + " sản phẩm";
+
+                                            if (item.id == CollectionID)
+                                            {
+                                                <option selected value="@item.id">@(item.name + " (" + value + ")")</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.id">@(item.name + " (" + value + ")")</option>
+                                            }
+
+                                        }
+
+
+                                    </optgroup>
+                                    <optgroup label="Hãng">
+                                        @foreach (var item in ListBrandProduct)
+                                        {
+                                            string value = "có " + item.products.Count() + " sản phẩm";
+
+
+                                            if (item.id == BrandID)
+                                            {
+                                                <option selected value="@item.id">@(item.name + " (" + value + ")")</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.id">@(item.name + " (" + value + ")")</option>
+                                            }
+                                        }
+
+                                        }
+                                    </optgroup>
+
+                                </select>
+                            </div>
+                            <a class="btn btn-primary" style="float:right" href="@Url.Action("UpdateProduct", "Product")">Add</a>
+
+                        </div>
+
+
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                            </li>
+                            <li>
+                                <a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <table id="datatable" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Logo</th>
+                                    <th>Keyword</th>
+                                    <th>MetaKeyword</th>
+                                    <th>DateCreated</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr id="row_@item.id">
+                                        <td>@item.id</td>
+                                        <td>@item.name</td>
+
+                                        <td><img class="img-responsive" src="@Url.Content(item.avatar.FirstOrDefault().url)" /></td>
+
+                                        <td>
+                                            @(item.keyword != null ? String.Join(",", item.keyword) : "")
+
+                                        </td>
+
+                                        <td>@item.metakeyword</td>
+
+
+                                        @if (@item.createddate == null)
+                                        {
+                                            <td> @item.createddate </td>
+                                        }
+                                        else
+                                        {
+                                            <td> @item.createddate.Value.ToString("yyyy/MM/dd hh:mm:ss") </td>
+                                        }
+
+                                        <td>
+
+                                            <a href="@Url.Action("UpdateProduct", "Product", new { id = item.id })" class="btn btn-warning">Update</a>
+
+                                            <a href="#" class="btn btn-danger btn-delete-product" data-id="@item.id">Delete</a>
+
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,274 @@
+﻿@using WaduCaseBusiness.Model
+@model OrderBO
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <button type="button" class="close"
+                    data-dismiss="modal">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+                Chi tiết đơn hàng
+            </h4>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body">
+            <div class="form-group">
+            </div>
+            <div>
+                <h2 style="font-style:italic;color:black;">Thông tin khách hàng</h2>
+                <div class="item">
+                    <div class="col-md-3 col-sm-3">
+                        <label>Tên khách hàng:</label>
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                        <label>@Model.fullname</label>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="col-md-3 col-sm-3">
+                        <label>Địa chỉ:</label>
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                        <label>@(Model.fulladdress + ", " + Model.ward + ", " + Model.district + ", " + Model.province)</label>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="col-md-3 col-sm-3">
+                        <label>Note:</label>
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                        <label>@(String.IsNullOrEmpty(Model.note) ? "<không có>" : Model.note)</label>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="col-md-3 col-sm-3">
+                        <label>Phone - Email:</label>
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                        <label>@(Model.phone + " - " + Model.email)</label>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="col-md-3 col-sm-3">
+                        <label>IP đặt hàng:</label>
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                        <label>@(Model.iporder)</label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div>
+                <h2 style="font-style:italic;color:black;">Thông tin đơn hàng</h2>
+                <div class="x_content">
+                    <table id="datatable" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ProductID</th>
+                                <th>Sản phẩm</th>
+                                <th>Số lượng</th>
+                                <th>Giá</th>
+                                <th>DesignImage</th>
+                                <th>Danh sách hình</th>
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+                            @if (Model.listitem != null)
+                            {
+                                foreach (var item in Model.listitem)
+                                {
+                                    <tr id="row_@item.ProductID">
+                                        <td>@item.ProductID</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.Quantity</td>
+                                        <td>@item.Price.ToString("N0")đ</td>
+                                        <td><img class="img-responsive" src="@Url.Content(item.Thumbnail)" /></td>
+                                        <td>
+                                            @if (item.ListCustomerImage != null)
+                                            {
+                                                foreach (var image in item.ListCustomerImage)
+                                                {
+                                                    <img class="img-responsive" src="@Url.Content(image)" />
+
+                                                }
+                                            }
+
+
+                                        </td>
+
+                                    </tr>
+                                }
+                            }
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="item">
+                    <div class="col-md-3 col-sm-3">
+                        <label>Tổng Giảm trừ:</label>
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                        <label>@(Model.totaldiscount.ToString("N0"))đ</label>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="col-md-3 col-sm-3">
+                        <label>Tiền ship:</label>
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                        <label>@(Model.shipfee.ToString("N0"))đ</label>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="col-md-3 col-sm-3">
+                        <label>Tổng tiền thanh toán:</label>
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                        <label>@(Model.totalmoney.ToString("N0"))đ</label>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="col-md-3 col-sm-3">
+                        <label>Hình thức thanh toán:</label>
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                        <label>@(Model.paymenttype == 1 ? "Ship Cod" : "Chuyển khoản")</label>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="col-md-3 col-sm-3">
+                        <label>Trạng thái đơn hàng:</label>
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                        <label>@(Model.statusname)</label>
+                    </div>
+                </div>
+                @if (Model.status == 1)
+                {
+                    <div class="item">
+                        <div class="col-md-3 col-sm-3">
+                            <label>Ngày đặt hàng:</label>
+                        </div>
+                        <div class="col-md-9 col-sm-9">
+                            <label>@(Model.createdate.Value.AddHours(7).ToString("yyyy/MM/dd hh:mm:ss"))</label>
+                        </div>
+                    </div>
+                }
+                else if (Model.status == 3)
+                {
+                    <div class="item">
+                        <div class="col-md-3 col-sm-3">
+                            <label>Ngày hoàn tất giao hàng:</label>
+                        </div>
+                        <div class="col-md-9 col-sm-9">
+                            <label>@(Model.deliverydate.Value.AddHours(7).ToString("yyyy/MM/dd hh:mm:ss"))</label>
+                        </div>
+                    </div>
+                }
+                else if (Model.status == 4)
+                {
+                    <div class="item">
+                        <div class="col-md-3 col-sm-3">
+                            <label>Ngày hủy:</label>
+                        </div>
+                        <div class="col-md-9 col-sm-9">
+                            <label>@(Model.canceleddate.Value.AddHours(7).ToString("yyyy/MM/dd hh:mm:ss"))</label>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="col-md-3 col-sm-3">
+                            <label>Người hủy:</label>
+                        </div>
+                        <div class="col-md-9 col-sm-9">
+                            <label>@(Model.canceleduser)</label>
+                        </div>
+                    </div>
+
+                }
+                else if (Model.status == 5)
+                {
+                    <div class="item">
+                        <div class="col-md-3 col-sm-3">
+                            <label>Ngày xóa:</label>
+                        </div>
+                        <div class="col-md-9 col-sm-9">
+                            <label>@(Model.deleteddate.Value.AddHours(7).ToString("yyyy/MM/dd hh:mm:ss"))</label>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="col-md-3 col-sm-3">
+                            <label>Người xóa:</label>
+                        </div>
+                        <div class="col-md-9 col-sm-9">
+                            <label>@(Model.deletedduser)</label>
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+
+            </br>
+            @if (Model.status == 1 || Model.status == 2)
+            {
+                using (Html.BeginForm("UpdateOrderStatus", "Order", FormMethod.Post))
+                {
+                    <input type="hidden" name="orderid" class="form-control"
+                           value="@Model.id" />
+
+                    if (Model.status == 1)
+                    {
+                        <div class="item form-group">
+                            <select name="selectstatus" class="form-control">
+                                <option value="2">Đang xử lý</option>
+                                <option value="3">Đã hoàn tất</option>
+                                <option value="4">Hủy đơn hàng</option>
+                            </select>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="item form-group">
+                            <select name="selectstatus" class="form-control">
+                                <option value="1">Chưa xử lý</option>
+                                <option value="3">Đã hoàn tất</option>
+                                <option value="4">Hủy đơn hàng</option>
+                            </select>
+                        </div>
+                    }
+                    <div class="item form-group" id="buttonsubmitarea">
+                        <div class="col-md-offset-5 col-md-10">
+                            <input type="submit" value="Chuyển trạng thái" class="btn btn-warning" />
+                        </div>
+                    </div>
+                }
+
+            }
+
+
+
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default"
+                    data-dismiss="modal">
+                Close
+            </button>
+
+        </div>
+    </div>
+</div>

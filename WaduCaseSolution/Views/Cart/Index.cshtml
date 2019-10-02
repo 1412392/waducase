@@ -1,0 +1,318 @@
+﻿@using WaduCase.Models;
+@using WaduCase.Common;
+
+@model List<CartSession>
+
+@{
+    ViewBag.Title = "Giỏ hàng | Wadu Case";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (!Model.Any())
+{
+    <main id="main" class="">
+        <div class="checkout-page-title page-title">
+            <div class="page-title-inner flex-row medium-flex-wrap container">
+                <div class="flex-col flex-grow medium-text-center">
+                    <nav class="breadcrumbs heading-font checkout-breadcrumbs text-center h2 strong">
+                        <a href="/gio-hang" class="current">Shopping Cart</a>
+                        <span class="divider hide-for-small"><i class="icon-angle-right"></i></span>
+                        <a href="/thanh-toan" class="hide-for-small">Checkout details</a>
+                        <span class="divider hide-for-small"><i class="icon-angle-right"></i></span> <a href="#" class="no-click hide-for-small">Order Complete</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="cart-container container page-wrapper page-checkout">
+            <div class="woocommerce">
+                <div class="text-center pt pb">
+                    <div class="woocommerce-notices-wrapper"></div><p class="cart-empty">Chưa có sản phẩm nào trong giỏ hàng.</p><p class="return-to-shop">
+                        <a class="button primary wc-backward" href="/danh-muc/bo-suu-tap/ốp-lưng-siêu-anh-hùng-3"> Quay trở lại cửa hàng </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+}
+else
+{
+    <main id="main" class="">
+        <div class="checkout-page-title page-title">
+            <div class="page-title-inner flex-row medium-flex-wrap container">
+                <div class="flex-col flex-grow medium-text-center">
+                    <nav class="breadcrumbs heading-font checkout-breadcrumbs text-center h2 strong">
+                        <a href="/gio-hang" class="current">Shopping Cart</a>
+                        <span class="divider hide-for-small"><i class="icon-angle-right"></i></span>
+                        <a href="/thanh-toan" class="hide-for-small">Checkout details</a>
+                        <span class="divider hide-for-small"><i class="icon-angle-right"></i></span>
+                        <a href="#"
+                           class="no-click hide-for-small">
+                            Order Complete
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="cart-container container page-wrapper page-checkout">
+            <div class="woocommerce">
+                <div class="woocommerce-notices-wrapper"></div>
+                <div class="woocommerce row row-large row-divided">
+                    <div class="col large-7 pb-0 cart-auto-refresh">
+                        <form class="woocommerce-cart-form" action="/gio-hang" method="post">
+                            <div class="cart-wrapper sm-touch-scroll">
+                                <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents"
+                                       cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th class="product-name" colspan="3">Sản phẩm</th>
+                                            <th class="product-price">Giá</th>
+                                            <th class="product-quantity">Số lượng</th>
+                                            <th class="product-subtotal">Tổng cộng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr class="woocommerce-cart-form__cart-item cart_item">
+                                                <td class="product-remove">
+                                                    <a href="javascript:void(0);"
+                                                       class="removeitem" aria-label="Xóa sản phẩm này" data-itemkey="@item.ItemKey"
+                                                       data-product_sku="">×</a>
+                                                </td>
+                                                <td class="product-thumbnail">
+                                                    <a href="@ProductHelper.GenProductURL(item.Name,item.ProductID)/?attribute_pa_chon_chat_lieu_op_lung=@item.MaterialID&cart_item_key=@item.ItemKey">
+                                                        <img width="300" height="300"
+                                                             src="@Url.Content(item.Thumbnail)"
+                                                             class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
+                                                             alt="@item.Name"
+                                                             sizes="(max-width: 300px) 100vw, 300px">
+                                                    </a>
+                                                </td>
+                                                <td class="product-name" data-title="Sản phẩm">
+                                                    <a href="@ProductHelper.GenProductURL(item.Name,item.ProductID)/?attribute_pa_chon_chat_lieu_op_lung=@item.MaterialID&cart_item_key=@item.ItemKey">
+                                                        @(item.Name + " - " + item.MaterialName)<br><i style="font-size: 0.9em"></i>
+                                                    </a>
+                                                    <p class="show-for-small mobile-product-price">
+                                                        <span class="mobile-product-price__qty">@item.Quantity x</span> <span class="woocommerce-Price-amount amount">
+                                                            @item.Price.ToString("N0")<span class="woocommerce-Price-currencySymbol">₫</span>
+                                                        </span>
+                                                    </p>
+                                                </td>
+                                                <td class="product-price" data-title="Giá">
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        @item.Price.ToString("N0")<span class="woocommerce-Price-currencySymbol">₫</span>
+                                                    </span>
+                                                </td>
+                                                <td class="product-quantity" data-title="Số lượng">
+                                                    <div class="quantity buttons_added">
+                                                        <input type="button" data-value="minus" value="-" data-id="@item.ItemKey"
+                                                               class="clickquantity minus button is-form">
+                                                        <label class="screen-reader-text"
+                                                               for="quantity_5d5779977d319">Số lượng</label>
+                                                        <input type="number" readonly
+                                                               id="quantity_@item.ItemKey" class="input-text qty text cartquantity" step="1"
+                                                               min="0" max="9999"
+                                                               name="cartquantity_@item.ItemKey" value="@item.Quantity"
+                                                               title="SL" size="4" pattern="[0-9]*" inputmode="numeric"
+                                                               aria-labelledby="@(item.Name + " - " + item.MaterialName)">
+                                                        <input type="button" data-value="plus" value="+" data-id="@item.ItemKey" class="clickquantity plus button is-form">
+                                                    </div>
+                                                </td>
+                                                <td class="product-subtotal" data-title="Tổng cộng">
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        @item.FinalPrice.ToString("N0")<span class="woocommerce-Price-currencySymbol">₫</span>
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+                                        }
+
+                                        <tr>
+                                            <td colspan="6" class="actions clear">
+                                                <div class="continue-shopping pull-left text-left">
+                                                    <a class="button-continue-shopping button primary is-outline"
+                                                       href="/danh-muc/bo-suu-tap/ốp-lưng-siêu-anh-hùng-3">
+                                                        ← Tiếp tục xem sản phẩm
+                                                    </a>
+                                                </div>
+                                                @*<button type="submit"
+                                                            class="button primary mt-0 pull-left small" name="update_cart"
+                                                            value="Cập nhật giỏ hàng" disabled="">
+                                                        Cập nhật giỏ hàng
+                                                    </button>*@
+                                                <input type="hidden" id="woocommerce-cart-nonce" name="woocommerce-cart-nonce"
+                                                       value="1c32edccf0">
+                                                <input type="hidden" name="_wp_http_referer"
+                                                       value="/gio-hang">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="cart-collaterals large-5 col pb-0">
+                        <div class="cart-sidebar col-inner ">
+                            <div class="cart_totals ">
+                                <table cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th class="product-name" colspan="2" style="border-width:3px;">
+                                                Tổng đơn hàng
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                                <h2>Tổng đơn hàng</h2>
+                                <table cellspacing="0" class="shop_table shop_table_responsive">
+                                    <tbody>
+                                        <tr class="cart-subtotal">
+                                            <th>Tổng:</th>
+                                            <td data-title="Tổng:">
+                                                <span class="woocommerce-Price-amount amount">
+                                                    @Model.Sum(x => x.FinalPrice).ToString("N0")<span class="woocommerce-Price-currencySymbol">₫</span>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr class="woocommerce-shipping-totals shipping">
+                                            <td class="shipping__inner" colspan="2">
+                                                <table class="shipping__table ">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>Phí giao hàng</th>
+                                                            <td data-title="Phí giao hàng">
+                                                                <ul id="shipping_method"
+                                                                    class="shipping__list woocommerce-shipping-methods">
+                                                                    <li class="shipping__list_item">
+                                                                        <input type="hidden"
+                                                                               name="shipping_method[0]" data-index="0"
+                                                                               id="shipping_method_0_flat_rate1"
+                                                                               value="flat_rate:1"
+                                                                               class="shipping_method">
+                                                                        <label class="shipping__list_label"
+                                                                               for="shipping_method_0_flat_rate1">
+                                                                            <span class="woocommerce-Price-amount amount">
+                                                                                0<span class="woocommerce-Price-currencySymbol">₫</span>
+                                                                            </span>
+                                                                        </label>
+                                                                    </li>
+                                                                </ul>
+                                                                <p class="woocommerce-shipping-destination">
+                                                                    Estimate for
+                                                                    <strong>toàn quốc</strong>.
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr class="order-total">
+                                            <th>Tổng cộng</th>
+                                            <td data-title="Tổng cộng">
+                                                <strong>
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        @Model.Sum(x => x.FinalPrice).ToString("N0")<span class="woocommerce-Price-currencySymbol">₫</span>
+                                                    </span>
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="wc-proceed-to-checkout">
+                                    <a href="/thanh-toan"
+                                       class="checkout-button button alt wc-forward">Tiến hành thanh toán</a>
+                                </div>
+                            </div>
+                            <form class="checkout_coupon mb-0" @*method="post"*@ onclick="return false" action="#">
+                                <div class="coupon">
+                                    <h3 class="widget-title"><i class="icon-tag"></i> Mã ưu đãi</h3>
+                                    <input type="text"
+                                           name="coupon_code" class="input-text" id="coupon_code" value=""
+                                           placeholder="Mã ưu đãi">
+                                    <input type="submit" class="is-form expand"
+                                           name="apply_coupon" value="Áp dụng">
+                                </div>
+                            </form>
+                            <div class="cart-sidebar-content relative"></div>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+
+                </script>
+                <div class="cart-footer-content after-cart-content relative"></div>
+            </div>
+        </div>
+    </main>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.clickquantity').off('click').on('click', function (e) {//phải có off để single click với id đó
+                e.preventDefault();
+                debugger
+                var btn = $(this);
+                var itemKey = btn.data("id");
+                var itemValue = btn.data("value");
+
+                var quantityInputName = "#quantity_" + itemKey;
+
+                var quantity = parseInt($(quantityInputName).val());
+
+
+                $.ajax({
+                    url: '/Cart/UpdateQuantity',
+                    data: { ItemKey: itemKey, Quantity: quantity, Action: itemValue },
+                    type: 'POST',
+                    ajaxasync: true,
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.status == true) {
+
+                            location.reload();
+                        }
+
+                    },
+                    error: function () {
+                        alert("Có lỗi xảy ra. Vui lòng thực hiện lại!");
+                    }
+
+                });
+
+            });
+
+            $('.removeitem').off('click').on('click', function (e) {//phải có off để single click với id đó
+                e.preventDefault();
+                debugger
+                var btn = $(this);
+                var itemKey = btn.data("itemkey");
+
+                $.ajax({
+                    url: '/Cart/RemoveItem',
+                    data: { ItemKey: itemKey },
+                    type: 'POST',
+                    ajaxasync: true,
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.status == true) {
+
+                            location.reload();
+                        }
+
+                    },
+                    error: function () {
+                        alert("Có lỗi xảy ra. Vui lòng thực hiện lại!");
+                    }
+
+                });
+
+            });
+        });
+
+
+
+    </script>
+
+}

@@ -1,0 +1,487 @@
+﻿
+@using WaduCaseBusiness.Model;
+@using WaduCase.Models;
+
+@model OrderBO
+@{
+    List<ProvinceBO> ListProvince = ViewBag.ListProvince;
+    List<CartSession> ListCartItem = ViewBag.ListCartItem;
+    CommonBO CommonInfo = ViewBag.CommonInfo;
+
+    ViewBag.Title = "Thanh toán | Wadu Case";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="@Url.Content("~/Assets/css/select2.min.css")" rel="stylesheet" />
+<main id="main" class="">
+    <div class="cart-container container page-wrapper page-checkout">
+        <div class="woocommerce">
+            @*<div class="woocommerce-form-login-toggle">
+                    <div class="woocommerce-info message-wrapper">
+                        <div class="message-container container medium-text-center">
+                            Bạn đã có tài khoản? <a href="#"
+                                                    class="showlogin">Ấn vào đây để đăng nhập</a>
+                        </div>
+                    </div>
+                </div>
+                <form class="woocommerce-form woocommerce-form-login login" onclick="return false" action="#" method="post" style="display: none;">
+                    <p>Hãy nhập tên đăng nhập và mật khẩu tài khoản đã đăng ký của bạn</p>
+                    <p class="form-row form-row-first">
+                        <div class="fl-wrap fl-wrap-input">
+                            <input type="text" class="input-text fl-input" name="username" id="username"
+                                   autocomplete="username" placeholder="Tên đăng nhập hoặc email">
+                        </div>
+                    </p>
+                    <p class="form-row form-row-last">
+                        <div class="fl-wrap fl-wrap-input">
+                            <input class="input-text fl-input" type="password" name="password" id="password"
+                                   autocomplete="current-password" placeholder="Mật khẩu">
+                        </div>
+                    </p>
+                    <div class="clear"></div>
+                    <p class="form-row">
+                        <input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce"
+                               value="201dd0c153">
+                        <input type="hidden" name="_wp_http_referer" value="/thanh-toan">
+                        <button type="submit" class="button" name="login" value="Đăng nhập">
+                            Đăng nhập
+                        </button>
+                        <input type="hidden" name="redirect" value="/thanh-toan">
+                        <label class="woocommerce-form__label woocommerce-form__label-for-checkbox inline">
+                            <input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme"
+                                   type="checkbox" id="rememberme" value="forever"> <span>Ghi nhớ mật khẩu</span>
+                        </label>
+                    </p>
+                    <p class="lost_password"> <a href="/tai-khoan/quen-mat-khau">Quên mật khẩu?</a></p>
+                    <div class="clear"></div>
+                </form>*@
+            <div class="woocommerce-form-coupon-toggle">
+                <div class="woocommerce-info message-wrapper">
+                    <div class="message-container container medium-text-center">
+                        Có mã ưu đãi? <a href="#"
+                                         class="showcoupon">Nhấp vào đây để nhập mã của bạn</a>
+                    </div>
+                </div>
+            </div>
+            <form class="checkout_coupon woocommerce-form-coupon has-border is-dashed" action="#" @*method="post"*@ onclick="return false"
+                  style="display: none;">
+                <p>Nếu bạn có mã ưu đãi, sử dụng ở bên dưới.</p>
+                <div class="coupon">
+                    <div class="flex-row medium-flex-wrap">
+                        <div class="flex-col flex-grow">
+                            <input type="text" name="coupon_code" class="input-text"
+                                   placeholder="Mã ưu đãi" id="coupon_code" value="">
+                        </div>
+                        <div class="flex-col">
+                            <button type="submit" class="button expand" name="apply_coupon"
+                                    value="Áp dụng">
+                                Áp dụng
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="woocommerce-notices-wrapper"></div>
+
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { @action = "/thanh-toan", @class = "checkout woocommerce-checkout", enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(false, "", new { @class = "message-container container alert-color medium-text-center" })
+                <div class="row pt-0 ">
+                    <div class="large-7 col  ">
+                        <div id="customer_details">
+                            <div class="clear">
+                                <div class="woocommerce-billing-fields">
+                                    <h3>Thanh toán và giao hàng</h3>
+                                    <div class="woocommerce-billing-fields__field-wrapper">
+                                        <p class="form-row form-row-wide validate-required" id="billing_last_name_field"
+                                           data-priority="10">
+                                            <span class="woocommerce-input-wrapper">
+                                                <div class="fl-wrap fl-wrap-input">
+
+                                                    @Html.TextBoxFor(model => model.fullname, new { name = "fullname", id = "billing_last_name", @class = "input-text fl-input", placeholder = "Nhập đầy đủ họ và tên", @required = "" })
+                                                </div>
+                                            </span>
+                                        </p>
+                                        <p class="form-row form-row-first validate-required validate-phone"
+                                           id="billing_phone_field" data-priority="20">
+                                            <span class="woocommerce-input-wrapper">
+                                                <div class="fl-wrap fl-wrap-input">
+                                                    <input type="tel" required
+                                                           class="input-text fl-input" name="phone"
+                                                           id="billing_phone" placeholder="Số điện thoại" value=""
+                                                           autocomplete="tel">
+
+
+                                                </div>
+                                            </span>
+                                        </p>
+                                        <p class="form-row form-row-last validate-email" id="billing_email_field"
+                                           data-priority="21">
+                                            <span class="woocommerce-input-wrapper">
+                                                <div class="fl-wrap fl-wrap-input">
+                                                    <input type="email" class="input-text fl-input" name="email"
+                                                           id="billing_email" placeholder="Địa chỉ email&nbsp;(tuỳ chọn)"
+                                                           value="" autocomplete="email username">
+                                                </div>
+                                            </span>
+                                        </p>
+                                        <p class="form-row form-row-wide address-field update_totals_on_change validate-required"
+                                           id="billing_state_field" data-priority="30">
+                                            <span class="woocommerce-input-wrapper">
+                                                <span class="fl-wrap fl-wrap-select fl-is-active">
+                                                    <select class="js-province-basic-single" required name="province">
+                                                        <option></option>
+                                                        @foreach (var item in ListProvince)
+                                                        {
+                                                            <option value="@item.id">@item.name</option>
+                                                        }
+
+
+                                                    </select>
+                                                </span>
+                                            </span>
+                                        </p>
+                                        <p class="form-row form-row-wide address-field update_totals_on_change validate-required validate-required"
+                                           id="billing_city_field" data-priority="40">
+                                            <span class="woocommerce-input-wrapper">
+                                                <span class="fl-wrap fl-wrap-select fl-is-active">
+                                                    <select class="js-district-basic-single" required name="district">
+                                                        <option></option>
+
+                                                    </select>
+                                                </span>
+                                            </span>
+                                        </p>
+                                        <p class="form-row form-row-wide address-field update_totals_on_change validate-required validate-required"
+                                           id="billing_address_2_field" data-priority="50">
+                                            <span class="woocommerce-input-wrapper">
+                                                <span class="fl-wrap fl-wrap-select fl-is-active">
+
+                                                    <select class="js-ward-basic-single" required name="ward">
+                                                        <option></option>
+
+                                                    </select>
+                                                </span>
+                                            </span>
+                                        </p>
+                                        <p class="form-row form-row-wide validate-required" id="billing_address_1_field"
+                                           data-priority="60">
+                                            <span class="woocommerce-input-wrapper">
+                                                <div class="fl-wrap fl-wrap-input">
+
+                                                    <input type="text"
+                                                           class="input-text fl-input" name="orderfulladdress"
+                                                           id="billing_address_1"
+                                                           placeholder="Địa chỉ cụ thể (Ví dụ: 123 Hoàng Diệu)" required value=""
+                                                           autocomplete="address-line1">
+                                                </div>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear">
+                                <div class="woocommerce-shipping-fields"></div>
+                                <div class="woocommerce-additional-fields">
+                                    <h3>Ghi Chú:</h3>
+                                    <div class="woocommerce-additional-fields__field-wrapper">
+                                        <p class="form-row notes" id="order_comments_field" data-priority="">
+                                            <span class="woocommerce-input-wrapper">
+                                                <div class="fl-wrap fl-wrap-textarea">
+
+                                                    <textarea name="ordernote"
+                                                              class="input-text fl-textarea" id="ordercomment" placeholder="Ghi chú về đơn hàng, ví dụ: thời gian giao hay chỉ dẫn địa điểm giao hàng chi tiết hơn." rows="2" cols="5"></textarea>
+                                                </div>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="large-5 col">
+                        <div class="col-inner has-border">
+                            <div class="checkout-sidebar sm-touch-scroll">
+                                <h3 id="order_review_heading">Đơn hàng của bạn</h3>
+                                <div id="order_review" class="woocommerce-checkout-review-order">
+                                    <table class="shop_table woocommerce-checkout-review-order-table">
+                                        <thead>
+                                            <tr>
+                                                <th class="product-name">Sản phẩm</th>
+                                                <th class="product-total">Tổng cộng</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in ListCartItem)
+                                            {
+
+                                                <tr class="cart_item_@item.ItemKey">
+                                                    <td class="product-name">
+                                                        @(item.Name + " - " + item.MaterialName) <strong class="product-quantity">× @item.Quantity</strong>
+                                                    </td>
+                                                    <td class="product-total">
+                                                        <span class="woocommerce-Price-amount amount">
+                                                            @item.FinalPrice.ToString("N0")<span class="woocommerce-Price-currencySymbol">₫</span>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                        <tfoot>
+
+                                            <tr class="cart-subtotal">
+                                                <th>Tổng:</th>
+                                                <td>
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        @ListCartItem.Sum(x => x.FinalPrice).ToString("N0")<span class="woocommerce-Price-currencySymbol">₫</span>
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+                                            <tr class="woocommerce-shipping-totals shipping">
+                                                <td class="shipping__inner" colspan="2">
+                                                    <table class="shipping__table ">
+                                                        <tbody>
+                                                            <tr>
+                                                                <th>Phí giao hàng</th>
+                                                                <td data-title="Phí giao hàng">
+                                                                    <ul id="shipping_method"
+                                                                        class="shipping__list woocommerce-shipping-methods">
+                                                                        <li class="shipping__list_item">
+                                                                            <input type="hidden"
+                                                                                   name="feeship" data-index="0"
+                                                                                   id="shipping_method_0_flat_rate2"
+                                                                                   value="flat_rate:2"
+                                                                                   class="shipping_method">
+                                                                            <label class="shipping__list_label"
+                                                                                   for="shipping_method_0_flat_rate2">
+                                                                                <span class="woocommerce-Price-amount amount">
+                                                                                    0<span class="woocommerce-Price-currencySymbol">₫</span>
+                                                                                </span>
+                                                                            </label>
+                                                                        </li>
+                                                                    </ul>
+
+
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr class="discountfee">
+                                                                <th>Giảm giá vì Chuyển khoản ngân hàng</th>
+                                                                <td><span class="woocommerce-Price-amount amount">-@((ListCartItem.Sum(x => x.FinalPrice) * 5 / 100).ToString("N0"))<span class="woocommerce-Price-currencySymbol">₫</span></span></td>
+                                                            </tr>
+                                                        </tbody>
+
+                                                    </table>
+                                                </td>
+                                            </tr>
+
+                                            <tr class="order-total">
+                                                <th>Tổng cộng</th>
+                                                <td>
+                                                    <strong>
+                                                        <span class="woocommerce-Price-amount amount totalmoney">
+                                                            @ListCartItem.Sum(x => x.FinalPrice).ToString("N0")<span class="woocommerce-Price-currencySymbol">₫</span>
+                                                        </span>
+                                                    </strong>
+                                                </td>
+                                            </tr>
+
+
+                                        </tfoot>
+                                    </table>
+                                    <div id="payment" class="woocommerce-checkout-payment">
+                                        <ul class="wc_payment_methods payment_methods methods">
+                                            <li class="wc_payment_method payment_method_cod">
+                                                <input id="payment_method_cod" type="radio" class="input-radio"
+                                                       name="payment_method" value="cod" checked="checked"
+                                                       data-order_button_text="">
+
+                                                <label for="payment_method_cod">
+                                                    Trả tiền mặt khi nhận hàng (COD)
+                                                </label>
+                                                <div class="payment_box div_payment_method_cod" style="display: block;">
+                                                    <p>
+                                                        Khách hàng thanh toán trực tiếp bằng tiền mặt cho nhân viên giao
+                                                        hàng
+                                                    </p>
+                                                </div>
+                                            </li>
+                                            <li class="wc_payment_method payment_method_bacs">
+                                                <input id="payment_method_bacs" type="radio" class="input-radio"
+                                                       name="payment_method" value="bacs" data-order_button_text="">
+
+                                                <label for="payment_method_bacs">
+                                                    Chuyển khoản ngân hàng <small>(Giảm giá 5%)</small>
+                                                </label>
+                                                <div class="payment_box div_payment_method_bacs" style="display:none;">
+
+                                                    @if (CommonInfo != null && CommonInfo.bankinfo != null && CommonInfo.bankinfo.Count > 0)
+                                                    {
+                                                        var firstBank = CommonInfo.bankinfo.First();
+                                                        <p>
+                                                            Thực hiện thanh toán ngay vào tài khoản ngân hàng của HATO
+                                                            Case.<br>
+                                                            – Tên tài khoản: @firstBank.accountname <br>
+                                                            – Số tài khoản:  @firstBank.accountnumber <br>
+                                                            – Ngân hàng:  @firstBank.bankname<br>
+                                                            – Nội dung chuyển khoản: "Tên anh chị + Số điện thoại mua hàng"
+                                                        </p>
+                                                    }
+                                                    <p>
+                                                        Ngay sau khi nhận được tiền chuyển khoản từ anh chị, WADU sẽ tiến
+                                                        gọi xác nhận. Đơn hàng sẽ được xử lý ngay
+                                                        sau đó.
+                                                    </p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div class="form-row place-order">
+                                            <div class="woocommerce-terms-and-conditions-wrapper">
+
+                                            </div>
+
+                                            <input type="hidden" name="listitemkey" value="@String.Join("|",ListCartItem.Select(x=>x.ItemKey))" />
+
+
+                                            <button type="submit" class="button alt"
+                                                    name="woocommerce_checkout_place_order" id="place_order"
+                                                    value="Đặt hàng" data-value="Đặt hàng">
+                                                Đặt hàng
+                                            </button>
+
+                                            <input type="hidden" id="woocommerce-process-checkout-nonce"
+                                                   name="woocommerce-process-checkout-nonce" value="d5e6926100"><input type="hidden" name="_wp_http_referer"
+                                                                                                                       value="/?wc-ajax=update_order_review">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="woocommerce-privacy-policy-text"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+</main>
+
+@section Scripts{
+    <script src="@Url.Content("~/Assets/js/select2.min.js")"></script>
+    <script>
+        $(document).ready(function () {
+            $('.discountfee').css("display", "none");
+
+            $(document).on('change', '#payment_method_bacs', function () {
+                $('.div_payment_method_cod').css("display", "none");
+                $('.div_payment_method_bacs').css("display", "block");
+                $(".discountfee").removeAttr("style");
+
+                //tính lại total money
+                debugger
+                var totalmoney = "";
+                totalmoney =@((ListCartItem.Sum(x => x.FinalPrice)-ListCartItem.Sum(x => x.FinalPrice)*5/100).ToString("N0").Replace(",","."));
+                totalmoney = totalmoney.toFixed(3).replace(".", ",") + "₫";
+                $('.totalmoney').html(totalmoney);
+            });
+
+            $(document).on('change', '#payment_method_cod', function () {
+                $('.div_payment_method_cod').css("display", "block");
+                $('.div_payment_method_bacs').css("display", "none");
+                 $('.discountfee').css("display", "none");
+
+                //tinh lại total money
+                var totalmoney = "";
+                totalmoney =@(ListCartItem.Sum(x => x.FinalPrice).ToString("N0").Replace(",","."));
+                totalmoney = totalmoney.toFixed(3).replace(".", ",") + "₫";
+                $('.totalmoney').html(totalmoney);
+            });
+
+            $(document).on("click", "a.showlogin",
+                function () {
+                    return $("form.login, form.woocommerce-form-login").slideToggle();
+                });
+            $(document).on("click", "a.showcoupon",
+                function () {
+                    return $(".checkout_coupon").slideToggle(400, function () { $(".checkout_coupon").find(":input:eq(0)").focus() }), !1
+                });
+            $('.js-province-basic-single').select2({
+                placeholder: "Chọn Tỉnh/Thành Phố",
+
+                width: '100%'
+            });
+            $('.js-district-basic-single').select2({
+                placeholder: "Chọn Quận/Huyện",
+
+                width: '100%'
+            });
+            $('.js-ward-basic-single').select2({
+                placeholder: "Chọn Xã/Phường/Thị Trấn",
+
+                width: '100%'
+            });
+
+            $(".js-province-basic-single").on("change", function () {
+
+                var provinceID = parseInt($(this).val());
+                $.ajax({
+                    url: "/Cart/GetListDistrictByProvinceID",
+                    type: "get",
+                    dateType: "json",
+                    data: {
+                        proid: provinceID
+                    },
+                    success: function (result) {
+                        $(".js-district-basic-single").html('');
+                        $(".js-ward-basic-single").html('');
+                        $(".js-ward-basic-single").append("<option></option>")
+                        $(".js-district-basic-single").select2({
+                            width: '100%',
+                            data: result.items
+                        })
+
+
+                    },
+                    error: function (err) {
+                        alert("Xảy ra lỗi. Vui lòng thử lại ạ!");
+                    }
+                });
+
+            });
+
+            $(".js-district-basic-single").on("change", function () {
+
+                var districtID = parseInt($(this).val());
+                $.ajax({
+                    url: "/Cart/GetListWardByDistrictID",
+                    type: "get",
+                    dateType: "json",
+                    data: {
+                        disid: districtID
+                    },
+                    success: function (result) {
+                        $(".js-ward-basic-single").html('');
+
+                        $(".js-ward-basic-single").select2({
+                            width: '100%',
+                            data: result.items
+                        })
+
+
+                    },
+                    error: function (err) {
+                        alert("Xảy ra lỗi. Vui lòng thử lại ạ!");
+                    }
+                });
+
+            });
+
+        });
+
+    </script>
+}

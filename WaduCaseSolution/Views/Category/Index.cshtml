@@ -1,0 +1,83 @@
+﻿@using WaduCaseBusiness.Model;
+@using WaduCase.Common;
+
+@model BrandBO
+
+@{
+    ViewBag.Title = "Ốp lưng " + Model.seoname + " | WaduCase";
+    string OrderBy = Convert.ToString(ViewBag.OrderBy);
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="shop-page-title category-page-title page-title featured-title dark ">
+    <div class="page-title-bg fill">
+        <div class="title-bg fill bg-fill" data-parallax-fade="true" data-parallax="-2" data-parallax-background
+             data-parallax-container=".page-title"></div>
+        <div class="title-overlay fill"></div>
+    </div>
+    <div class="page-title-inner flex-row  medium-flex-wrap container">
+        <div class="flex-col flex-grow medium-text-center">
+            <div class="is-medium">
+                <nav class="woocommerce-breadcrumb breadcrumbs">
+                    <a href="#">Trang chủ</a> <span class="divider">&#47;</span> @Model.name
+                </nav>
+            </div>
+            <div class="category-filtering category-filter-row show-for-medium">
+                <a href="#" data-open="#shop-sidebar"
+                   data-visible-after="true" data-pos="left" class="filter-button uppercase plain">
+                    <i class="icon-menu"></i>
+                    <strong>Lọc</strong>
+                </a>
+                <div class="inline-block"></div>
+            </div>
+        </div>
+        <div class="flex-col medium-text-center  form-flat">
+            <form class="woocommerce-ordering" method="get">
+                <select name="orderby" class="orderby">
+                    <option value="popularity" @(String.IsNullOrEmpty(OrderBy) ? "selected" : "")>Sắp xếp</option>
+                    <option value="price" @(OrderBy.ToLower() == "price" ? "selected" : "")>Thứ tự theo giá: thấp đến cao</option>
+                    <option value="price-desc" @(OrderBy.ToLower() == "price-desc" ? "selected" : "")>Thứ tự theo giá: cao xuống thấp</option>
+                </select>
+
+            </form>
+        </div>
+    </div>
+</div>
+<main id="main" class="">
+    <div class="row category-page-row">
+        <div class="col large-3 hide-for-medium ">
+            @Html.Action("Sidebar", new { currentID = Model.id, isCollectionLoad = false })
+        </div>
+        <div class="col large-9">
+            <div class="shop-container">
+                <div class="term-description">
+                    <h1 class="uppercase"><span style="font-size: 85%;">ốp lưng @Model.name TỰ THIẾT KẾ</span></h1>
+                    <div class="gap-element clearfix" style="display:block; height:auto; padding-top:30px"></div>
+
+                </div>
+                <div class="woocommerce-notices-wrapper"></div>
+
+                @Html.Action("ListProduct", new { id = Model.id, isCollection = false, orderBy = ViewBag.OrderBy })
+
+                <hr />
+                <div class="gap-element clearfix" style="display:block; height:auto; padding-top:30px"></div>
+
+
+                @Html.Action("ListRealCaseByBrandID", new { id = Model.id, name = Model.name })
+
+                <div class="gap-element clearfix" style="display:block; height:auto; padding-top:50px"></div>
+                <h2><strong>Tất Cả Bộ Sưu Tập Của WADU Case</strong></h2>
+
+                @Html.Action("GetAllCollection")
+
+                <div class="gap-element clearfix" style="display:block; height:auto; padding-top:30px"></div>
+
+                @Html.Partial("~/Views/Category/_PartialDescription.cshtml")
+
+
+
+            </div>
+        </div>
+    </div>
+</main>
+

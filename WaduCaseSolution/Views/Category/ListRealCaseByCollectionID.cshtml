@@ -1,0 +1,75 @@
+﻿@using WaduCaseBusiness.Model;
+@using WaduCase.Common;
+@{
+    string collectionName = ViewBag.CollectionName;
+    int collectionID = ViewBag.CollectionID;
+}
+
+@model List<RealCaseBO>
+
+@if (Model != null && Model.Count > 0)
+{
+    <section class="section" id="section_177017329">
+        <div class="bg section-bg fill bg-fill bg-loaded bg-loaded"></div>
+        <div class="section-content relative">
+            <div class="gap-element clearfix" style="display:block; height:auto; padding-top:30px"></div>
+            <div class="row align-middle align-center" id="row-1021187755">
+                <div class="col small-12 large-12">
+                    <div class="col-inner text-center">
+                        <h3 style="text-align: center;">
+                            <span style="font-size: 110%;">
+                                ẢNH THỰC TẾ ỐP LƯNG @collectionName.ToUpper().Trim()  TẠI WADU
+                                CASE
+                            </span>
+                        </h3>
+                        <p style="text-align: center;">
+                            <span style="font-size: 100%;">
+                                <em>
+                                    (Nhấn vào hình để phóng
+                                    to)
+                                </em>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <style scope="scope"></style>
+            </div>
+            <div id="gallery-876156004"
+                 class="row large-columns-4 medium-columns- small-columns-2 row-xsmall row-full-width row-masonry"
+                 data-packery-options='{"itemSelector": ".col", "gutter": 0, "presentageWidth" : true}'>
+                @foreach (var item in Model)
+                {
+                    <div class="gallery-col col">
+                        <div class="col-inner">
+                            <a class="image-lightbox lightbox-gallery"
+                               href="@item.url" title="">
+                                <div class="box has-hover gallery-box box-default">
+                                    <div class="box-image">
+                                        <img width="400" height="400"
+                                             src="@Url.Content(item.url)"
+                                             class="attachment-medium size-medium" alt="@item.title"
+                                             style="default" type="masonry"
+                                             width="full-width" col_spacing="xsmall" />
+                                    </div>
+                                    <div class="box-text text-left">
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <div class="gap-element clearfix" style="display:block; height:auto; padding-top:30px"></div>
+        </div>
+        <style scope="scope">
+            #section_177017329 {
+                padding-top: 30px;
+                padding-bottom: 30px;
+                background-color: rgba(212, 212, 212, 0.35);
+            }
+        </style>
+    </section>
+}
+

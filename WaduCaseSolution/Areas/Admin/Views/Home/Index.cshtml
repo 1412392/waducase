@@ -1,0 +1,86 @@
+﻿@using Newtonsoft.Json;
+@{
+    ViewBag.Title = "Trang Chủ | Admin page waducase";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section jsFooter{
+    <script src="~/Assets/Admin/vendors/raphael/raphael.js"></script>
+    <script src="~/Assets/Admin/vendors/morris.js/morris.js"></script>
+    <script>
+        $(document).ready(function () {
+            Morris.Line({
+                element: 'line-example',
+                data: null,
+
+                xkey: 'Month',
+                ykeys: ['Profit'],
+                labels: ['$'],
+                xLabelFormat: function (x) {
+                    var IndexToMonth = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                    var month = IndexToMonth[x.getMonth()];
+                    var year = x.getFullYear();
+                    return year + ' ' + month;
+                },
+                dateFormat: function (x) {
+                    var IndexToMonth = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                    var month = IndexToMonth[new Date(x).getMonth()];
+                    var year = new Date(x).getFullYear();
+                    return year + ' ' + month;
+                },
+            });
+        });
+
+    </script>
+}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="">
+            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-list-alt"></i></div>
+                    <div class="count">@ViewBag.TotalProduct/<span style="color:green">@ViewBag.TotalProductInBrand</span>/<span style="color:red">@ViewBag.TotalProductInCollection</span></div>
+                    <h3>Tổng sản phẩm/InBrand/InCollection</h3>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Diễn biến doanh thu</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="#">Settings 1</a>
+                                </li>
+                                <li>
+                                    <a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content2">
+                    <div id="line-example"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

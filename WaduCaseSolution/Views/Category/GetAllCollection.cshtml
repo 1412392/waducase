@@ -1,0 +1,32 @@
+﻿@using WaduCaseBusiness.Model;
+@using WaduCase.Common;
+@model List<CollectionBO>
+
+<div class="row large-columns-4 medium-columns- small-columns-2 row-xsmall row-full-width">
+
+    @foreach (var item in Model)
+    {
+        <div class="product-category col">
+            <div class="col-inner">
+                <a href="@ProductHelper.GenCollectionURL(item.name,item.id)">
+                    <div class="box box-category has-hover box-push ">
+                        <div class="box-image">
+                            <div class="">
+                                <img src="@Url.Content(item.logo)"
+                                     alt="@item.name" width="300" height="300" />
+                            </div>
+                        </div>
+                        <div class="box-text text-center">
+                            <div class="box-text-inner">
+                                <h5 class="uppercase header-title"> @item.name</h5>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    }
+
+
+</div>

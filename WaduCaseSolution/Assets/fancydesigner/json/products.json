@@ -1,0 +1,109 @@
+[
+  [
+    {
+      "productTitle": "lg g4",
+      "title": "lg g4",
+      "thumbnail": "/Assets/img/demofancy/LG-G4_full.png",
+      "options": {
+        "stageWidth": 500,
+        "stageHeight": 500,
+        "customAdds": {
+          "uploads": true,
+          "texts": true,
+          "designs": true
+        }
+      },
+      "elements": [
+        {
+          "type": "image",
+          "title": "1",
+          "source": "/Assets/img/demofancy/LG-g4_full.jpg",
+          "parameters": {
+            "uploadZone": 0,
+            "left": 250,
+            "top": 250,
+            "scaleX": 0.65000000000000002220446049250313080847263336181640625,
+            "scaleY": 0.65000000000000002220446049250313080847263336181640625,
+            "degree": 0,
+            "price": 0,
+            "originX": "center",
+            "originY": "center",
+            "removable": false,
+            "draggable": false,
+            "rotatable": false,
+            "resizable": false,
+            "zChangeable": false,
+            "topped": false,
+            "autoSelect": false,
+            "uniScalingUnlockable": false,
+            "excludeFromExport": false,
+            "advancedEditing": false,
+            "locked": false,
+            "boundingBoxMode": "inside",
+            "customAdds": []
+          }
+        },
+        {
+          "type": "image",
+          "title": "upload",
+          "source": "/Assets/img/demofancy/LG_upload.png",
+          "parameters": {
+            "uploadZone": 0,
+            "left": 250,
+            "top": 250,
+            "scaleX": 0.64000000000000001332267629550187848508358001708984375,
+            "scaleY": 0.64000000000000001332267629550187848508358001708984375,
+            "degree": 0,
+            "price": 0,
+            "originX": "center",
+            "originY": "center",
+            "opacity": 1,
+            "removable": false,
+            "draggable": false,
+            "rotatable": false,
+            "resizable": false,
+            "zChangeable": false,
+            "topped": false,
+            "autoSelect": false,
+            "uniScalingUnlockable": false,
+            "excludeFromExport": false,
+            "advancedEditing": false,
+            "locked": false,
+            "boundingBoxMode": "inside",
+            "customAdds": []
+          }
+        },
+        {
+          "type": "image",
+          "title": "2",
+          "source": "/Assets/img/demofancy/Lg-G4.png",
+          "parameters": {
+            "uploadZone": 0,
+            "left": 250,
+            "top": 250,
+            "scaleX": 0.65000000000000002220446049250313080847263336181640625,
+            "scaleY": 0.65000000000000002220446049250313080847263336181640625,
+            "degree": 0,
+            "price": 0,
+            "originX": "center",
+            "originY": "center",
+            "opacity": 1,
+            "removable": false,
+            "draggable": false,
+            "rotatable": false,
+            "resizable": false,
+            "zChangeable": false,
+            "topped": true,
+            "autoSelect": false,
+            "uniScalingUnlockable": false,
+            "excludeFromExport": false,
+            "advancedEditing": false,
+            "locked": false,
+            "boundingBoxMode": "inside",
+            "customAdds": []
+          }
+        }
+      ]
+    }
+  ]
+]

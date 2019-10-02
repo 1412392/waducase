@@ -1,0 +1,57 @@
+﻿@using WaduCaseBusiness.Model
+@model CommonBO
+
+<footer id="footer" class="footer-wrapper">
+    <div class="footer-widgets footer footer-2 dark">
+        <div class="row dark large-columns-2 mb-0">
+            <div id="block_widget-2" class="col pb-0 widget block_widget">
+                <span class="widget-title">
+                    WADU Case - In ốp
+                    lưng điện thoại chất lượng cao
+                </span>
+                <div class="is-divider small"></div>
+                <ul>
+                    <li><strong>Văn phòng đại diện: </strong>@Model.officeaddress</li>
+                    <li><strong>Xưởng in: </strong>@Model.factoryaddress</li>
+                    <li><strong>Email: </strong>@Model.email</li>
+                    <li><strong>SĐT: </strong> @Model.phone</li>
+                    <li><strong>Hotline lắng nghe phản hồi: </strong> @Model.hotline</li>
+                </ul>
+            </div>
+            <div id="block_widget-4" class="col pb-0 widget block_widget">
+                <span class="widget-title">
+                    TƯ VẤN VÀ HỖ
+                    TRỢ
+                </span>
+                <div class="is-divider small"></div>
+                <p>
+                    <em>
+                        <a href="javascript:void(0)" target="_self" rel="noopener">
+                            Xem mục câu hỏi thường gặp
+                            &gt;&gt;
+                        </a>
+                    </em>
+                </p>
+                <p>Chat ngay với chúng tôi ở khung chat dưới góc phải bên dưới màn hình.</p>
+                <p> </p>
+            </div>
+        </div>
+    </div>
+    <div class="absolute-footer dark medium-text-center small-text-center">
+        <div class="container clearfix">
+            <div class="footer-secondary pull-right">
+                <div class="footer-text inline-block small-block">
+                    <a href="javascript:void(0)" title="DMCA.com Protection Status"
+                       class="dmca-badge external" rel="nofollow" target="_self">
+                        <img src="@Url.Content("~/Assets/img/dmca_protected_sml_120n.png")"
+                             alt="DMCA.com Protection Status">
+                    </a>
+                </div>
+            </div>
+            <div class="footer-primary pull-left">
+
+                <div class="copyright-footer"> 2019 © - Bản quyền thuộc về <strong>WADU Case</strong></div>
+            </div>
+        </div>
+    </div>
+</footer>

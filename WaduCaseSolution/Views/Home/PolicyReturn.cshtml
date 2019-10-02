@@ -1,0 +1,59 @@
+﻿@using WaduCaseBusiness.Model
+@model CommonBO
+
+@{
+    ViewBag.Title = "Chính sách đổi trả | Wadu Case";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<main id="main" class="">
+    <div id="content" class="content-area page-wrapper" role="main">
+        <div class="row row-main">
+            <div class="large-12 col">
+                <div class="col-inner">
+                    <h1 style="text-align: center;">CHÍNH SÁCH ĐỔI – TRẢ</h1>
+                    <h2>Chính Sách Đổi Hàng</h2>
+                    <h3>1.Điều kiện đổi hàng</h3>
+                    <ul>
+                        <li>Sản phẩm ốp lưng được mua trên website Wadu Case</li>
+                        <li>Thời gian chưa quá 30 ngày kể từ ngày nhận được sản phẩm</li>
+                        <li>Ốp lưng khách nhận được không đúng với sản phẩm lúc khách đặt hàng</li>
+                        <li>Hình in trên ốp không đúng với thiết kế ban đầu của khách</li>
+                        <li>Ốp bị phai màu, bong tróc nặng.</li>
+                    </ul>
+                    <h3>2. Hình thức đổi hàng</h3>
+                    <ul>
+                        <li>
+                            Khách hàng chuyển ốp về lại văn phòng Wadu Case tại địa chỉ: <i>@Model.officeaddress</i>. Đi kèm với thông tin số điện thoại mua hàng và mã đơn
+                            hàng.&nbsp;(Khách hàng thanh toán phí vận chuyển)
+                        </li>
+                        <li>
+                            Wadu Case sẽ in lại ốp đó với đúng như yêu cầu ban đầu và gửi lại cho khách một vài ngày sau
+                            đó. (Khách hàng thanh toán phí vận chuyển)
+                        </li>
+                    </ul>
+                    <p>&nbsp;</p>
+                    <h2>Chính Sách Trả Hàng</h2>
+                    <h3>1.Điều kiện trả hàng</h3>
+                    <ul>
+                        <li>
+                            Sau khi đổi hàng mà khách hàng vẫn không ưng ý về sản phẩm và nêu rõ lý do không hài lòng.
+                        </li>
+                    </ul>
+                    <h3>2.Hình thức trả hàng</h3>
+                    <ul>
+                        <li>
+                            Khách hàng chuyển ốp về lại văn phòng Wadu Case tại địa chỉ:  <i>@Model.officeaddress</i>. Đi kèm với thông tin số điện thoại mua hàng, mã đơn hàng và
+                            cung cấp số tài khoản ngân hàng.&nbsp;(Khách hàng thanh toán phí vận chuyển)
+                        </li>
+                        <li>
+                            Ngay sau khi nhận sản phẩm được trả về, Wadu Case sẽ chuyển lại số tiền ốp (không bao gồm
+                            phí vận chuyển) vào tài khoản ngân hàng của khách hàng
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+

@@ -1,0 +1,912 @@
+﻿@using WaduCaseBusiness.Model;
+@using WaduCase.Common;
+
+@{
+    ViewBag.MetaKeyword = "Ốp lưng waducase, in ốp lưng chất lượng cao, in ốp lưng đẹp, waducase ốp lưng, op lung waducase, ốp lưng iphone, ốp lưng samsung";
+    ViewBag.Title = "In Ốp Lưng Điện Thoại Chất Lượng Cao | Wadu Case";
+    ViewBag.MetaDescription = "In ốp lưng điện thoại chất lượng cao. Công nghệ in Nhật Bản - Màu sắc đẹp và sắc nét gấp 3 lần - Chất liệu ốp cao cấp. In nhanh - Giao hàng toàn quốc.";
+    List<BrandBO> listBrand = ViewBag.ListBrand;
+    List<PhoneModelBO> listPhoneModel = ViewBag.ListModel;
+    CommonBO commonInfo = ViewBag.CommonInfo;
+}
+
+
+<main id="main" class="">
+    <div id="content" role="main" class="content-area">
+        @Html.Partial("~/Views/Home/_PartialBanner.cshtml")
+
+        <div class="gap-element" style="display:block; height:auto; padding-top:60px" class="clearfix"></div>
+        <div class="row align-middle" id="row-517314029">
+            <div class="col medium-6 small-12 large-6">
+                <div class="col-inner">
+                    <h2 style="text-align: center;"><strong>CÔNG NGHỆ IN NHẬT BẢN</strong></h2>
+                    <div class="gap-element" style="display:block; height:auto; padding-top:20px" class="clearfix"></div>
+                    <div class="icon-box featured-box icon-box-left text-left">
+                        <div class="icon-box-img" style="width: 60px">
+                            <div class="icon">
+                                <div class="icon-inner">
+                                    <img width="298" height="294" src="~/Assets/img/chat-luong-nhat-ban.png"
+                                         class="attachment-medium size-medium" alt="chất lượng in nhật bản" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="icon-box-text last-reset">
+                            <p style="text-align: left;">Màu sắc đẹp và nét gấp 03 lần máy in Trung Quốc.</p>
+                        </div>
+                    </div>
+                    <div class="gap-element" style="display:block; height:auto; padding-top:20px" class="clearfix"></div>
+                    <div class="icon-box featured-box icon-box-left text-left">
+                        <div class="icon-box-img" style="width: 50px">
+                            <div class="icon">
+                                <div class="icon-inner">
+                                    <img width="217" height="214" src="~/Assets/img/bao-hanh-in-op-lung-1-doi-1.png"
+                                         class="attachment-medium size-medium" alt="1 tháng bảo hành một đổi một miễn phí" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="icon-box-text last-reset">
+                            <p style="text-align: left;">Mực in cao cấp, nhập khẩu 100% từ Nhật. Độ bền màu sắc cực cao</p>
+                        </div>
+                    </div>
+                    <div class="gap-element" style="display:block; height:auto; padding-top:20px" class="clearfix"></div>
+                    <div class="icon-box featured-box icon-box-left text-left">
+                        <div class="icon-box-img" style="width: 50px">
+                            <div class="icon">
+                                <div class="icon-inner">
+                                    <img width="298" height="294" src="~/Assets/img/dan-dau-thi-truong.png"
+                                         class="attachment-medium size-medium" alt="dẫn đầu thị trường in ốp lưng điện thoại" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="icon-box-text last-reset">
+                            <p style="text-align: left;">
+                                Bảo hành 01 tháng 01 ĐỔI 01. WADU Case dẫn đầu thị trường về chất lượng
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col medium-6 small-12 large-6">
+                <div class="col-inner">
+                    <div class="banner has-hover" id="banner-1285979598">
+                        <div class="banner-inner fill">
+                            <div class="banner-bg fill">
+                                <div class="bg fill bg-fill bg-loaded"></div>
+                                <div class="overlay"></div>
+                            </div>
+                            <div class="banner-layers container">
+                                <div class="fill banner-link"></div>
+                                <div id="text-box-2108793917"
+                                     class="text-box banner-layer x50 md-x50 lg-x50 y50 md-y50 lg-y50 res-text">
+                                    <div class="text dark text-shadow-1">
+                                        <div class="text-inner text-center">
+                                            <p>
+                                                <strong>
+                                                    <span style="color: #ffffff; font-size: 130%;">
+                                                        Nhấn vào icon để xem video xưởng in
+                                                        WADU Case
+                                                    </span>
+                                                </strong>
+                                            </p>
+                                            <div class="video-button-wrapper" style="font-size:150%">
+                                                <a href="https://www.youtube.com/watch?v=pflX2Qob1kQ"
+                                                   class="button open-video icon circle is-outline is-xlarge external" rel="nofollow"
+                                                   target="_blank"><i class="icon-play" style="font-size:1.5em;padding-top:5px;"></i></a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <style scope="scope">
+
+                                        #text-box-2108793917 .text {
+                                            border-radius: 10px;
+                                            font-size: 100%;
+                                        }
+
+                                        #text-box-2108793917 {
+                                            width: 60%;
+                                        }
+                                    </style>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="height-fix is-invisible">
+                            <img width="1020" height="503" src="@Url.Content("/Assets/img/videoyoutube.jpg")"
+                                 class="attachment-large size-large" alt="" />
+                        </div>
+                        <style scope="scope">
+
+                            #banner-1285979598 .bg.bg-loaded {
+                                background-image: url('Assets/img/videoyoutube.jpg');
+                            }
+
+                            #banner-1285979598 .overlay {
+                                background-color: rgba(0, 0, 0, 0.5);
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+            <style scope="scope"></style>
+        </div> <a id="batdauthietke" data-ps2id-target=""></a>
+        <div class="gap-element" style="display:block; height:auto; padding-top:36px" class="clearfix"></div>
+        <section class="section" id="section_1156645181">
+            <div class="bg section-bg fill bg-fill bg-loaded bg-loaded"></div>
+            <div class="section-content relative">
+                <div class="row align-center" id="row-1624698844">
+                    <div class="col small-12 large-12">
+                        <div class="col-inner text-center">
+                            <div class="gap-element" style="display:block; height:auto; padding-top:18px" class="clearfix"></div>
+                            <h2 class="uppercase">
+                                <span style="font-size: 100%;">
+                                    3 BƯỚC đơn giản ĐỂ in ốp lưng do bạn tự tay thiết
+                                    kế
+                                </span>
+                            </h2>
+                            <div class="gap-element" style="display:block; height:auto; padding-top:20px" class="clearfix"></div>
+                            <p>
+                                <span style="font-size: 95%;"><em>(Nếu cần hỗ trợ thiết kế, nhắn ngay cho WADU ạ ^^ )</em></span>
+                            </p> <a href="#nhowaduthietke" target="_self" class="button success is-small box-shadow-2"
+                                    style="border-radius:99px;"><span>NHỜ WADU THIẾT KẾ</span><i class="icon-angle-right"></i></a>
+                            <div class="icon-box featured-box icon-box-left text-left">
+                                <div class="icon-box-img" style="width: 70px">
+                                    <div class="icon">
+                                        <div class="icon-inner">
+                                            <img width="300" height="300"
+                                                 src="~/Assets/img/ICON-CAC-BUOC-QUY-TRINH-IN-OP-LUNG-1.png" class="attachment-medium size-medium"
+                                                 alt="Bước 1" sizes="(max-width: 300px) 100vw, 300px" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="icon-box-text last-reset">
+                                    <div class="gap-element" style="display:block; height:auto; padding-top:15px" class="clearfix">
+                                    </div>
+                                    <p>
+                                        <strong>Chọn điện thoại của bạn bên dưới </strong><span style="font-size: 100%;">
+                                            <em>
+                                                (Nếu không
+                                                thấy điện thoại của mình, nhắn cho WADU ạ ^^  nhiều điện thoại chưa kịp tải lên
+                                                web)
+                                            </em>
+                                        </span><strong><br /> </strong>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="gap-element" style="display:block; height:auto; padding-top:25px" class="clearfix"></div>
+                            <div class="searchform-wrapper ux-search-box relative form- is-large">
+                                <form role="search" method="get" class="searchform" action="#">
+                                    <div class="flex-row relative">
+                                        <div class="flex-col flex-grow">
+                                            <input type="search" class="search-field mb-0" name="s" value=""
+                                                   placeholder="Tìm kiếm dòng điện thoại ?" /> <input type="hidden" name="post_type"
+                                                                                                      value="product" />
+                                        </div>
+                                        <div class="flex-col">
+                                            <button type="submit"
+                                                    class="ux-search-submit submit-button secondary button icon mb-0">
+                                                <i class="icon-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="live-search-results text-left z-top"></div>
+                                </form>
+                            </div>
+                            <div class="gap-element" style="display:block; height:auto; padding-top:30px" class="clearfix"></div>
+                            <div class="row row-collapse row-full-width" id="row-201333446">
+                                @foreach (var brand in listBrand)
+                                {
+                                    <div class="col medium-3 small-6 large-3">
+                                        <div class="col-inner" style="padding:0px 5px 0px 5px;">
+                                            <a href="#@brand.name.ToLower()" target="_self"
+                                               class="button secondary expand" style="border-radius:10px;"><span>@brand.name</span></a>
+                                        </div>
+                                    </div>
+                                }
+                                <style scope="scope"></style>
+                            </div>
+                            <div class="gap-element" style="display:block; height:auto; padding-top:40px" class="clearfix"></div>
+                            <div class="icon-box featured-box icon-box-left text-left">
+                                <div class="icon-box-img" style="width: 70px">
+                                    <div class="icon">
+                                        <div class="icon-inner">
+                                            <img width="150" height="150"
+                                                 src="~/Assets/img/ICON-CAC-BUOC-QUY-TRINH-IN-OP-LUNG-2.png" class="attachment-medium size-medium"
+                                                 alt="Bước 2" sizes="(max-width: 150px) 100vw, 150px" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="icon-box-text last-reset">
+                                    <div class="gap-element" style="display:block; height:auto; padding-top:15px" class="clearfix">
+                                    </div>
+                                    <p>
+                                        <strong>
+                                            Ở trang điện thoại của bạn, nhấn vào nút &#8220;TẢI HÌNH LÊN&#8221;, thêm hình bạn muốn
+                                            in và chỉnh sửa
+                                        </strong><strong><br /> </strong>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="gap-element" style="display:block; height:auto; padding-top:40px" class="clearfix"></div>
+                            <div class="icon-box featured-box icon-box-left text-left">
+                                <div class="icon-box-img" style="width: 70px">
+                                    <div class="icon">
+                                        <div class="icon-inner">
+                                            <img width="150" height="150"
+                                                 src="~/Assets/img/ICON-CAC-BUOC-QUY-TRINH-IN-OP-LUNG-3.png" class="attachment-medium size-medium"
+                                                 alt="Bước 3" sizes="(max-width: 150px) 100vw, 150px" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="icon-box-text last-reset">
+                                    <div class="gap-element" style="display:block; height:auto; padding-top:20px" class="clearfix">
+                                    </div>
+                                    <p><strong>Thêm vào giỏ hàng và Tiến hành đặt hàng</strong><strong><br /> </strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <style scope="scope"></style>
+                </div>
+            </div>
+            <style scope="scope">
+
+                #section_1156645181 {
+                    padding-top: 60px;
+                    padding-bottom: 60px;
+                    background-color: rgba(212, 212, 212, 0.35);
+                }
+            </style>
+        </section>
+
+        @foreach (var item in listBrand)
+        {
+            var listPhone = listPhoneModel.Where(x => x.brandid == item.id).ToList();
+
+            if (listPhone.Count <= 0) { continue; }
+            //var lstGroup = listPhone.Select(x => new
+            //{
+            //    group = x.group,
+            //    groupterm = x.groupterm
+            //}).DistinctBy(.ToList();
+
+            var lstGroup = listPhone
+    .GroupBy(p => new { group = ("" + p.group).ToLower() })
+        .Select(g => g.First())
+        .ToList();
+
+            if (lstGroup != null && !String.IsNullOrEmpty(lstGroup[0].group))
+            {
+                <div id="@item.name.ToLower().Trim()" class="lightbox-by-id lightbox-content mfp-hide lightbox-white "
+                     style="max-width:900px ;padding:20px">
+                    <div class="accordion" rel="">
+                        @foreach (var group in lstGroup)
+                        {
+                            <div class="accordion-item">
+                                <a href="#" class="accordion-title plain">
+                                    <button class="toggle">
+                                        <i class="icon-angle-down"></i>
+                                    </button><span>@group.group</span>
+                                </a>
+                                <div class="accordion-inner">
+                                    <div class="row row-collapse" id="row-@item.id">
+                                        @{ var listPhoneByGroup = listPhone.FindAll(x => x.groupterm == group.groupterm);}
+                                        @foreach (var phone in listPhoneByGroup)
+                                        {
+                                            <div class="col medium-3 small-6 large-3">
+                                                <div class="col-inner" style="padding:0px 5px 0px 5px;">
+                                                    <a rel="noopener noreferrer"
+                                                       href="@ProductHelper.GenProductURL(phone.name,phone.id,true)" target="_blank"
+                                                       class="button secondary is-small lowercase expand" style="border-radius:10px;">
+                                                        <span>
+                                                            @phone.name
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        }
+
+                                        <style scope="scope"></style>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            }
+            else
+            {
+
+                <div id="@item.name.ToLower().Trim()" class="lightbox-by-id lightbox-content mfp-hide lightbox-white "
+                     style="max-width:900px ;padding:20px">
+                    <div class="row row-collapse row-full-width" id="row-@item.id">
+                        @foreach (var phone in listPhone)
+                        {
+                            <div class="col medium-3 small-6 large-3">
+                                <div class="col-inner" style="padding:0px 5px 0px 5px;">
+                                    <a rel="noopener noreferrer"
+                                       href="@ProductHelper.GenProductURL(phone.name,phone.id,true)" target="_blank" class="button secondary is-small lowercase expand"
+                                       style="border-radius:10px;">
+                                        <span>@phone.name</span>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+
+                        <style scope="scope"></style>
+                    </div>
+                </div>
+            }
+
+        }
+
+        <div class="gap-element clearfix" style="display:block; height:auto; padding-top:30px"></div>
+
+        @Html.Action("GetFeatureCollection", "Home")
+
+
+        <h2 style="text-align: center;">NỀN TẢNG THIẾT KẾ ỐP LƯNG ONLINE ĐẦU TIÊN Ở VIỆT NAM</h2>
+        <div class="gap-element" style="display:block; height:auto; padding-top:20px" class="clearfix"></div>
+        <section class="section" id="section_1563005619">
+            <div class="bg section-bg fill bg-fill bg-loaded bg-loaded"></div>
+            <div class="section-content relative">
+                <div class="row" id="row-1566113183">
+                    <div class="col small-12 large-12">
+                        <div class="col-inner">
+                            <div class="banner has-hover" id="banner-58966675">
+                                <div class="banner-inner fill">
+                                    <div class="banner-bg fill">
+                                        <div class="bg fill bg-fill bg-loaded"></div>
+                                        <div class="overlay"></div>
+                                    </div>
+                                    <div class="banner-layers container">
+                                        <div class="fill banner-link"></div>
+                                        <div id="text-box-240251389"
+                                             class="text-box banner-layer x50 md-x50 lg-x50 y50 md-y50 lg-y50 res-text">
+                                            <div class="text dark text-shadow-1">
+                                                <div class="text-inner text-center">
+                                                    <p>
+                                                        <strong>
+                                                            <span style="color: #ffffff; font-size: 130%;">
+                                                                Nhấn vào icon để xem
+                                                                video
+                                                            </span>
+                                                        </strong>
+                                                    </p>
+                                                    <div class="video-button-wrapper" style="font-size:150%">
+                                                        <a href="https://www.youtube.com/watch?v=pflX2Qob1kQ"
+                                                           class="button open-video icon circle is-outline is-xlarge external" rel="nofollow"
+                                                           target="_blank"><i class="icon-play" style="font-size:1.5em;padding-top:10px;"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <style scope="scope">
+
+                                                #text-box-240251389 .text {
+                                                    border-radius: 10px;
+                                                    font-size: 100%;
+                                                }
+
+                                                #text-box-240251389 {
+                                                    width: 60%;
+                                                }
+                                            </style>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="height-fix is-invisible">
+                                    <img width="1020" height="641" src="@Url.Content("~/Assets/img/videoyoutube.jpg")"
+                                         class="attachment-large size-large" alt="Nền tảng thiết kế ốp lưng online tại WADU Case"
+                                         sizes="(max-width: 1020px) 100vw, 1020px" />
+                                </div>
+                                <style scope="scope">
+
+                                    #banner-58966675 .bg.bg-loaded {
+                                        background-image: url(/Assets/img/videoyoutube.jpg);
+                                    }
+
+                                    #banner-58966675 .overlay {
+                                        background-color: rgba(0, 0, 0, 0.35);
+                                    }
+                                </style>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="row-23554298">
+                    <div class="col medium-6 small-6 large-6">
+                        <div class="col-inner">
+                            <div class="icon-box featured-box icon-box-center text-center">
+                                <div class="icon-box-img" style="width: 50px">
+                                    <div class="icon">
+                                        <div class="icon-inner">
+                                            <img width="300" height="300" src="~/Assets/img/de-dang-thiet-ke.png"
+                                                 class="attachment-medium size-medium" alt="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="icon-box-text last-reset">
+                                    <p style="text-align: center;">Dễ dàng tải hình bạn lên và tự thiết kế</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col medium-6 small-6 large-6">
+                        <div class="col-inner">
+                            <div class="icon-box featured-box icon-box-center text-center">
+                                <div class="icon-box-img" style="width: 50px">
+                                    <div class="icon">
+                                        <div class="icon-inner">
+                                            <img width="300" height="300" src="~/Assets/img/truc-quan.png"
+                                                 class="attachment-medium size-medium" alt="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="icon-box-text last-reset">
+                                    <p style="text-align: center;">Trực quan, xem ngay mẫu trước khi in</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gap-element" style="display:block; height:auto; padding-top:30px" class="clearfix"></div>
+                <div class="row row-small row-full-width align-middle align-center" id="row-103870035">
+                    <div class="col medium-2 small-6 large-2">
+                        <div class="col-inner text-right">
+                            <a href="#batdauthietke" target="_self"
+                               class="button secondary is-small box-shadow-2 expand" style="border-radius:99px;">
+                                <span>
+                                    TỰ TAY
+                                    THIẾT KẾ
+                                </span> <i class="icon-angle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col medium-2 small-6 large-2">
+                        <div class="col-inner text-left">
+                            <a href="#nhowaduthietke" target="_self"
+                               class="button success is-small box-shadow-2 expand" style="border-radius:99px;">
+                                <span>
+                                    NHỜ WADU
+                                    THIẾT KẾ
+                                </span> <i class="icon-angle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <style scope="scope"></style>
+                </div>
+            </div>
+            <style scope="scope">
+                #section_1563005619 {
+                    padding-top: 0px;
+                    padding-bottom: 0px;
+                }
+
+
+                @@media (min-width:550px) {
+
+                    #section_1563005619 {
+                        padding-top: 30px;
+                        padding-bottom: 30px;
+                    }
+                }
+            </style>
+        </section>
+        <div class="gap-element" style="display:block; height:auto; padding-top:30px" class="clearfix"></div>
+        <section class="section" id="section_517111740">
+            <div class="bg section-bg fill bg-fill bg-loaded bg-loaded"></div>
+            <div class="section-content relative">
+                <div class="gap-element" style="display:block; height:auto; padding-top:30px" class="clearfix"></div>
+                <div class="row align-middle align-center" id="row-741083999">
+                    <div class="col small-12 large-12">
+                        <div class="col-inner text-center">
+                            <h3 style="text-align: center;">
+                                <span style="font-size: 110%;">
+                                    ẢNH THỰC TẾ ỐP LƯNG IN TẠI WADU
+                                    CASE
+                                </span>
+                            </h3>
+                            <p style="text-align: center;">
+                                <span style="font-size: 100%;">
+                                    <em>
+                                        (Nhấn vào hình để phóng
+                                        to)
+                                    </em>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <style scope="scope"></style>
+                </div>
+                <div id="gallery-86167976"
+                     class="row large-columns-4 medium-columns- small-columns-2 row-xsmall row-full-width row-masonry"
+                     data-packery-options='{"itemSelector": ".col", "gutter": 0, "presentageWidth" : true}'>
+                    <div class="gallery-col col">
+                        <div class="col-inner">
+                            <a class="image-lightbox lightbox-gallery" href="~/Assets/img/op6.jpg" title="">
+                                <div class="box has-hover gallery-box box-default">
+                                    <div class="box-image">
+                                        <img width="900" height="900" src="~/Assets/img/op6.jpg"
+                                             class="attachment-large size-large" alt="hình thực tế ốp lưng cặp đôi 5 tại WADU Case"
+                                             ids="24914,24943,28925,24919,25156,24916,24917,24929" type="masonry" width="full-width"
+                                             col_spacing="xsmall" image_size="large" />
+                                    </div>
+                                    <div class="box-text text-left">
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="gallery-col col">
+                        <div class="col-inner">
+                            <a class="image-lightbox lightbox-gallery" href="~/Assets/img/op4.jpg" title="">
+                                <div class="box has-hover gallery-box box-default">
+                                    <div class="box-image">
+                                        <img width="900" height="900" src="~/Assets/img/op4.jpg"
+                                             class="attachment-large size-large" alt="ảnh thực tế in ốp lưng điện thoại - ảnh số 2"
+                                             ids="24914,24943,28925,24919,25156,24916,24917,24929" type="masonry" width="full-width"
+                                             col_spacing="xsmall" image_size="large" />
+                                    </div>
+                                    <div class="box-text text-left">
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="gallery-col col">
+                        <div class="col-inner">
+                            <a class="image-lightbox lightbox-gallery" href="~/Assets/img/op3.jpg" title="">
+                                <div class="box has-hover gallery-box box-default">
+                                    <div class="box-image">
+                                        <img width="900" height="900" src="~/Assets/img/op3.jpg"
+                                             class="attachment-large size-large" alt="" ids="24914,24943,28925,24919,25156,24916,24917,24929"
+                                             type="masonry" width="full-width" col_spacing="xsmall" image_size="large" />
+                                    </div>
+                                    <div class="box-text text-left">
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="gallery-col col">
+                        <div class="col-inner">
+                            <a class="image-lightbox lightbox-gallery" href="~/Assets/img/op7.jpg" title="">
+                                <div class="box has-hover gallery-box box-default">
+                                    <div class="box-image">
+                                        <img width="480" height="480" src="~/Assets/img/op7.jpg"
+                                             class="attachment-large size-large" alt="ảnh thực tế in ốp lưng điện thoại - ảnh số 5"
+                                             ids="24914,24943,28925,24919,25156,24916,24917,24929" type="masonry" width="full-width"
+                                             col_spacing="xsmall" image_size="large" />
+                                    </div>
+                                    <div class="box-text text-left">
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="gap-element" style="display:block; height:auto; padding-top:30px" class="clearfix"></div>
+                <div class="gap-element" style="display:block; height:auto; padding-top:50px" class="clearfix"></div>
+                <div class="row row-full-width align-middle align-center" id="row-919953276">
+                    <div class="col small-12 large-12">
+                        <div class="col-inner text-center">
+                            <p style="text-align: center;">
+                                <span style="color: #000000; font-size: 140%;">
+                                    <strong>
+                                        WADU Case Là Đối
+                                        Tác Của Nhiều Thương Hiệu Lớn
+                                    </strong>
+                                </span>
+                            </p>
+                            <div class="row large-columns-3 medium-columns- small-columns-2 row-xsmall row-full-width slider row-slider slider-nav-reveal slider-nav-push"
+                                 data-flickity-options='{"imagesLoaded": true, "groupCells": "100%", "dragThreshold" : 5, "cellAlign": "left","wrapAround": true,"prevNextButtons": true,"percentPosition": true,"pageDots": false, "rightToLeft": false, "autoPlay" : false}'>
+                                <div class="gallery-col col">
+                                    <div class="col-inner">
+                                        <a class="image-lightbox lightbox-gallery" href="~/Assets/img/vietnam-airline.jpg"
+                                           title="Converse Shoes">
+                                            <div class="box has-hover gallery-box box-normal">
+                                                <div class="box-image">
+                                                    <img width="952" height="527" src="~/Assets/img/vietnam-airline.jpg"
+                                                         class="attachment-large size-large" alt="in ốp lưng cho giày converse"
+                                                         ids="27695,27694,27693,27699,28923,27697,27698,27696" type="slider" width="full-width"
+                                                         col_spacing="xsmall" columns="3" image_size="large" />
+                                                </div>
+                                                <div class="box-text text-left">
+                                                    <p>Converse Shoes</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="gallery-col col">
+                                    <div class="col-inner">
+                                        <a class="image-lightbox lightbox-gallery" href="~/Assets/img/circle-k.jpg"
+                                           title="Circle K">
+                                            <div class="box has-hover gallery-box box-normal">
+                                                <div class="box-image">
+                                                    <img width="952" height="527" src="~/Assets/img/circle-k.jpg"
+                                                         class="attachment-large size-large" alt="in ốp lưng cho Cicle K"
+                                                         ids="27695,27694,27693,27699,28923,27697,27698,27696" type="slider" width="full-width"
+                                                         col_spacing="xsmall" columns="3" image_size="large" />
+                                                </div>
+                                                <div class="box-text text-left">
+                                                    <p>Circle K</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="gallery-col col">
+                                    <div class="col-inner">
+                                        <a class="image-lightbox lightbox-gallery" href="~/Assets/img/bamboo-airway.jpg"
+                                           title="Bamboo Airways">
+                                            <div class="box has-hover gallery-box box-normal">
+                                                <div class="box-image">
+                                                    <img width="952" height="527" src="~/Assets/img/bamboo-airway.jpg"
+                                                         class="attachment-large size-large" alt="in ốp lưng cho bamboo airway"
+                                                         ids="27695,27694,27693,27699,28923,27697,27698,27696" type="slider" width="full-width"
+                                                         col_spacing="xsmall" columns="3" image_size="large" />
+                                                </div>
+                                                <div class="box-text text-left">
+                                                    <p>Bamboo Airways</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="gallery-col col">
+                                    <div class="col-inner">
+                                        <a class="image-lightbox lightbox-gallery" href="~/Assets/img/vietnam-airline.jpg"
+                                           title="Vietnam Airline">
+                                            <div class="box has-hover gallery-box box-normal">
+                                                <div class="box-image">
+                                                    <img width="952" height="527" src="~/Assets/img/vietnam-airline.jpg"
+                                                         class="attachment-large size-large" alt="in ốp lưng cho vietnam airline"
+                                                         ids="27695,27694,27693,27699,28923,27697,27698,27696" type="slider" width="full-width"
+                                                         col_spacing="xsmall" columns="3" image_size="large" />
+                                                </div>
+                                                <div class="box-text text-left">
+                                                    <p>Vietnam Airline</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="gallery-col col">
+                                    <div class="col-inner">
+                                        <a class="image-lightbox lightbox-gallery" href="~/Assets/img/doi-tac-mb-bank.jpg"
+                                           title="MB Bank">
+                                            <div class="box has-hover gallery-box box-normal">
+                                                <div class="box-image">
+                                                    <img width="952" height="527" src="~/Assets/img/doi-tac-mb-bank.jpg"
+                                                         class="attachment-large size-large" alt=""
+                                                         ids="27695,27694,27693,27699,28923,27697,27698,27696" type="slider" width="full-width"
+                                                         col_spacing="xsmall" columns="3" image_size="large" />
+                                                </div>
+                                                <div class="box-text text-left">
+                                                    <p>MB Bank</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="gallery-col col">
+                                    <div class="col-inner">
+                                        <a class="image-lightbox lightbox-gallery" href="~/Assets/img/dienquan-2.jpg"
+                                           title="Dien Quan Media - 1">
+                                            <div class="box has-hover gallery-box box-normal">
+                                                <div class="box-image">
+                                                    <img width="952" height="527" src="~/Assets/img/dienquan-2.jpg"
+                                                         class="attachment-large size-large" alt="in ốp lưng cho dien quan 2"
+                                                         ids="27695,27694,27693,27699,28923,27697,27698,27696" type="slider" width="full-width"
+                                                         col_spacing="xsmall" columns="3" image_size="large" />
+                                                </div>
+                                                <div class="box-text text-left">
+                                                    <p>Dien Quan Media - 1</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <style scope="scope"></style>
+                </div>
+                <div class="row align-middle align-center" id="row-1981645032">
+                    <div class="col small-12 large-12">
+                        <div class="col-inner text-center">
+                            <div class="row large-columns-6 medium-columns-3 small-columns-3 row-xsmall">
+                                <div class="gallery-col col">
+                                    <div class="col-inner">
+                                        <div class="box has-hover gallery-box box-default">
+                                            <div class="box-image" style="width:75%;">
+                                                <img width="400" height="400"
+                                                     src="~/Assets/img/logo-circle-k-400x400.png" class="attachment-medium size-medium" alt=""
+                                                     ids="27051,24759,28831,27053,27052,27050,28911,24765,24762,27054,24766,24761"
+                                                     lightbox="false" col_spacing="xsmall" columns="6" columns__sm="3" image_width="75"
+                                                     text_align="center" text_padding="0px 10px 0px 16px" />
+                                            </div>
+                                            <div class="box-text text-center" style="padding:0px 10px 0px 16px;">
+                                                <p></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-col col">
+                                    <div class="col-inner">
+                                        <div class="box has-hover gallery-box box-default">
+                                            <div class="box-image" style="width:75%;">
+                                                <img width="400" height="400"
+                                                     src="~/Assets/img/logo-converse-400x400.png" class="attachment-medium size-medium" alt=""
+                                                     ids="27051,24759,28831,27053,27052,27050,28911,24765,24762,27054,24766,24761"
+                                                     lightbox="false" col_spacing="xsmall" columns="6" columns__sm="3" image_width="75"
+                                                     text_align="center" text_padding="0px 10px 0px 16px" />
+                                            </div>
+                                            <div class="box-text text-center" style="padding:0px 10px 0px 16px;">
+                                                <p></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-col col">
+                                    <div class="col-inner">
+                                        <div class="box has-hover gallery-box box-default">
+                                            <div class="box-image" style="width:75%;">
+                                                <img width="400" height="400"
+                                                     src="~/Assets/img/logo-viettle-post-400x400.png" class="attachment-medium size-medium" alt=""
+                                                     ids="27051,24759,28831,27053,27052,27050,28911,24765,24762,27054,24766,24761"
+                                                     lightbox="false" col_spacing="xsmall" columns="6" columns__sm="3" image_width="75"
+                                                     text_align="center" text_padding="0px 10px 0px 16px" />
+                                            </div>
+                                            <div class="box-text text-center" style="padding:0px 10px 0px 16px;">
+                                                <p></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-col col">
+                                    <div class="col-inner">
+                                        <div class="box has-hover gallery-box box-default">
+                                            <div class="box-image" style="width:75%;">
+                                                <img width="400" height="400"
+                                                     src="~/Assets/img/logo-bamboo-airways-400x400.png" class="attachment-medium size-medium" alt=""
+                                                     ids="27051,24759,28831,27053,27052,27050,28911,24765,24762,27054,24766,24761"
+                                                     lightbox="false" col_spacing="xsmall" columns="6" columns__sm="3" image_width="75"
+                                                     text_align="center" text_padding="0px 10px 0px 16px" />
+                                            </div>
+                                            <div class="box-text text-center" style="padding:0px 10px 0px 16px;">
+                                                <p></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-col col">
+                                    <div class="col-inner">
+                                        <div class="box has-hover gallery-box box-default">
+                                            <div class="box-image" style="width:75%;">
+                                                <img width="400" height="400"
+                                                     src="~/Assets/img/logo-converse-400x400.png" class="attachment-medium size-medium" alt=""
+                                                     ids="27051,24759,28831,27053,27052,27050,28911,24765,24762,27054,24766,24761"
+                                                     lightbox="false" col_spacing="xsmall" columns="6" columns__sm="3" image_width="75"
+                                                     text_align="center" text_padding="0px 10px 0px 16px" />
+                                            </div>
+                                            <div class="box-text text-center" style="padding:0px 10px 0px 16px;">
+                                                <p></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-col col">
+                                    <div class="col-inner">
+                                        <div class="box has-hover gallery-box box-default">
+                                            <div class="box-image" style="width:75%;">
+                                                <img width="400" height="400"
+                                                     src="~/Assets/img/MB-BANK-400x400.png" class="attachment-medium size-medium" alt=""
+                                                     ids="27051,24759,28831,27053,27052,27050,28911,24765,24762,27054,24766,24761"
+                                                     lightbox="false" col_spacing="xsmall" columns="6" columns__sm="3" image_width="75"
+                                                     text_align="center" text_padding="0px 10px 0px 16px" />
+                                            </div>
+                                            <div class="box-text text-center" style="padding:0px 10px 0px 16px;">
+                                                <p></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="gap-element" style="display:block; height:auto; padding-top:30px" class="clearfix"></div>
+                            <a rel="noopener noreferrer" href="#" target="_blank"
+                               class="button secondary is-outline is-small lowercase" style="border-radius:99px;">
+                                <span>
+                                    In ốp lưng
+                                    cho doanh nghiệp
+                                </span> <i class="icon-angle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <style scope="scope"></style>
+                </div>
+            </div>
+            <style scope="scope">
+
+                #section_517111740 {
+                    padding-top: 30px;
+                    padding-bottom: 30px;
+                    background-color: rgba(212, 212, 212, 0.35);
+                }
+            </style>
+        </section>
+        <div class="gap-element" style="display:block; height:auto; padding-top:20px" class="clearfix"></div>
+        <div class="gap-element" style="display:block; height:auto; padding-top:30px" class="clearfix"></div>
+        <div class="row row-small row-full-width align-middle align-center" id="row-1036438036">
+            <div class="col medium-2 small-6 large-2">
+                <div class="col-inner text-right">
+                    <a href="index.html#batdauthietke" target="_self"
+                       class="button secondary is-small box-shadow-2 expand" style="border-radius:99px;">
+                        <span>
+                            TỰ TAY THIẾT
+                            KẾ
+                        </span> <i class="icon-angle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col medium-2 small-6 large-2">
+                <div class="col-inner text-left">
+                    <a href="#nhowaduthietke" target="_self"
+                       class="button success is-small box-shadow-2 expand" style="border-radius:99px;">
+                        <span>
+                            NHỜ WADU THIẾT
+                            KẾ
+                        </span> <i class="icon-angle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <style scope="scope"></style>
+        </div>
+        <div id="nhowaduthietke" class="lightbox-by-id lightbox-content mfp-hide lightbox-white "
+             style="max-width:600px ;padding:20px">
+            <p style="text-align: center;">
+                WADU rất vui khi được hỗ trợ anh, chị. WADU có thể hỗ trợ anh, chị qua (nhấn
+                vào nút chat bên dưới)
+            </p>
+            <div class="row row-collapse row-full-width align-equal align-center" id="row-471027856">
+                <div class="col medium-6 small-6 large-6">
+                    <div class="col-inner text-center">
+                        <p>
+                            <a href="@commonInfo.facebookchat" class="external" rel="nofollow" target="_blank">
+                                <span style="font-size: 100%;">
+                                    <img class="wp-image-28289 alignright" src="~/Assets/img/chat-facebook-for-custom.png" alt=""
+                                         width="200" />
+                                </span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col medium-6 small-6 large-6">
+                    <div class="col-inner text-left">
+                        <p>
+                            <a href="@commonInfo.zalochat" class="external" rel="nofollow" target="_blank">
+                                <img class="wp-image-28290 alignleft"
+                                     src="~/Assets/img/chat-ZALO.png" alt="" width="200" />
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <style scope="scope"></style>
+            </div>
+        </div>
+        <div class="gap-element" style="display:block; height:auto; padding-top:40px" class="clearfix"></div>
+
+
+        @Html.Partial("~/Views/Home/_PartialLetter.cshtml")
+    </div>
+</main>
